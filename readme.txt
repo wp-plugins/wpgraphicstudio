@@ -81,4 +81,7 @@ None
 == Screenshots ==
 
 1. The settings page.
-2. The create graphics page.
+2. The create graphics/members area.
+3. Members area, select create or view gallery options on hover.
+4. Members garphic galleries, select gallery options on hover.
+
