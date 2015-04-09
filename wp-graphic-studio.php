@@ -3,9 +3,9 @@
  * Plugin Name: wpGraphicStudio
  * Plugin URI: http://wpgraphicstudio.com
  * Description: The internets only premier, premium graphics development and distribution system for wordpress...
- * Author: John Seroka
- * Author URI: http://johnseroka.com
- * Version: 6.0.1
+ * Author: wpGraphicStudio
+ * Author URI: http://wpgraphicstudio.com
+ * Version: 6.0.2
  * Text Domain: wpgs
  * Domain Path: languages
  *
@@ -13,8 +13,8 @@
  *
  * @package WPGS
  * @category Core
- * @author John Seroka
- * @version 6.0.1
+ * @author wpGraphicStudio
+ * @version 6.0.2
  */
  // Exit if accessed directly
  if ( ! defined( 'ABSPATH' ) ) exit;
