@@ -341,7 +341,7 @@ tb_remove();
 	<input id="upload_logo_button" type="button" value="Upload Logo" /><br>
 							<label class="description" for="wpgs_wpgraphicstudio_logo_url"><?php _e('Upload or enter the url to your logo displayed at the top of each module'); ?></label><br>
 							<?php
-							if ($logo_url == '') { ?>
+							if ($logo_url != '') { ?>
 							<img src="<?php echo get_option( 'wpgs_wpgraphicstudio_logo_url' ); ?>">
 							<?php } ?>
 						</td>
