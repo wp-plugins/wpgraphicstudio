@@ -178,7 +178,7 @@ add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'wpgs_settings_a
 
 function wpgs_settings_action_links( $wpgslinks ) {
    $wpgslinks[] = '<a href="'. get_admin_url(null, 'admin.php?page=wpgs-core-settings') .'">Settings</a>';
-   $wpgslinks[] = '<a href="http://wpgraphicstudio.com" target="_blank">Add-Ons for wpGraphicStudio</a>';
+   $wpgslinks[] = '<a href="http://wpgraphicstudio.com" target="_blank">Add-Ons</a>';
    return $wpgslinks;
 }
 /**
