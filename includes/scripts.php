@@ -58,15 +58,6 @@ function wpgs_load_admin_scripts( $hook ) {
 	// Use minified libraries if SCRIPT_DEBUG is turned off
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	$wpgs_pages = array( $wpgs_settings_page, 'index.php', );
-	$wpgs_cpt   = apply_filters( 'wpgs_load_scripts_for_these_types', array( 'graphics', 'wpgs_payment', ) );
-
-	if ( ! in_array( $hook, $wpgs_pages ) && ! is_object( $post ) )
-		return;
-
-	if ( is_object( $post ) && ! in_array( $post->post_type, $wpgs_cpt ) )
-		return;
-
 	if ( $hook == $wpgs_settings_page ) {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
