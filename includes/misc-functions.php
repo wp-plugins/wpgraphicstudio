@@ -300,6 +300,8 @@ function wpgs_wpgraphicstudio_settings_page() {
 	$nav_hex 	= get_option( 'wpgs_wpgraphicstudio_nav_hex' );
 	$per_gallery 	= get_option( 'wpgs_wpgraphicstudio_per_gallery' );
 	$per_members 	= get_option( 'wpgs_wpgraphicstudio_per_members' );
+	$delete_files 	= get_option( 'wpgs_wpgraphicstudio_delete_files' );
+	$email_graphics 	= get_option( 'wpgs_wpgraphicstudio_email_graphics' );
 
 	?>
 <script language="JavaScript">
@@ -373,6 +375,40 @@ tb_remove();
 							<label class="description" for="wpgs_wpgraphicstudio_per_members"><?php _e('Number of modules (per page) in "Create Graphic & "Member Galleries"'); ?></label>
 						</td>
 					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Auto Delete Files'); ?>
+						</th>
+						<td>
+<?php
+	$items = array("On", "Off");
+	echo "<select id='wpgs_wpgraphicstudio_delete_files' name='wpgs_wpgraphicstudio_delete_files'>";
+	foreach($items as $item) {
+		$selected = ($delete_files==$item) ? 'selected="selected"' : '';
+		echo "<option value='$item' $selected>$item</option>";
+	}
+	echo "</select>";
+?>
+							<label class="description" for="wpgs_wpgraphicstudio_delete_files"><?php _e('Automatically delete user files on account delete'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Email Graphics'); ?>
+						</th>
+						<td>
+<?php
+	$email_items = array("On", "Off");
+	echo "<select id='wpgs_wpgraphicstudio_email_graphics' name='wpgs_wpgraphicstudio_email_graphics'>";
+	foreach($email_items as $email_item) {
+		$email_selected = ($email_graphics==$email_item) ? 'selected="selected"' : '';
+		echo "<option value='$email_item' $email_selected>$email_item</option>";
+	}
+	echo "</select>";
+?>
+							<label class="description" for="wpgs_wpgraphicstudio_email_graphics"><?php _e('Allow users to email graphics to their email account'); ?></label>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<?php submit_button(); ?>
@@ -393,11 +429,19 @@ function wpgs_wpgraphicstudio_register_gallery() {
 function wpgs_wpgraphicstudio_register_members() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_per_members' );
 }
+function wpgs_wpgraphicstudio_register_delete_files() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_delete_files' );
+}
+function wpgs_wpgraphicstudio_register_email_graphics() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_email_graphics' );
+}
 
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_logo');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_nav');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_gallery');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_members');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_delete_files');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_email_graphics');
 
 function wpgs_sanitize_register_logo( $new ) {
 	$old = get_option( 'wpgs_wpgraphicstudio_logo_url' );
@@ -534,5 +578,6 @@ recursiveRemove("$mydir");
 	$headers = 'From: ' . get_bloginfo( "name" ) . ' <' . get_bloginfo( "admin_email" ) . '>' . "\r\n";
  	 wp_mail( $email, 'Your account has been removed', 'Your account at ' . get_bloginfo("name") . ' has been removed due to dormancy or non usage for an extended period of time.', $headers );
 }
-
+if ((get_option( 'wpgs_wpgraphicstudio_delete_files' ) == '') || (get_option( 'wpgs_wpgraphicstudio_delete_files' ) == 'On')) {
 add_action( 'delete_user', 'fileRemove' );
+}

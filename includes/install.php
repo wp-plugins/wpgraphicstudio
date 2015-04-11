@@ -50,7 +50,7 @@ if ( isset( $wpgs_options['gallery_page'] ) )
 	    // Create Graphic Page
 		$create = wp_insert_post(
 			array(
-				'post_title'     => __( 'Create Graphic', 'wpgs' ),
+				'post_title'     => __( 'Members Area', 'wpgs' ),
 				'post_content'   => '[wpgs-create]',
 				'post_status'    => 'publish',
 				'post_author'    => 1,
