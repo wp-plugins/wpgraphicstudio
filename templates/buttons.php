@@ -348,14 +348,15 @@ print "<ul class=\"thumbs\">\n";
 <input class=\"galleryDelete\" type=\"submit\" value=\"\" alt=\"Delete Graphic\" title=\"Delete Graphic\" /></form>
 
 <a href=\"".$full_url.$pA."\" download=\"$pA\">
-<input class=\"galleryDownload\" type=\"submit\" value=\"\" alt=\"Download Graphic\" title=\"Download Graphic\"/></a>
-
-<form action=\"/buttons\" id=\"eMail\" method=\"post\">
+<input class=\"galleryDownload\" type=\"submit\" value=\"\" alt=\"Download Graphic\" title=\"Download Graphic\"/></a>";
+if ((get_option( 'wpgs_wpgraphicstudio_email_graphics' ) == '') || (get_option( 'wpgs_wpgraphicstudio_email_graphics' ) == 'On')) {
+print "<form action=\"/buttons\" id=\"eMail\" method=\"post\">
 <input type=\"hidden\" name=\"file\" value=\"$file_name\">
 <input type=\"hidden\" name=\"view\" value=\"gallery\">
 <input type=\"hidden\" name=\"email\" value=\"1\">
-<input class=\"galleryEmail\" type=\"submit\" value=\"\" alt=\"Email Graphic\" title=\"Email Graphic\" /></form>
-</div></li>\n";
+<input class=\"galleryEmail\" type=\"submit\" value=\"\" alt=\"Email Graphic\" title=\"Email Graphic\" /></form>";
+}
+print "</div></li>\n";
 			}
 			else
 			{
