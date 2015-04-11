@@ -48,8 +48,8 @@ e.g.
 
 1. Upload `wp-graphic-studio folder` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Be sure the pages generated for the plugin Create Graphic, Graphic Gallery, Belcher Boxes, Web Boxes, Buttons, CTA Boxes, Headlines are set to use your themes full width template page.
-4. Add only the Create Graphic and Graphic Gallery pages to your main navigation menu.
+3. Be sure the pages generated for the plugin Members Area, Belcher Boxes, Web Boxes, Buttons, CTA Boxes, Headlines are set to use your themes full width template page.
+4. Add only the Members Area page to your main navigation menu.
 5. Go to www.yoursite.com/create-graphic/ to start creating and generating graphics.
 
 == Frequently Asked Questions ==
@@ -63,6 +63,15 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.1.2 April 10 2015 =
+* Added the ability for site admin to turn the delete user files, created graphics and graphic galleries when a users account is deleted on or off.
+* Added the ability for site admin to turn the email graphic to users registered email account, on or off.
+* Create Graphic page is now named Members Area.
+* Updated install/setup instructions.
+
+== Changelog ==
+= 6.0.2 April 9 2015 =
+* Updated session handler to resolve php issue on some lower quality servers and bargain basement hosting providers.
 
 = 6.0.1 March 27 2015 =
 * Integrated the WordPress media uploader into the graphic module logo url field in wpGraphicStudio settings to allow logo to be uploaded.
