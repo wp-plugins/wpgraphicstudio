@@ -376,11 +376,12 @@ print "<p>You currently have no graphics in this gallery </p>";
 <?php } if ($_POST['create'] != '') {
 $logo = get_option( 'wpgs_wpgraphicstudio_logo_url' );
 $nav_hex = get_option( 'wpgs_wpgraphicstudio_nav_hex' );
+$decHex = ereg_replace("[^A-Za-z0-9]", "", $nav_hex );
 ?><div margin = "0" align = "center" height = "450px" width = "800px">
 <object id="flashcontent" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800px" height="450px">
-<?php echo'<param name="movie" value="'.plugins_url( 'web-boxes.swf', dirname(__FILE__) ).'?logoURL='.$logo.'&NavColor='.$nav_hex.'" />'; ?>
+<?php echo'<param name="movie" value="'.plugins_url( 'web-boxes.swf', dirname(__FILE__) ).'?logoURL='.$logo.'&NavColor='.$decHex.'" />'; ?>
   <!--[if !IE]>-->
-  <?php echo '<object type="application/x-shockwave-flash" data="'.plugins_url( 'web-boxes.swf', dirname(__FILE__) ).'?logoURL='.$logo.'&NavColor='.$nav_hex.'" width="800px" height="450px">'; ?>
+  <?php echo '<object type="application/x-shockwave-flash" data="'.plugins_url( 'web-boxes.swf', dirname(__FILE__) ).'?logoURL='.$logo.'&NavColor='.$decHex.'" width="800px" height="450px">'; ?>
   <!--<![endif]-->
   </div>
     <p>
