@@ -18,6 +18,7 @@ Rather than attempting to provide every feature under the sun, wpGraphicStudio m
 **Features of the plugin include**
 
   * Compatible integration with s2Member
+  * Module text customizing for translating graphic modules to different languages
   * Members area
   * Members graphic galleries
   * Members can save, download, delete their created graphics
