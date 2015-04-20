@@ -290,20 +290,46 @@ function wpgs_get_timezone_id() {
     return 'UTC';
 }
 
+function ilc_admin_tabs( $current = 'main' ) {
+    $tabs = array( 'main' => 'Main Settings', 'customize' => 'Customize', 'language' => 'Language' );
+    echo '<div id="icon-themes" class="icon32"><br></div>';
+    echo '<h2 class="nav-tab-wrapper">';
+    foreach( $tabs as $tab => $name ){
+        $class = ( $tab == $current ) ? ' nav-tab-active' : '';
+        echo "<a class='nav-tab$class' href='?page=wpgs-core-settings&tab=$tab'>$name</a>";
+
+    }
+    echo '</h2>';
+}
+
 function wpgs_wpgraphicstudio_settings_menu() {
 	add_submenu_page( 'NULL', __( 'wpGraphicStudio', 'wpgs' ), __( 'wpGraphicStudio', 'wpgs' ), 'administrator', 'wpgs-core-settings', 'wpgs_wpgraphicstudio_settings_page' );
 }
 add_action('admin_menu', 'wpgs_wpgraphicstudio_settings_menu');
 
 function wpgs_wpgraphicstudio_settings_page() {
+   global $pagenow;
+   $settings = get_option( "ilc_theme_settings" );
+
+//generic HTML and code goes here
+
+if ( isset ( $_GET['tab'] ) ) ilc_admin_tabs($_GET['tab']); else ilc_admin_tabs('main');
+
+if ( $pagenow == 'admin.php' && $_GET['page'] == 'wpgs-core-settings' ){
+
+   if ( isset ( $_GET['tab'] ) ) $tab = $_GET['tab'];
+   else $tab = 'main';
+
+   switch ( $tab ){
+         case 'customize' :
+if ($_GET['settings-updated'] == 'true') { ?>
+    <div class="updated">
+        <p><?php _e( 'Customize Options Updated!', 'wpgs' ); ?></p>
+    </div>
+<?php }
 	$logo_url 	= get_option( 'wpgs_wpgraphicstudio_logo_url' );
 	$nav_hex 	= get_option( 'wpgs_wpgraphicstudio_nav_hex' );
-	$per_gallery 	= get_option( 'wpgs_wpgraphicstudio_per_gallery' );
-	$per_members 	= get_option( 'wpgs_wpgraphicstudio_per_members' );
-	$delete_files 	= get_option( 'wpgs_wpgraphicstudio_delete_files' );
-	$email_graphics 	= get_option( 'wpgs_wpgraphicstudio_email_graphics' );
-
-	?>
+?>
 <script language="JavaScript">
 jQuery(document).ready(function() {
 jQuery('#upload_logo_button').click(function() {
@@ -327,8 +353,9 @@ tb_remove();
 
 })( jQuery );
 </script>
+
 <div class="wrap">
-		<h2><?php _e('wpGraphicStudio Core Settings/Options'); ?></h2>
+		<h2><?php _e('wpGraphicStudio Customize Options'); ?></h2>
 		<form method="post" action="options.php">
 
 			<?php settings_fields('wpgs_wpgraphicstudio_settings'); ?>
@@ -357,6 +384,30 @@ tb_remove();
 							<label class="description" for="wpgs_wpgraphicstudio_nav_hex"><?php _e('Select navigation menu color'); ?></label>
 						</td>
 					</tr>
+				</tbody>
+<?php
+   break;
+      case 'main' :
+if ($_GET['settings-updated'] == 'true') { ?>
+    <div class="updated">
+        <p><?php _e( 'Main Settings/Options Updated!', 'wpgs' ); ?></p>
+    </div>
+<?php }
+
+	$per_gallery 	= get_option( 'wpgs_wpgraphicstudio_per_gallery' );
+	$per_members 	= get_option( 'wpgs_wpgraphicstudio_per_members' );
+	$delete_files 	= get_option( 'wpgs_wpgraphicstudio_delete_files' );
+	$email_graphics 	= get_option( 'wpgs_wpgraphicstudio_email_graphics' );
+
+	?>
+<div class="wrap">
+		<h2><?php _e('wpGraphicStudio Main Settings/Options'); ?></h2>
+		<form method="post" action="options.php">
+
+			<?php settings_fields('wpgs_wpgraphicstudio_settings'); ?>
+
+			<table class="form-table">
+				<tbody>
 					<tr valign="top">
 						<th scope="row" valign="top">
 							<?php _e('Graphic Galleries'); ?>
@@ -410,12 +461,352 @@ tb_remove();
 						</td>
 					</tr>
 				</tbody>
+      <?php
+break;
+      case 'language' :
+      if (isset($_POST['navTextValue'])) {
+$phpcontent = '<?php
+$xmlstr = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<langs>
+<langu>
+<navText>'.$_POST['navTextValue'].'</navText>
+<navStyle>'.$_POST['navStyleValue'].'</navStyle>
+<navIcon>'.$_POST['navIconValue'].'</navIcon>
+<navColor>'.$_POST['navColorValue'].'</navColor>
+<navGraphics>'.$_POST['navGraphicsValue'].'</navGraphics>
+<font1>'.$_POST['font1Value'].'</font1>
+<font2>'.$_POST['font2Value'].'</font2>
+<font3>'.$_POST['font3Value'].'</font3>
+<font4>'.$_POST['font4Value'].'</font4>
+<font5>'.$_POST['font5Value'].'</font5>
+<font6>'.$_POST['font6Value'].'</font6>
+<font7>'.$_POST['font7Value'].'</font7>
+<font8>'.$_POST['font8Value'].'</font8>
+<font9>'.$_POST['font9Value'].'</font9>
+<font10>'.$_POST['font10Value'].'</font10>
+<font11>'.$_POST['font11Value'].'</font11>
+<font12>'.$_POST['font12Value'].'</font12>
+<font13>'.$_POST['font13Value'].'</font13>
+<textSaveOptions>'.$_POST['saveOptions'].'</textSaveOptions>
+<textColorOptions>'.$_POST['colorOptions'].'</textColorOptions>
+<textImageDimensions>'.$_POST['textImageDimensions'].'</textImageDimensions>
+<textSaveAs>'.$_POST['saveAs'].'</textSaveAs>
+<textIcon>'.$_POST['textIcon'].'</textIcon>
+<textBackground>'.$_POST['textBackground'].'</textBackground>
+<textBackgroundColor>'.$_POST['textBackgroundColor'].'</textBackgroundColor>
+<textSaveTo>'.$_POST['saveTo'].'</textSaveTo>
+<txtAlign>'.$_POST['txtAlign'].'</txtAlign>
+<txtField>'.$_POST['txtField'].'</txtField>
+<txtColor>'.$_POST['txtColor'].'</txtColor>
+<txtSize>'.$_POST['txtSize'].'</txtSize>
+<txtFont>'.$_POST['txtFont'].'</txtFont>
+<txtButton>'.$_POST['txtButton'].'</txtButton>
+<txtCTAboxes>'.$_POST['txtCTAboxes'].'</txtCTAboxes>
+<txt1BelcherBoxes>'.$_POST['txt1BelcherBoxes'].'</txt1BelcherBoxes>
+<txt2BelcherBoxes>'.$_POST['txt2BelcherBoxes'].'</txt2BelcherBoxes>
+<txt3BelcherBoxes>'.$_POST['txt3BelcherBoxes'].'</txt3BelcherBoxes>
+<txt4BelcherBoxes>'.$_POST['txt4BelcherBoxes'].'</txt4BelcherBoxes>
+<txt1WebBoxes>'.$_POST['txt1WebBoxes'].'</txt1WebBoxes>
+<txt2WebBoxes>'.$_POST['txt2WebBoxes'].'</txt2WebBoxes>
+<txt3WebBoxes>'.$_POST['txt3WebBoxes'].'</txt3WebBoxes>
+<txt4WebBoxes>'.$_POST['txt4WebBoxes'].'</txt4WebBoxes>
+<txt5WebBoxes>'.$_POST['txt5WebBoxes'].'</txt5WebBoxes>
+<btnReset>'.$_POST['btnReset'].'</btnReset>
+<btnDownload>'.$_POST['btnDownload'].'</btnDownload>
+<btnCapture>'.$_POST['btnCapture'].'</btnCapture>
+<btnUpload>'.$_POST['btnUpload'].'</btnUpload>
+<btnDelete>'.$_POST['btnDelete'].'</btnDelete>
+<btnBack>'.$_POST['btnBack'].'</btnBack>
+<btnFront>'.$_POST['btnFront'].'</btnFront>
+<btnAlignLeft>'.$_POST['btnAlignLeft'].'</btnAlignLeft>
+<btnAlignCenter>'.$_POST['btnAlignCenter'].'</btnAlignCenter>
+<btnAlignRight>'.$_POST['btnAlignRight'].'</btnAlignRight>
+<textBorderStroke>'.$_POST['textBorderStroke'].'</textBorderStroke>
+<textTexture>'.$_POST['textTexture'].'</textTexture>
+<textTextureBackground>'.$_POST['textTextureBackground'].'</textTextureBackground>
+<textPaymentBoxBackground>'.$_POST['textPaymentBoxBackground'].'</textPaymentBoxBackground>
+<textDoodle>'.$_POST['textDoodle'].'</textDoodle>
+<textHighlight>'.$_POST['textHighlight'].'</textHighlight>
+<textPayment>'.$_POST['textPayment'].'</textPayment>
+<textBorders>'.$_POST['textBorders'].'</textBorders>
+<textmWidth>'.$_POST['textmWidth'].'</textmWidth>
+<textXHeight>'.$_POST['textXHeight'].'</textXHeight>
+<textNotice>'.$_POST['textNotice'].'</textNotice>
+<btnAddText>'.$_POST['btnAddText'].'</btnAddText>
+<textButtonColor>'.$_POST['textButtonColor'].'</textButtonColor>
+<textBottomColor>'.$_POST['textBottomColor'].'</textBottomColor>
+<textButtonBorderColor>'.$_POST['textButtonBorderColor'].'</textButtonBorderColor>
+<textBorderColor>'.$_POST['textBorderColor'].'</textBorderColor>
+</langu>
+</langs>
+XML;
+?>';
+$phpfp = fopen("../wp-content/plugins/wp-graphic-studio/includes/language.php","wb");
+fwrite($phpfp,$phpcontent);
+fclose($phpfp);
+
+$content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<langs>
+<langu>
+<navText>'.$_POST['navTextValue'].'</navText>
+<navStyle>'.$_POST['navStyleValue'].'</navStyle>
+<navIcon>'.$_POST['navIconValue'].'</navIcon>
+<navColor>'.$_POST['navColorValue'].'</navColor>
+<navGraphics>'.$_POST['navGraphicsValue'].'</navGraphics>
+<font1>'.$_POST['font1Value'].'</font1>
+<font2>'.$_POST['font2Value'].'</font2>
+<font3>'.$_POST['font3Value'].'</font3>
+<font4>'.$_POST['font4Value'].'</font4>
+<font5>'.$_POST['font5Value'].'</font5>
+<font6>'.$_POST['font6Value'].'</font6>
+<font7>'.$_POST['font7Value'].'</font7>
+<font8>'.$_POST['font8Value'].'</font8>
+<font9>'.$_POST['font9Value'].'</font9>
+<font10>'.$_POST['font10Value'].'</font10>
+<font11>'.$_POST['font11Value'].'</font11>
+<font12>'.$_POST['font12Value'].'</font12>
+<font13>'.$_POST['font13Value'].'</font13>
+<textSaveOptions>'.$_POST['saveOptions'].'</textSaveOptions>
+<textColorOptions>'.$_POST['colorOptions'].'</textColorOptions>
+<textImageDimensions>'.$_POST['textImageDimensions'].'</textImageDimensions>
+<textSaveAs>'.$_POST['saveAs'].'</textSaveAs>
+<textIcon>'.$_POST['textIcon'].'</textIcon>
+<textBackground>'.$_POST['textBackground'].'</textBackground>
+<textBackgroundColor>'.$_POST['textBackgroundColor'].'</textBackgroundColor>
+<textSaveTo>'.$_POST['saveTo'].'</textSaveTo>
+<txtAlign>'.$_POST['txtAlign'].'</txtAlign>
+<txtField>'.$_POST['txtField'].'</txtField>
+<txtColor>'.$_POST['txtColor'].'</txtColor>
+<txtSize>'.$_POST['txtSize'].'</txtSize>
+<txtFont>'.$_POST['txtFont'].'</txtFont>
+<txtButton>'.$_POST['txtButton'].'</txtButton>
+<txtCTAboxes>'.$_POST['txtCTAboxes'].'</txtCTAboxes>
+<txt1BelcherBoxes>'.$_POST['txt1BelcherBoxes'].'</txt1BelcherBoxes>
+<txt2BelcherBoxes>'.$_POST['txt2BelcherBoxes'].'</txt2BelcherBoxes>
+<txt3BelcherBoxes>'.$_POST['txt3BelcherBoxes'].'</txt3BelcherBoxes>
+<txt4BelcherBoxes>'.$_POST['txt4BelcherBoxes'].'</txt4BelcherBoxes>
+<txt1WebBoxes>'.$_POST['txt1WebBoxes'].'</txt1WebBoxes>
+<txt2WebBoxes>'.$_POST['txt2WebBoxes'].'</txt2WebBoxes>
+<txt3WebBoxes>'.$_POST['txt3WebBoxes'].'</txt3WebBoxes>
+<txt4WebBoxes>'.$_POST['txt4WebBoxes'].'</txt4WebBoxes>
+<txt5WebBoxes>'.$_POST['txt5WebBoxes'].'</txt5WebBoxes>
+<btnReset>'.$_POST['btnReset'].'</btnReset>
+<btnDownload>'.$_POST['btnDownload'].'</btnDownload>
+<btnCapture>'.$_POST['btnCapture'].'</btnCapture>
+<btnUpload>'.$_POST['btnUpload'].'</btnUpload>
+<btnDelete>'.$_POST['btnDelete'].'</btnDelete>
+<btnBack>'.$_POST['btnBack'].'</btnBack>
+<btnFront>'.$_POST['btnFront'].'</btnFront>
+<btnAlignLeft>'.$_POST['btnAlignLeft'].'</btnAlignLeft>
+<btnAlignCenter>'.$_POST['btnAlignCenter'].'</btnAlignCenter>
+<btnAlignRight>'.$_POST['btnAlignRight'].'</btnAlignRight>
+<btnAddText>'.$_POST['btnAddText'].'</btnAddText>
+<textBorderStroke>'.$_POST['textBorderStroke'].'</textBorderStroke>
+<textTexture>'.$_POST['textTexture'].'</textTexture>
+<textTextureBackground>'.$_POST['textTextureBackground'].'</textTextureBackground>
+<textPaymentBoxBackground>'.$_POST['textPaymentBoxBackground'].'</textPaymentBoxBackground>
+<textDoodle>'.$_POST['textDoodle'].'</textDoodle>
+<textPayment>'.$_POST['textPayment'].'</textPayment>
+<textBorders>'.$_POST['textBorders'].'</textBorders>
+<textHighlight>'.$_POST['textHighlight'].'</textHighlight>
+<textmWidth>'.$_POST['textmWidth'].'</textmWidth>
+<textXHeight>'.$_POST['textXHeight'].'</textXHeight>
+<textNotice>'.$_POST['textNotice'].'</textNotice>
+<textButtonColor>'.$_POST['textButtonColor'].'</textButtonColor>
+<textBottomColor>'.$_POST['textBottomColor'].'</textBottomColor>
+<textButtonBorderColor>'.$_POST['textButtonBorderColor'].'</textButtonBorderColor>
+<textBorderColor>'.$_POST['textBorderColor'].'</textBorderColor>
+</langu>
+</langs>';
+$fp = fopen("../wp-content/plugins/wp-graphic-studio/includes/language.xml","wb");
+fwrite($fp,$content);
+fclose($fp);
+}
+
+include 'language.php';
+
+$langs = new SimpleXMLElement($xmlstr);
+$nav_text_value = $langs->langu[0]->navText;
+$nav_style_value = $langs->langu[0]->navStyle;
+$nav_icon_value = $langs->langu[0]->navIcon;
+$nav_color_value = $langs->langu[0]->navColor;
+$nav_graphics_value = $langs->langu[0]->navGraphics;
+
+$font_1_value = $langs->langu[0]->font1;
+$font_2_value = $langs->langu[0]->font2;
+$font_3_value = $langs->langu[0]->font3;
+$font_4_value = $langs->langu[0]->font4;
+$font_5_value = $langs->langu[0]->font5;
+$font_6_value = $langs->langu[0]->font6;
+$font_7_value = $langs->langu[0]->font7;
+$font_8_value = $langs->langu[0]->font8;
+$font_9_value = $langs->langu[0]->font9;
+$font_10_value = $langs->langu[0]->font10;
+$font_11_value = $langs->langu[0]->font11;
+$font_12_value = $langs->langu[0]->font12;
+$font_13_value = $langs->langu[0]->font13;
+
+$save_options_value = $langs->langu[0]->textSaveOptions;
+$color_options_value = $langs->langu[0]->textColorOptions;
+$text_image_dimensions_value = $langs->langu[0]->textImageDimensions;
+$save_as_value = $langs->langu[0]->textSaveAs;
+$save_to_value = $langs->langu[0]->textSaveTo;
+
+$text_font_value = $langs->langu[0]->txtFont;
+$text_color_value = $langs->langu[0]->txtColor;
+$text_size_value = $langs->langu[0]->txtSize;
+$text_align_value = $langs->langu[0]->txtAlign;
+$text_field_value = $langs->langu[0]->txtField;
+
+$text_background_value = $langs->langu[0]->textBackground;
+$text_icon_value = $langs->langu[0]->textIcon;
+
+$text_border_stroke_value = $langs->langu[0]->textBorderStroke;
+$text_texture_value = $langs->langu[0]->textTexture;
+$text_texture_background_value = $langs->langu[0]->textTextureBackground;
+$text_payment_box_background_value = $langs->langu[0]->textPaymentBoxBackground;
+$text_doodle_value = $langs->langu[0]->textDoodle;
+$text_payment_value = $langs->langu[0]->textPayment;
+$text_borders_value = $langs->langu[0]->textBorders;
+$text_highlight_value = $langs->langu[0]->textHighlight;
+$text_mwidth_value = $langs->langu[0]->textmWidth;
+$text_xheight_value = $langs->langu[0]->textXHeight;
+$text_button_color_value = $langs->langu[0]->textButtonColor;
+$text_button_border_color_value = $langs->langu[0]->textButtonBorderColor;
+$text_bottom_color_value = $langs->langu[0]->textBottomColor;
+$text_background_color_value = $langs->langu[0]->textBackgroundColor;
+$text_border_color_value = $langs->langu[0]->textBorderColor;
+
+$reset_value = $langs->langu[0]->btnReset;
+$delete_value = $langs->langu[0]->btnDelete;
+$upload_value = $langs->langu[0]->btnUpload;
+$move_forward_value = $langs->langu[0]->btnFront;
+$move_backward_value = $langs->langu[0]->btnBack;
+$save_gallery_value = $langs->langu[0]->btnCapture;
+$save_computer_value = $langs->langu[0]->btnDownload;
+$align_left_value = $langs->langu[0]->btnAlignLeft;
+$align_center_value = $langs->langu[0]->btnAlignCenter;
+$align_right_value = $langs->langu[0]->btnAlignRight;
+$new_text_field_value = $langs->langu[0]->btnAddText;
+
+$button_text_field_value = $langs->langu[0]->txtButton;
+$cta_boxes_text_field_value = $langs->langu[0]->txtCTAboxes;
+$text_notice_value = $langs->langu[0]->textNotice;
+$belcherbox_text1_field_value = $langs->langu[0]->txt1BelcherBoxes;
+$belcherbox_text2_field_value = $langs->langu[0]->txt2BelcherBoxes;
+$belcherbox_text3_field_value = $langs->langu[0]->txt3BelcherBoxes;
+$belcherbox_text4_field_value = $langs->langu[0]->txt4BelcherBoxes;
+$webboxes_text1_field_value = $langs->langu[0]->txt1WebBoxes;
+$webboxes_text2_field_value = $langs->langu[0]->txt2WebBoxes;
+$webboxes_text3_field_value = $langs->langu[0]->txt3WebBoxes;
+$webboxes_text4_field_value = $langs->langu[0]->txt4WebBoxes;
+$webboxes_text5_field_value = $langs->langu[0]->txt5WebBoxes;
+
+if (isset($_POST['navTextValue'])) { ?>
+    <div class="updated">
+        <p><?php _e( 'Text Customize Options Updated!', 'wpgs' ); ?></p>
+    </div>
+<?php } ?>
+<div class="wrap">
+		<h2><?php _e('wpGraphicStudio Text Customize Options'); ?></h2>
+
+<form method="post" action="">
+<h4><?php _e('Below are all the text variations used within the wpGraphicStudio Core graphic modules
+ (Buttons, Belcher Boxes, CTA Boxes, Headlines, WordPress Headers) to change the language simply enter
+  in the translated text for each text variation and save your changes at the bottom.<br><br>You can use <a href="https://translate.google.com/" target="_blank">
+  <b><u>Google Translate</b></u></a> to translate these word combinations to just about any language and paste the translated versions below.<br><br>The text
+   variations below are used on all modules and/or the five included modules in this plugin.<br>All add on modules also have a language section where additional
+   text variations that are specific to those modules are located and can be translated as well.'); ?></h4>
+<h2><?php _e('Navigation Menu'); ?><?php _e(' - Text displayed for each navigation menu button'); ?></h2>
+Text menu button: <input type="text" name="navTextValue" value="<?php echo $nav_text_value ?>"><br>
+Style menu button: <input type="text" name="navStyleValue" value="<?php echo $nav_style_value ?>"><br>
+Icon menu button: <input type="text" name="navIconValue" value="<?php echo $nav_icon_value ?>"><br>
+Color menu button: <input type="text" name="navColorValue" value="<?php echo $nav_color_value ?>"><br>
+Graphics menu button: <input type="text" name="navGraphicsValue" value="<?php echo $nav_graphics_value ?>">
+
+<h2><?php _e('Font Menu'); ?><?php _e(' - Text displayed for each font name'); ?></h2>
+Font 1 name: <input type="text" name="font1Value" value="<?php echo $font_1_value ?>"><br>
+Font 2 name: <input type="text" name="font2Value" value="<?php echo $font_2_value ?>"><br>
+Font 3 name: <input type="text" name="font3Value" value="<?php echo $font_3_value ?>"><br>
+Font 4 name: <input type="text" name="font4Value" value="<?php echo $font_4_value ?>"><br>
+Font 5 name: <input type="text" name="font5Value" value="<?php echo $font_5_value ?>"><br>
+Font 6 name: <input type="text" name="font6Value" value="<?php echo $font_6_value ?>"><br>
+Font 7 name: <input type="text" name="font7Value" value="<?php echo $font_7_value ?>"><br>
+Font 8 name: <input type="text" name="font8Value" value="<?php echo $font_8_value ?>"><br>
+Font 9 name: <input type="text" name="font9Value" value="<?php echo $font_9_value ?>"><br>
+Font 10 name: <input type="text" name="font10Value" value="<?php echo $font_10_value ?>"><br>
+Font 11 name: <input type="text" name="font11Value" value="<?php echo $font_11_value ?>"><br>
+Font 12 name: <input type="text" name="font12Value" value="<?php echo $font_12_value ?>"><br>
+Font 13 name: <input type="text" name="font13Value" value="<?php echo $font_13_value ?>">
+
+<h2><?php _e('Save Options'); ?><?php _e(' - Text displayed in the save options section'); ?></h2>
+Save Options: <input type="text" name="saveOptions" value="<?php echo $save_options_value ?>"><br>
+Save As: <input type="text" name="saveAs" value="<?php echo $save_as_value ?>"><br>
+Save To: <input type="text" name="saveTo" value="<?php echo $save_to_value ?>"><br>
+Image Dimensions: <input type="text" name="textImageDimensions" value="<?php echo $text_image_dimensions_value ?>">
+
+<h2><?php _e('Text Menu'); ?><?php _e(' - Text displayed in the text menu'); ?></h2>
+Color: <input type="text" name="txtColor" value="<?php echo $text_color_value ?>"><br>
+Font: <input type="text" name="txtFont" value="<?php echo $text_font_value ?>"><br>
+Size: <input type="text" name="txtSize" value="<?php echo $text_size_value ?>"><br>
+Align: <input type="text" name="txtAlign" value="<?php echo $text_align_value ?>"><br>
+Text Field: <input type="text" name="txtField" value="<?php echo $text_field_value ?>">
+
+<h2><?php _e('Colors Menu'); ?><?php _e(' - Text displayed in the colors menu'); ?></h2>
+Color Options: <input type="text" name="colorOptions" value="<?php echo $color_options_value ?>"><br>
+Background: <input type="text" name="textBackground" value="<?php echo $text_background_value ?>"><br>
+Icon: <input type="text" name="textIcon" value="<?php echo $text_icon_value ?>"><br>
+Border Stroke: <input type="text" name="textBorderStroke" value="<?php echo $text_border_stroke_value ?>"><br>
+Texture: <input type="text" name="textTexture" value="<?php echo $text_texture_value ?>"><br>
+Texture Background: <input type="text" name="textTextureBackground" value="<?php echo $text_texture_background_value ?>"><br>
+Payment Box Background: <input type="text" name="textPaymentBoxBackground" value="<?php echo $text_payment_box_background_value ?>"><br>
+Doodle: <input type="text" name="textDoodle" value="<?php echo $text_doodle_value ?>"><br>
+Highlight: <input type="text" name="textHighlight" value="<?php echo $text_highlight_value ?>"><br>
+Width: <input type="text" name="textmWidth" value="<?php echo $text_mwidth_value ?>"><br>
+X-Height: <input type="text" name="textXHeight" value="<?php echo $text_xheight_value ?>"><br>
+Payment: <input type="text" name="textPayment" value="<?php echo $text_payment_value ?>"><br>
+Borders: <input type="text" name="textBorders" value="<?php echo $text_borders_value ?>"><br>
+Button: <input type="text" name="textButtonColor" value="<?php echo $text_button_color_value ?>"><br>
+Button Border Color: <input type="text" name="textButtonBorderColor" value="<?php echo $text_button_border_color_value ?>"><br>
+Border Color: <input type="text" name="textBorderColor" value="<?php echo $text_border_color_value ?>">
+
+<h2><?php _e('Feature Tooltips'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
+Reset: <input type="text" name="btnReset" value="<?php echo $reset_value ?>"><br>
+Delete: <input type="text" name="btnDelete" value="<?php echo $delete_value ?>"><br>
+Upload: <input type="text" name="btnUpload" value="<?php echo $upload_value ?>"><br>
+Move Forward: <input type="text" name="btnFront" value="<?php echo $move_forward_value ?>"><br>
+Move Backward: <input type="text" name="btnBack" value="<?php echo $move_backward_value ?>"><br>
+Save To Gallery: <input type="text" name="btnCapture" value="<?php echo $save_gallery_value ?>"><br>
+Save To Computer: <input type="text" name="btnDownload" value="<?php echo $save_computer_value ?>"><br>
+Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left_value ?>"><br><br>
+Align Center: <input type="text" name="btnAlignCenter" value="<?php echo $align_center_value ?>"><br>
+Align Right: <input type="text" name="btnAlignRight" value="<?php echo $align_right_value ?>"><br>
+Text Field: <input type="text" name="btnAddText" value="<?php echo $new_text_field_value ?>">
+
+<h2><?php _e('Height/Width Notice - Headlines'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
+Height/Width Notice: <input type="text" name="textNotice" value="<?php echo $text_notice_value ?>">
+
+<h2><?php _e('Module Design Areas'); ?><?php _e(' - Text displayed in the design areas of the graphic modules'); ?></h2>
+Buttons Text Field: <input type="text" name="txtButton" value="<?php echo $button_text_field_value ?>"><br>
+Call toAction Boxes Text Field: <input type="text" name="txtCTAboxes" value="<?php echo $cta_boxes_text_field_value ?>"><br>
+Belcher Boxes Text Field 1: <input type="text" name="txt1BelcherBoxes" value="<?php echo $belcherbox_text1_field_value ?>"><br>
+Belcher Boxes Text Field 2: <input type="text" name="txt2BelcherBoxes" value="<?php echo $belcherbox_text2_field_value ?>"><br>
+Belcher Boxes Text Field 3: <input type="text" name="txt3BelcherBoxes" value="<?php echo $belcherbox_text3_field_value ?>"><br>
+Belcher Boxes Text Field 4: <input type="text" name="txt4BelcherBoxes" size="50" value="<?php echo $belcherbox_text4_field_value ?>"><br>
+Web Boxes Text Field 1: <input type="text" name="txt1WebBoxes" value="<?php echo $webboxes_text1_field_value ?>"><br>
+Web Boxes Text Field 2: <input type="text" name="txt2WebBoxes" value="<?php echo $webboxes_text2_field_value ?>"><br>
+Web Boxes Text Field 3: <input type="text" name="txt3WebBoxes" value="<?php echo $webboxes_text3_field_value ?>"><br>
+Web Boxes Text Field 4: <input type="text" name="txt4WebBoxes" size="50" value="<?php echo $webboxes_text4_field_value ?>"><br>
+Web Boxes Text Field 5: <input type="text" name="txt5WebBoxes" size="50" value="<?php echo $webboxes_text5_field_value ?>">
+
+<?php break; } ?>
 			</table>
-			<?php submit_button(); ?>
+      <?php submit_button(); ?>
 
 		</form>
 	<?php
-}
+}}
 
 function wpgs_wpgraphicstudio_register_logo() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_logo_url' );
@@ -562,6 +953,24 @@ function recursiveRemove($user_id) {
     }
     rmdir($user_id);
 }
+function wpgs_get_pages( $force = false ) {
+
+	$pages_options = array( '' => '' ); // Blank option
+
+	if( ( ! isset( $_GET['page'] ) || 'edd-settings' != $_GET['page'] ) && ! $force ) {
+		return $pages_options;
+	}
+
+	$pages = get_pages();
+	if ( $pages ) {
+		foreach ( $pages as $page ) {
+			$pages_options[ $page->ID ] = $page->post_title;
+		}
+	}
+
+	return $pages_options;
+}
+
 function fileRemove($user_id) {
 
 $upload_dir = wp_upload_dir();
