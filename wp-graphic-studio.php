@@ -5,7 +5,7 @@
  * Description: The internets only premier, premium graphics development and distribution system for wordpress...
  * Author: wpGraphicStudio
  * Author URI: http://wpgraphicstudio.com
- * Version: 6.0.2
+ * Version: 6.1.2
  * Text Domain: wpgs
  * Domain Path: languages
  *
@@ -14,7 +14,7 @@
  * @package WPGS
  * @category Core
  * @author wpGraphicStudio
- * @version 6.0.2
+ * @version 6.1.2
  */
  // Exit if accessed directly
  if ( ! defined( 'ABSPATH' ) ) exit;
@@ -83,7 +83,11 @@ final class wp_Graphic_Studio {
 			self::$instance = new wp_Graphic_Studio;
 			self::$instance->setup_constants();
 			self::$instance->includes();
+			//self::$instance->load_textdomain();
+			//self::$instance->roles = new WPGS_Roles();
+			//self::$instance->api = new WPGS_API();
 			self::$instance->session = new WPGS_Session();
+			//self::$instance->html = new WPGS_HTML_Elements();
 		}
 		return self::$instance;
 	}
@@ -125,7 +129,7 @@ final class wp_Graphic_Studio {
 	private function setup_constants() {
 		// Plugin version
 		if ( ! defined( 'WPGS_VERSION' ) )
-			define( 'WPGS_VERSION', '6.0.2' );
+			define( 'WPGS_VERSION', '6.1.2' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'WPGS_PLUGIN_DIR' ) )
@@ -148,7 +152,7 @@ final class wp_Graphic_Studio {
 	 * @return void
 	 */
 	private function includes() {
-		global $wpgs_options;
+			global $wpgs_options;
 
 		require_once WPGS_PLUGIN_DIR . 'includes/actions.php';
 		require_once WPGS_PLUGIN_DIR . 'includes/install.php';
