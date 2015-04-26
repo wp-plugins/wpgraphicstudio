@@ -542,7 +542,7 @@ $xmlstr = <<<XML
 </langs>
 XML;
 ?>';
-$phpfp = fopen("../wp-content/plugins/wp-graphic-studio/includes/language.php","wb");
+$phpfp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.php","wb");
 fwrite($phpfp,$phpcontent);
 fclose($phpfp);
 
@@ -619,7 +619,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <textBorderColor>'.$_POST['textBorderColor'].'</textBorderColor>
 </langu>
 </langs>';
-$fp = fopen("../wp-content/plugins/wp-graphic-studio/includes/language.xml","wb");
+$fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.xml","wb");
 fwrite($fp,$content);
 fclose($fp);
 }
@@ -770,6 +770,8 @@ Borders: <input type="text" name="textBorders" value="<?php echo $text_borders_v
 Button: <input type="text" name="textButtonColor" value="<?php echo $text_button_color_value ?>"><br>
 Button Border Color: <input type="text" name="textButtonBorderColor" value="<?php echo $text_button_border_color_value ?>"><br>
 Border Color: <input type="text" name="textBorderColor" value="<?php echo $text_border_color_value ?>">
+Background Color: <input type="text" name="textBackgroundColor" value="<?php echo $text_background_color_value ?>">
+Bottom Color: <input type="text" name="textBottomColor" value="<?php echo $text_bottom_color_value ?>">
 
 <h2><?php _e('Feature Tooltips'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
 Reset: <input type="text" name="btnReset" value="<?php echo $reset_value ?>"><br>
