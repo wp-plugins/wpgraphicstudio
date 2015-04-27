@@ -64,18 +64,19 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.2.3 April 26 2015 =
+* Updated repository configuration.
+
 = 6.2.2 April 20 2015 =
 * Added text customiing support for the modules user interface to allow modules to be customized to different languages.
 * Enhanced settings/options section to include various sections.
 
-== Changelog ==
 = 6.1.2 April 10 2015 =
 * Added the ability for site admin to turn the delete user files, created graphics and graphic galleries when a users account is deleted on or off.
 * Added the ability for site admin to turn the email graphic to users registered email account, on or off.
 * Create Graphic page is now named Members Area.
 * Updated install/setup instructions.
 
-== Changelog ==
 = 6.0.2 April 9 2015 =
 * Updated session handler to resolve php issue on some lower quality servers and bargain basement hosting providers.
 
