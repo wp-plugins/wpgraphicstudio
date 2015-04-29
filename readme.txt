@@ -3,8 +3,8 @@ Contributors: (wpgraphicstudio)
 Donate link: http://wpgraphicstudio.com/donate/
 Tags: graphics, generator, affiliate marketing graphics
 Requires at least: 3.0.1
-Tested up to: 4.1
-Stable tag: 4.1
+Tested up to: 4.2.1
+Stable tag: 4.2.1
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,7 @@ Rather than attempting to provide every feature under the sun, wpGraphicStudio m
 
   * Compatible integration with s2Member
   * Module text customizing for translating graphic modules to different languages
+  * Upload custom images for each module in the members area and graphic gallery sections
   * Members area
   * Members graphic galleries
   * Members can save, download, delete their created graphics
@@ -64,6 +65,11 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.3.3 April 29 2015 =
+* Updated headlines module.
+* Added ability to upload members area and graphic gallery images for each module.
+* Updated language functions.
+
 = 6.2.3 April 26 2015 =
 * Updated repository configuration.
 
