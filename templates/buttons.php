@@ -7,12 +7,9 @@ $upload_dir = wp_upload_dir();
 $upload_path = $upload_dir['basedir'];
 
 $up_path1 = ''.$upload_path.'/'. $user_id .'/';
-if (!file_exists($up_path1)) mkdir($up_path1);
 
 $up_path2 = ''.$upload_path.'/wpgs/'. $user_id .'/buttons';
 $up_path5 = ''.$upload_path.'/wpgs/'. $user_id .'/buttons/thumbs';
-if (!file_exists($up_path2)) mkdir($up_path2);
-if (!file_exists($up_path5)) mkdir($up_path5);
 
 function set_html_content_type () {
 
