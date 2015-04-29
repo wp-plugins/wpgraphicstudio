@@ -133,7 +133,7 @@ class WPGS_Welcome {
 
 				<div class="feature-section">
 
-					<a href="http://http://www.wpgraphicstudio.com/downloads/wpgraphicstudio-for-windows-pc/">/<img src="<?php echo WPGS_PLUGIN_URL . 'assets/images/screenshots/wpgraphicstudio-for-windows.png'; ?>" border="0" class="wpgs-welcome-screenshots"/></a>
+					<a href="http://www.wpgraphicstudio.com/downloads/wpgraphicstudio-for-windows-pc/"><img src="<?php echo WPGS_PLUGIN_URL . 'assets/images/screenshots/wpgraphicstudio-for-windows.png'; ?>" border="0" class="wpgs-welcome-screenshots"/></a>
 
 					<h4><?php _e( 'Create and generate the same gaphics from your desktop', 'wpgs' ); ?></h4>
 					<p><?php _e( 'Create and generate the same graphics as in wpGraphicStudio but from the desktop of your Windows PC or Laptop.<br>
