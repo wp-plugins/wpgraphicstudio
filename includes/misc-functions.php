@@ -325,25 +325,78 @@ if ( $pagenow == 'admin.php' && $_GET['page'] == 'wpgs-core-settings' ){
 if ($_GET['settings-updated'] == 'true') { ?>
     <div class="updated">
         <p><?php _e( 'Customize Options Updated!', 'wpgs' ); ?></p>
-    </div>
+    </div>";
 <?php }
 	$logo_url 	= get_option( 'wpgs_wpgraphicstudio_logo_url' );
 	$nav_hex 	= get_option( 'wpgs_wpgraphicstudio_nav_hex' );
+	$belcher_box_url 	= get_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
+	$buttons_url 	= get_option( 'wpgs_wpgraphicstudio_buttons_url' );
+	$cta_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
+	$web_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
+	$headlines_url 	= get_option( 'wpgs_wpgraphicstudio_headlines_url' );
+$upload_dir = wp_upload_dir();
+$upload_path = $upload_dir['basedir'];
+$tomydir = "$upload_path/wpgs/images/create/";
+
+$BelcherBoxurl = $belcher_box_url;
+$BelcherBoxurlparts = parse_url("$BelcherBoxurl");
+$BelcherBoxextracted = $BelcherBoxurlparts['path'];
+$BelcherBoxextracted_trim = trim( $BelcherBoxextracted, "/" );
+$BelcherBoxfrommydir_trim = ABSPATH . ''.$BelcherBoxextracted_trim.'';
+$frommydir = ABSPATH . '';
+
+$BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
+
+rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
+copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
+
+$Buttonsurl = $buttons_url;
+$Buttonsurlparts = parse_url("$Buttonsurl");
+$Buttonsextracted = $Buttonsurlparts['path'];
+$Buttonsextracted_trim = trim( $Buttonsextracted, "/" );
+$Buttonsfrommydir_trim = ABSPATH . ''.$Buttonsextracted_trim.'';
+
+$Buttonspath = pathinfo(''.$Buttonsfrommydir_trim.'');
+
+rename(''.$Buttonsfrommydir_trim.'', ''.$Buttonspath['dirname'].'/buttons.png');
+copy(''.$Buttonspath['dirname'].'/buttons.png', ''.$tomydir.'buttons.png');
+
+$ctaBoxesurl = $cta_boxes_url;
+$ctaBoxesurlparts = parse_url("$ctaBoxesurl");
+$ctaBoxesextracted = $ctaBoxesurlparts['path'];
+$ctaBoxesextracted_trim = trim( $ctaBoxesextracted, "/" );
+$ctaBoxesfrommydir_trim = ABSPATH . ''.$ctaBoxesextracted_trim.'';
+
+$ctaBoxespath = pathinfo(''.$ctaBoxesfrommydir_trim.'');
+
+rename(''.$ctaBoxesfrommydir_trim.'', ''.$ctaBoxespath['dirname'].'/cta-boxes.png');
+copy(''.$ctaBoxespath['dirname'].'/cta-boxes.png', ''.$tomydir.'cta-boxes.png');
+
+$Headlinesurl = $headlines_url;
+$Headlinesurlparts = parse_url("$Headlinesurl");
+$Headlinesextracted = $Headlinesurlparts['path'];
+$Headlinesextracted_trim = trim( $Headlinesextracted, "/" );
+$Headlinesfrommydir_trim = ABSPATH . ''.$Headlinesextracted_trim.'';
+
+$Headlinespath = pathinfo(''.$Headlinesfrommydir_trim.'');
+
+rename(''.$Headlinesfrommydir_trim.'', ''.$Headlinespath['dirname'].'/headlines.png');
+copy(''.$Headlinespath['dirname'].'/headlines.png', ''.$tomydir.'headlines.png');
+
+$WebBoxesurl = $web_boxes_url;
+$WebBoxesurlparts = parse_url("$WebBoxesurl");
+$WebBoxesextracted = $WebBoxesurlparts['path'];
+$WebBoxesextracted_trim = trim( $WebBoxesextracted, "/" );
+$WebBoxesfrommydir_trim = ABSPATH . ''.$WebBoxesextracted_trim.'';
+
+$WebBoxespath = pathinfo(''.$WebBoxesfrommydir_trim.'');
+
+rename(''.$WebBoxesfrommydir_trim.'', ''.$WebBoxespath['dirname'].'/web-boxes.png');
+copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
+
+//unlink(''.$path['dirname'].'/belcher-boxes.png');
 ?>
 <script language="JavaScript">
-jQuery(document).ready(function() {
-jQuery('#upload_logo_button').click(function() {
-formfield = jQuery('#wpgs_wpgraphicstudio_logo_url').attr('name');
-tb_show('', 'media-upload.php?type=image&TB_iframe=true');
-return false;
-});
-
-window.send_to_editor = function(html) {
-imgurl = jQuery('img',html).attr('src');
-jQuery('#wpgs_wpgraphicstudio_logo_url').val(imgurl);
-tb_remove();
-}
-});
 (function( $ ) {
 
     // Add Color Picker to all inputs that have 'color-field' class
@@ -354,6 +407,34 @@ tb_remove();
 })( jQuery );
 </script>
 
+<script type="text/javascript">
+    //tb_show('', 'media-upload.php?TB_iframe=true');
+    var upload_image_button=false;
+    jQuery(document).ready(function() {
+
+    jQuery('.upload_image_button').click(function() {
+        upload_image_button =true;
+        formfieldID=jQuery(this).prev().attr("id");
+     formfield = jQuery("#"+formfieldID).attr('name');
+     tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+        if(upload_image_button==true){
+
+                var oldFunc = window.send_to_editor;
+                window.send_to_editor = function(html) {
+
+                imgurl = jQuery('img', html).attr('src');
+                jQuery("#"+formfieldID).val(imgurl);
+                 tb_remove();
+                window.send_to_editor = oldFunc;
+                }
+        }
+        upload_image_button=false;
+    });
+
+
+    })
+
+</script>
 <div class="wrap">
 		<h2><?php _e('wpGraphicStudio Customize Options'); ?></h2>
 		<form method="post" action="options.php">
@@ -367,13 +448,81 @@ tb_remove();
 							<?php _e('Modules Logo'); ?>
 						</th>
 	<td><label for="upload_logo">Upload Logo<br><input id="wpgs_wpgraphicstudio_logo_url" name="wpgs_wpgraphicstudio_logo_url" type="text" class="regular-text" value="<?php echo $logo_url ?>" />
-	<input id="upload_logo_button" type="button" value="Upload Logo" /><br>
+	<input class="upload_image_button" type="button" value="Upload Logo" /><br>
 							<label class="description" for="wpgs_wpgraphicstudio_logo_url"><?php _e('Upload or enter the url to your logo displayed at the top of each module'); ?></label><br>
 							<?php
 							if ($logo_url != '') { ?>
 							<img src="<?php echo get_option( 'wpgs_wpgraphicstudio_logo_url' ); ?>">
 							<?php } ?>
 						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Belcher Box Members Area/Gallery Graphic'); ?>
+						</th>
+	<td><label for="upload_belcher_box">Upload Belcher Box Graphic<br><input id="wpgs_wpgraphicstudio_belcher_box_url" name="wpgs_wpgraphicstudio_belcher_box_url" type="text" class="regular-text" value="<?php echo $belcher_box_url ?>" />
+    <input class="upload_image_button" type="button" value="Upload Belcher Box Graphic" /><br>
+							<label class="description" for="wpgs_wpgraphicstudio_belcher_box_url"><?php _e('Upload or enter the url to your Belcher Box Graphic displayed in the Members Area and Graphic Gallery sections'); ?></label><br>
+							<img src="<?php echo content_url( '/uploads/wpgs/images/create/belcher-boxes.png' ); ?>">
+						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Buttons Members Area/Gallery Graphic'); ?>
+						</th>
+	<td><label for="upload_buttons">Upload Buttons Graphic<br><input id="wpgs_wpgraphicstudio_buttons_url" name="wpgs_wpgraphicstudio_buttons_url" type="text" class="regular-text" value="<?php echo $buttons_url ?>" />
+    <input class="upload_image_button" type="button" value="Upload Buttons Graphic" /><br>
+							<label class="description" for="wpgs_wpgraphicstudio_buttons_url"><?php _e('Upload or enter the url to your Buttons Graphic displayed in the Members Area and Graphic Gallery sections'); ?></label><br>
+							<img src="<?php echo content_url( '/uploads/wpgs/images/create/buttons.png' ); ?>">
+						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('CTA Boxes Members Area/Gallery Graphic'); ?>
+						</th>
+	<td><label for="upload_cta_boxes">Upload CTA Boxes Graphic<br><input id="wpgs_wpgraphicstudio_cta_boxes_url" name="wpgs_wpgraphicstudio_cta_boxes_url" type="text" class="regular-text" value="<?php echo $cta_boxes_url ?>" />
+    <input class="upload_image_button" type="button" value="Upload CTA Boxes Graphic" /><br>
+							<label class="description" for="wpgs_wpgraphicstudio_cta_boxes_url"><?php _e('Upload or enter the url to your CTA Boxes Graphic displayed in the Members Area and Graphic Gallery sections'); ?></label><br>
+							<img src="<?php echo content_url( '/uploads/wpgs/images/create/cta-boxes.png' ); ?>">
+						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Headlines Members Area/Gallery Graphic'); ?>
+						</th>
+	<td><label for="upload_headlines">Upload Headlines Graphic<br><input id="wpgs_wpgraphicstudio_headlines_url" name="wpgs_wpgraphicstudio_headlines_url" type="text" class="regular-text" value="<?php echo $headlines_url ?>" />
+    <input class="upload_image_button" type="button" value="Upload Headlines Graphic" /><br>
+							<label class="description" for="wpgs_wpgraphicstudio_headlines_url"><?php _e('Upload or enter the url to your Headlines Graphic displayed in the Members Area and Graphic Gallery sections'); ?></label><br>
+							<img src="<?php echo content_url( '/uploads/wpgs/images/create/headlines.png' ); ?>">
+						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Web Boxes Members Area/Gallery Graphic'); ?>
+						</th>
+	<td><label for="upload_web_boxes">Upload Web Boxes Graphic<br><input id="wpgs_wpgraphicstudio_web_boxes_url" name="wpgs_wpgraphicstudio_web_boxes_url" type="text" class="regular-text" value="<?php echo $web_boxes_url ?>" />
+    <input class="upload_image_button" type="button" value="Upload Web Boxes Graphic" /><br>
+							<label class="description" for="wpgs_wpgraphicstudio_web_boxes_url"><?php _e('Upload or enter the url to your Web Boxes Graphic displayed in the Members Area and Graphic Gallery sections'); ?></label><br>
+							<img src="<?php echo content_url( '/uploads/wpgs/images/create/web-boxes.png' ); ?>">
+						</td>
+					</tr>
+					<tr valign="top">
+					<td colspan="2"><hr></td>
 					</tr>
 					<tr valign="top">
 						<th scope="row" valign="top">
@@ -465,79 +614,156 @@ if ($_GET['settings-updated'] == 'true') { ?>
 break;
       case 'language' :
       if (isset($_POST['navTextValue'])) {
+
+$santxt2Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt2Headlines']));
+$sanNavTextValue = preg_replace('/\\\\/', '', htmlspecialchars($_POST['navTextValue']));
+$sanNavStyleValue = preg_replace('/\\\\/', '', htmlspecialchars($_POST['navStyleValue']));
+$sanNavIconValue = preg_replace('/\\\\/', '', htmlspecialchars($_POST['navIconValue']));
+$sanNavColorValue = preg_replace('/\\\\/', '', htmlspecialchars($_POST['navColorValue']));
+$sanNavGraphicsValue = preg_replace('/\\\\/', '', htmlspecialchars($_POST['navGraphicsValue']));
+$sanfont1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font1Value']));
+$sanfont2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font2Value']));
+$sanfont3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font3Value']));
+$sanfont4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font4Value']));
+$sanfont5Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font5Value']));
+$sanfont6Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font6Value']));
+$sanfont7Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font7Value']));
+$sanfont8Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font8Value']));
+$sanfont9Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font9Value']));
+$sanfont10Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font10Value']));
+$sanfont11Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font11Value']));
+$sanfont12Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font12Value']));
+$sanfont13Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['font13Value']));
+$sansaveOptions = preg_replace('/\\\\/', '', htmlspecialchars($_POST['saveOptions']));
+$sanColorOptions = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ColorOptions']));
+$santextImageDimensions = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textImageDimensions']));
+$sansaveAs = preg_replace('/\\\\/', '', htmlspecialchars($_POST['saveAs']));
+$santextIcon = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textIcon']));
+$santextBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBackground']));
+$santextBackgroundColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBackgroundColor']));
+$sansaveTo = preg_replace('/\\\\/', '', htmlspecialchars($_POST['saveTo']));
+$santxtAlign = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtAlign']));
+$santxtField = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtField']));
+$santxtColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtColor']));
+$santxtSize = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtSize']));
+$santxtFont = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtFont']));
+$santxtButton = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtButton']));
+$santxtCTAboxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtCTAboxes']));
+$santxt1BelcherBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt1BelcherBoxes']));
+$santxt2BelcherBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt2BelcherBoxes']));
+$santxt3BelcherBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt3BelcherBoxes']));
+$santxt4BelcherBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt4BelcherBoxes']));
+$santxt1WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt1WebBoxes']));
+$santxt2WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt2WebBoxes']));
+$santxt3WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt3WebBoxes']));
+$santxt4WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt4WebBoxes']));
+$santxt5WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt5WebBoxes']));
+$santxt1Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt1Headlines']));
+$santxt2Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt2Headlines']));
+$santxt3Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt3Headlines']));
+$sanbtnReset = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnReset']));
+$sanbtnDownload = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnDownload']));
+$sanbtnCapture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnCapture']));
+$sanbtnUpload = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnUpload']));
+$sanbtnDelete = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnDelete']));
+$sanbtnBack = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnBack']));
+$sanbtnFront = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnFront']));
+$sanbtnAlignLeft = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignLeft']));
+$sanbtnAlignCenter = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignCenter']));
+$sanbtnAlignRight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignRight']));
+$btnAddText = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAddText']));
+$santextBorderStroke = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderStroke']));
+$santextTexture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTexture']));
+$santextTextureBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTextureBackground']));
+$santextPaymentBoxBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textPaymentBoxBackground']));
+$santextDoodle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textDoodle']));
+$santextPayment = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textPayment']));
+$santextBorders = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorders']));
+$santextHighlight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textHighlight']));
+$santextmWidth = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textmWidth']));
+$santextXHeight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textXHeight']));
+$santextNotice = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textNotice']));
+$santextButtonColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textButtonColor']));
+$santextBottomColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBottomColor']));
+$santextButtonBorderColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textButtonBorderColor']));
+$santextBorderColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderColor']));
+
 $phpcontent = '<?php
 $xmlstr = <<<XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <langs>
 <langu>
-<navText>'.$_POST['navTextValue'].'</navText>
-<navStyle>'.$_POST['navStyleValue'].'</navStyle>
-<navIcon>'.$_POST['navIconValue'].'</navIcon>
-<navColor>'.$_POST['navColorValue'].'</navColor>
-<navGraphics>'.$_POST['navGraphicsValue'].'</navGraphics>
-<font1>'.$_POST['font1Value'].'</font1>
-<font2>'.$_POST['font2Value'].'</font2>
-<font3>'.$_POST['font3Value'].'</font3>
-<font4>'.$_POST['font4Value'].'</font4>
-<font5>'.$_POST['font5Value'].'</font5>
-<font6>'.$_POST['font6Value'].'</font6>
-<font7>'.$_POST['font7Value'].'</font7>
-<font8>'.$_POST['font8Value'].'</font8>
-<font9>'.$_POST['font9Value'].'</font9>
-<font10>'.$_POST['font10Value'].'</font10>
-<font11>'.$_POST['font11Value'].'</font11>
-<font12>'.$_POST['font12Value'].'</font12>
-<font13>'.$_POST['font13Value'].'</font13>
-<textSaveOptions>'.$_POST['saveOptions'].'</textSaveOptions>
-<textColorOptions>'.$_POST['colorOptions'].'</textColorOptions>
-<textImageDimensions>'.$_POST['textImageDimensions'].'</textImageDimensions>
-<textSaveAs>'.$_POST['saveAs'].'</textSaveAs>
-<textIcon>'.$_POST['textIcon'].'</textIcon>
-<textBackground>'.$_POST['textBackground'].'</textBackground>
-<textBackgroundColor>'.$_POST['textBackgroundColor'].'</textBackgroundColor>
-<textSaveTo>'.$_POST['saveTo'].'</textSaveTo>
-<txtAlign>'.$_POST['txtAlign'].'</txtAlign>
-<txtField>'.$_POST['txtField'].'</txtField>
-<txtColor>'.$_POST['txtColor'].'</txtColor>
-<txtSize>'.$_POST['txtSize'].'</txtSize>
-<txtFont>'.$_POST['txtFont'].'</txtFont>
-<txtButton>'.$_POST['txtButton'].'</txtButton>
-<txtCTAboxes>'.$_POST['txtCTAboxes'].'</txtCTAboxes>
-<txt1BelcherBoxes>'.$_POST['txt1BelcherBoxes'].'</txt1BelcherBoxes>
-<txt2BelcherBoxes>'.$_POST['txt2BelcherBoxes'].'</txt2BelcherBoxes>
-<txt3BelcherBoxes>'.$_POST['txt3BelcherBoxes'].'</txt3BelcherBoxes>
-<txt4BelcherBoxes>'.$_POST['txt4BelcherBoxes'].'</txt4BelcherBoxes>
-<txt1WebBoxes>'.$_POST['txt1WebBoxes'].'</txt1WebBoxes>
-<txt2WebBoxes>'.$_POST['txt2WebBoxes'].'</txt2WebBoxes>
-<txt3WebBoxes>'.$_POST['txt3WebBoxes'].'</txt3WebBoxes>
-<txt4WebBoxes>'.$_POST['txt4WebBoxes'].'</txt4WebBoxes>
-<txt5WebBoxes>'.$_POST['txt5WebBoxes'].'</txt5WebBoxes>
-<btnReset>'.$_POST['btnReset'].'</btnReset>
-<btnDownload>'.$_POST['btnDownload'].'</btnDownload>
-<btnCapture>'.$_POST['btnCapture'].'</btnCapture>
-<btnUpload>'.$_POST['btnUpload'].'</btnUpload>
-<btnDelete>'.$_POST['btnDelete'].'</btnDelete>
-<btnBack>'.$_POST['btnBack'].'</btnBack>
-<btnFront>'.$_POST['btnFront'].'</btnFront>
-<btnAlignLeft>'.$_POST['btnAlignLeft'].'</btnAlignLeft>
-<btnAlignCenter>'.$_POST['btnAlignCenter'].'</btnAlignCenter>
-<btnAlignRight>'.$_POST['btnAlignRight'].'</btnAlignRight>
-<textBorderStroke>'.$_POST['textBorderStroke'].'</textBorderStroke>
-<textTexture>'.$_POST['textTexture'].'</textTexture>
-<textTextureBackground>'.$_POST['textTextureBackground'].'</textTextureBackground>
-<textPaymentBoxBackground>'.$_POST['textPaymentBoxBackground'].'</textPaymentBoxBackground>
-<textDoodle>'.$_POST['textDoodle'].'</textDoodle>
-<textHighlight>'.$_POST['textHighlight'].'</textHighlight>
-<textPayment>'.$_POST['textPayment'].'</textPayment>
-<textBorders>'.$_POST['textBorders'].'</textBorders>
-<textmWidth>'.$_POST['textmWidth'].'</textmWidth>
-<textXHeight>'.$_POST['textXHeight'].'</textXHeight>
-<textNotice>'.$_POST['textNotice'].'</textNotice>
-<btnAddText>'.$_POST['btnAddText'].'</btnAddText>
-<textButtonColor>'.$_POST['textButtonColor'].'</textButtonColor>
-<textBottomColor>'.$_POST['textBottomColor'].'</textBottomColor>
-<textButtonBorderColor>'.$_POST['textButtonBorderColor'].'</textButtonBorderColor>
-<textBorderColor>'.$_POST['textBorderColor'].'</textBorderColor>
+<navText>'.$sanNavTextValue.'</navText>
+<navStyle>'.$sanNavStyleValue.'</navStyle>
+<navIcon>'.$sanNavIconValue.'</navIcon>
+<navColor>'.$sanNavColorValue.'</navColor>
+<navGraphics>'.$sanNavGraphicsValue.'</navGraphics>
+<font1>'.$sanfont1Value.'</font1>
+<font2>'.$sanfont2Value.'</font2>
+<font3>'.$sanfont3Value.'</font3>
+<font4>'.$sanfont4Value.'</font4>
+<font5>'.$sanfont5Value.'</font5>
+<font6>'.$sanfont6Value.'</font6>
+<font7>'.$sanfont7Value.'</font7>
+<font8>'.$sanfont8Value.'</font8>
+<font9>'.$sanfont9Value.'</font9>
+<font10>'.$sanfont10Value.'</font10>
+<font11>'.$sanfont11Value.'</font11>
+<font12>'.$sanfont12Value.'</font12>
+<font13>'.$sanfont13Value.'</font13>
+<textSaveOptions>'.$sansaveOptions.'</textSaveOptions>
+<textColorOptions>'.$sancolorOptions.'</textColorOptions>
+<textImageDimensions>'.$santextImageDimensions.'</textImageDimensions>
+<textSaveAs>'.$sansaveAs.'</textSaveAs>
+<textIcon>'.$santextIcon.'</textIcon>
+<textBackground>'.$santextBackground.'</textBackground>
+<textBackgroundColor>'.$santextBackgroundColor.'</textBackgroundColor>
+<textSaveTo>'.$sansaveTo.'</textSaveTo>
+<txtAlign>'.$santxtAlign.'</txtAlign>
+<txtField>'.$santxtField.'</txtField>
+<txtColor>'.$santxtColor.'</txtColor>
+<txtSize>'.$santxtSize.'</txtSize>
+<txtFont>'.$santxtFont.'</txtFont>
+<txtButton>'.$santxtButton.'</txtButton>
+<txtCTAboxes>'.$santxtCTAboxes.'</txtCTAboxes>
+<txt1BelcherBoxes>'.$santxt1BelcherBoxes.'</txt1BelcherBoxes>
+<txt2BelcherBoxes>'.$santxt2BelcherBoxes.'</txt2BelcherBoxes>
+<txt3BelcherBoxes>'.$santxt3BelcherBoxes.'</txt3BelcherBoxes>
+<txt4BelcherBoxes>'.$santxt4BelcherBoxes.'</txt4BelcherBoxes>
+<txt1WebBoxes>'.$santxt1WebBoxes.'</txt1WebBoxes>
+<txt2WebBoxes>'.$santxt2WebBoxes.'</txt2WebBoxes>
+<txt3WebBoxes>'.$santxt3WebBoxes.'</txt3WebBoxes>
+<txt4WebBoxes>'.$santxt4WebBoxes.'</txt4WebBoxes>
+<txt5WebBoxes>'.$santxt5WebBoxes.'</txt5WebBoxes>
+<txt1Headlines>'.$santxt1Headlines.'</txt1Headlines>
+<txt2Headlines>'.$santxt2Headlines.'</txt2Headlines>
+<txt3Headlines>'.$santxt3Headlines.'</txt3Headlines>
+<btnReset>'.$sanbtnReset.'</btnReset>
+<btnDownload>'.$sanbtnDownload.'</btnDownload>
+<btnCapture>'.$sanbtnCapture.'</btnCapture>
+<btnUpload>'.$sanbtnUpload.'</btnUpload>
+<btnDelete>'.$sanbtnDelete.'</btnDelete>
+<btnBack>'.$sanbtnBack.'</btnBack>
+<btnFront>'.$sanbtnFront.'</btnFront>
+<btnAlignLeft>'.$sanbtnAlignLeft.'</btnAlignLeft>
+<btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
+<btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
+<textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
+<textTexture>'.$santextTexture.'</textTexture>
+<textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
+<textPaymentBoxBackground>'.$santextPaymentBoxBackground.'</textPaymentBoxBackground>
+<textDoodle>'.$santextDoodle.'</textDoodle>
+<textHighlight>'.$santextHighlight.'</textHighlight>
+<textPayment>'.$santextPayment.'</textPayment>
+<textBorders>'.$santextBorders.'</textBorders>
+<textmWidth>'.$santextmWidth.'</textmWidth>
+<textXHeight>'.$santextXHeight.'</textXHeight>
+<textNotice>'.$santextNotice.'</textNotice>
+<btnAddText>'.$sanbtnAddText.'</btnAddText>
+<textButtonColor>'.$santextButtonColor.'</textButtonColor>
+<textBottomColor>'.$santextBottomColor.'</textBottomColor>
+<textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
+<textBorderColor>'.$santextBorderColor.'</textBorderColor>
 </langu>
 </langs>
 XML;
@@ -549,74 +775,77 @@ fclose($phpfp);
 $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <langs>
 <langu>
-<navText>'.$_POST['navTextValue'].'</navText>
-<navStyle>'.$_POST['navStyleValue'].'</navStyle>
-<navIcon>'.$_POST['navIconValue'].'</navIcon>
-<navColor>'.$_POST['navColorValue'].'</navColor>
-<navGraphics>'.$_POST['navGraphicsValue'].'</navGraphics>
-<font1>'.$_POST['font1Value'].'</font1>
-<font2>'.$_POST['font2Value'].'</font2>
-<font3>'.$_POST['font3Value'].'</font3>
-<font4>'.$_POST['font4Value'].'</font4>
-<font5>'.$_POST['font5Value'].'</font5>
-<font6>'.$_POST['font6Value'].'</font6>
-<font7>'.$_POST['font7Value'].'</font7>
-<font8>'.$_POST['font8Value'].'</font8>
-<font9>'.$_POST['font9Value'].'</font9>
-<font10>'.$_POST['font10Value'].'</font10>
-<font11>'.$_POST['font11Value'].'</font11>
-<font12>'.$_POST['font12Value'].'</font12>
-<font13>'.$_POST['font13Value'].'</font13>
-<textSaveOptions>'.$_POST['saveOptions'].'</textSaveOptions>
-<textColorOptions>'.$_POST['colorOptions'].'</textColorOptions>
-<textImageDimensions>'.$_POST['textImageDimensions'].'</textImageDimensions>
-<textSaveAs>'.$_POST['saveAs'].'</textSaveAs>
-<textIcon>'.$_POST['textIcon'].'</textIcon>
-<textBackground>'.$_POST['textBackground'].'</textBackground>
-<textBackgroundColor>'.$_POST['textBackgroundColor'].'</textBackgroundColor>
-<textSaveTo>'.$_POST['saveTo'].'</textSaveTo>
-<txtAlign>'.$_POST['txtAlign'].'</txtAlign>
-<txtField>'.$_POST['txtField'].'</txtField>
-<txtColor>'.$_POST['txtColor'].'</txtColor>
-<txtSize>'.$_POST['txtSize'].'</txtSize>
-<txtFont>'.$_POST['txtFont'].'</txtFont>
-<txtButton>'.$_POST['txtButton'].'</txtButton>
-<txtCTAboxes>'.$_POST['txtCTAboxes'].'</txtCTAboxes>
-<txt1BelcherBoxes>'.$_POST['txt1BelcherBoxes'].'</txt1BelcherBoxes>
-<txt2BelcherBoxes>'.$_POST['txt2BelcherBoxes'].'</txt2BelcherBoxes>
-<txt3BelcherBoxes>'.$_POST['txt3BelcherBoxes'].'</txt3BelcherBoxes>
-<txt4BelcherBoxes>'.$_POST['txt4BelcherBoxes'].'</txt4BelcherBoxes>
-<txt1WebBoxes>'.$_POST['txt1WebBoxes'].'</txt1WebBoxes>
-<txt2WebBoxes>'.$_POST['txt2WebBoxes'].'</txt2WebBoxes>
-<txt3WebBoxes>'.$_POST['txt3WebBoxes'].'</txt3WebBoxes>
-<txt4WebBoxes>'.$_POST['txt4WebBoxes'].'</txt4WebBoxes>
-<txt5WebBoxes>'.$_POST['txt5WebBoxes'].'</txt5WebBoxes>
-<btnReset>'.$_POST['btnReset'].'</btnReset>
-<btnDownload>'.$_POST['btnDownload'].'</btnDownload>
-<btnCapture>'.$_POST['btnCapture'].'</btnCapture>
-<btnUpload>'.$_POST['btnUpload'].'</btnUpload>
-<btnDelete>'.$_POST['btnDelete'].'</btnDelete>
-<btnBack>'.$_POST['btnBack'].'</btnBack>
-<btnFront>'.$_POST['btnFront'].'</btnFront>
-<btnAlignLeft>'.$_POST['btnAlignLeft'].'</btnAlignLeft>
-<btnAlignCenter>'.$_POST['btnAlignCenter'].'</btnAlignCenter>
-<btnAlignRight>'.$_POST['btnAlignRight'].'</btnAlignRight>
-<btnAddText>'.$_POST['btnAddText'].'</btnAddText>
-<textBorderStroke>'.$_POST['textBorderStroke'].'</textBorderStroke>
-<textTexture>'.$_POST['textTexture'].'</textTexture>
-<textTextureBackground>'.$_POST['textTextureBackground'].'</textTextureBackground>
-<textPaymentBoxBackground>'.$_POST['textPaymentBoxBackground'].'</textPaymentBoxBackground>
-<textDoodle>'.$_POST['textDoodle'].'</textDoodle>
-<textPayment>'.$_POST['textPayment'].'</textPayment>
-<textBorders>'.$_POST['textBorders'].'</textBorders>
-<textHighlight>'.$_POST['textHighlight'].'</textHighlight>
-<textmWidth>'.$_POST['textmWidth'].'</textmWidth>
-<textXHeight>'.$_POST['textXHeight'].'</textXHeight>
-<textNotice>'.$_POST['textNotice'].'</textNotice>
-<textButtonColor>'.$_POST['textButtonColor'].'</textButtonColor>
-<textBottomColor>'.$_POST['textBottomColor'].'</textBottomColor>
-<textButtonBorderColor>'.$_POST['textButtonBorderColor'].'</textButtonBorderColor>
-<textBorderColor>'.$_POST['textBorderColor'].'</textBorderColor>
+<navText>'.$sanNavTextValue.'</navText>
+<navStyle>'.$sanNavStyleValue.'</navStyle>
+<navIcon>'.$sanNavIconValue.'</navIcon>
+<navColor>'.$sanNavColorValue.'</navColor>
+<navGraphics>'.$sanNavGraphicsValue.'</navGraphics>
+<font1>'.$sanfont1Value.'</font1>
+<font2>'.$sanfont2Value.'</font2>
+<font3>'.$sanfont3Value.'</font3>
+<font4>'.$sanfont4Value.'</font4>
+<font5>'.$sanfont5Value.'</font5>
+<font6>'.$sanfont6Value.'</font6>
+<font7>'.$sanfont7Value.'</font7>
+<font8>'.$sanfont8Value.'</font8>
+<font9>'.$sanfont9Value.'</font9>
+<font10>'.$sanfont10Value.'</font10>
+<font11>'.$sanfont11Value.'</font11>
+<font12>'.$sanfont12Value.'</font12>
+<font13>'.$sanfont13Value.'</font13>
+<textSaveOptions>'.$sansaveOptions.'</textSaveOptions>
+<textColorOptions>'.$sancolorOptions.'</textColorOptions>
+<textImageDimensions>'.$santextImageDimensions.'</textImageDimensions>
+<textSaveAs>'.$sansaveAs.'</textSaveAs>
+<textIcon>'.$santextIcon.'</textIcon>
+<textBackground>'.$santextBackground.'</textBackground>
+<textBackgroundColor>'.$santextBackgroundColor.'</textBackgroundColor>
+<textSaveTo>'.$sansaveTo.'</textSaveTo>
+<txtAlign>'.$santxtAlign.'</txtAlign>
+<txtField>'.$santxtField.'</txtField>
+<txtColor>'.$santxtColor.'</txtColor>
+<txtSize>'.$santxtSize.'</txtSize>
+<txtFont>'.$santxtFont.'</txtFont>
+<txtButton>'.$santxtButton.'</txtButton>
+<txtCTAboxes>'.$santxtCTAboxes.'</txtCTAboxes>
+<txt1BelcherBoxes>'.$santxt1BelcherBoxes.'</txt1BelcherBoxes>
+<txt2BelcherBoxes>'.$santxt2BelcherBoxes.'</txt2BelcherBoxes>
+<txt3BelcherBoxes>'.$santxt3BelcherBoxes.'</txt3BelcherBoxes>
+<txt4BelcherBoxes>'.$santxt4BelcherBoxes.'</txt4BelcherBoxes>
+<txt1WebBoxes>'.$santxt1WebBoxes.'</txt1WebBoxes>
+<txt2WebBoxes>'.$santxt2WebBoxes.'</txt2WebBoxes>
+<txt3WebBoxes>'.$santxt3WebBoxes.'</txt3WebBoxes>
+<txt4WebBoxes>'.$santxt4WebBoxes.'</txt4WebBoxes>
+<txt5WebBoxes>'.$santxt5WebBoxes.'</txt5WebBoxes>
+<txt1Headlines>'.$santxt1Headlines.'</txt1Headlines>
+<txt2Headlines>'.$santxt2Headlines.'</txt2Headlines>
+<txt3Headlines>'.$santxt3Headlines.'</txt3Headlines>
+<btnReset>'.$sanbtnReset.'</btnReset>
+<btnDownload>'.$sanbtnDownload.'</btnDownload>
+<btnCapture>'.$sanbtnCapture.'</btnCapture>
+<btnUpload>'.$sanbtnUpload.'</btnUpload>
+<btnDelete>'.$sanbtnDelete.'</btnDelete>
+<btnBack>'.$sanbtnBack.'</btnBack>
+<btnFront>'.$sanbtnFront.'</btnFront>
+<btnAlignLeft>'.$sanbtnAlignLeft.'</btnAlignLeft>
+<btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
+<btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
+<textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
+<textTexture>'.$santextTexture.'</textTexture>
+<textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
+<textPaymentBoxBackground>'.$santextPaymentBoxBackground.'</textPaymentBoxBackground>
+<textDoodle>'.$santextDoodle.'</textDoodle>
+<textHighlight>'.$santextHighlight.'</textHighlight>
+<textPayment>'.$santextPayment.'</textPayment>
+<textBorders>'.$santextBorders.'</textBorders>
+<textmWidth>'.$santextmWidth.'</textmWidth>
+<textXHeight>'.$santextXHeight.'</textXHeight>
+<textNotice>'.$santextNotice.'</textNotice>
+<btnAddText>'.$sanbtnAddText.'</btnAddText>
+<textButtonColor>'.$santextButtonColor.'</textButtonColor>
+<textBottomColor>'.$santextBottomColor.'</textBottomColor>
+<textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
+<textBorderColor>'.$santextBorderColor.'</textBorderColor>
 </langu>
 </langs>';
 $fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.xml","wb");
@@ -702,6 +931,9 @@ $webboxes_text2_field_value = $langs->langu[0]->txt2WebBoxes;
 $webboxes_text3_field_value = $langs->langu[0]->txt3WebBoxes;
 $webboxes_text4_field_value = $langs->langu[0]->txt4WebBoxes;
 $webboxes_text5_field_value = $langs->langu[0]->txt5WebBoxes;
+$headlines_text1_field_value = $langs->langu[0]->txt1Headlines;
+$headlines_text2_field_value = $langs->langu[0]->txt2Headlines;
+$headlines_text3_field_value = $langs->langu[0]->txt3Headlines;
 
 if (isset($_POST['navTextValue'])) { ?>
     <div class="updated">
@@ -769,8 +1001,8 @@ Payment: <input type="text" name="textPayment" value="<?php echo $text_payment_v
 Borders: <input type="text" name="textBorders" value="<?php echo $text_borders_value ?>"><br>
 Button: <input type="text" name="textButtonColor" value="<?php echo $text_button_color_value ?>"><br>
 Button Border Color: <input type="text" name="textButtonBorderColor" value="<?php echo $text_button_border_color_value ?>"><br>
-Border Color: <input type="text" name="textBorderColor" value="<?php echo $text_border_color_value ?>">
-Background Color: <input type="text" name="textBackgroundColor" value="<?php echo $text_background_color_value ?>">
+Border Color: <input type="text" name="textBorderColor" value="<?php echo $text_border_color_value ?>"><br>
+Background Color: <input type="text" name="textBackgroundColor" value="<?php echo $text_background_color_value ?>"><br>
 Bottom Color: <input type="text" name="textBottomColor" value="<?php echo $text_bottom_color_value ?>">
 
 <h2><?php _e('Feature Tooltips'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
@@ -781,7 +1013,7 @@ Move Forward: <input type="text" name="btnFront" value="<?php echo $move_forward
 Move Backward: <input type="text" name="btnBack" value="<?php echo $move_backward_value ?>"><br>
 Save To Gallery: <input type="text" name="btnCapture" value="<?php echo $save_gallery_value ?>"><br>
 Save To Computer: <input type="text" name="btnDownload" value="<?php echo $save_computer_value ?>"><br>
-Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left_value ?>"><br><br>
+Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left_value ?>"><br>
 Align Center: <input type="text" name="btnAlignCenter" value="<?php echo $align_center_value ?>"><br>
 Align Right: <input type="text" name="btnAlignRight" value="<?php echo $align_right_value ?>"><br>
 Text Field: <input type="text" name="btnAddText" value="<?php echo $new_text_field_value ?>">
@@ -800,7 +1032,10 @@ Web Boxes Text Field 1: <input type="text" name="txt1WebBoxes" value="<?php echo
 Web Boxes Text Field 2: <input type="text" name="txt2WebBoxes" value="<?php echo $webboxes_text2_field_value ?>"><br>
 Web Boxes Text Field 3: <input type="text" name="txt3WebBoxes" value="<?php echo $webboxes_text3_field_value ?>"><br>
 Web Boxes Text Field 4: <input type="text" name="txt4WebBoxes" size="50" value="<?php echo $webboxes_text4_field_value ?>"><br>
-Web Boxes Text Field 5: <input type="text" name="txt5WebBoxes" size="50" value="<?php echo $webboxes_text5_field_value ?>">
+Web Boxes Text Field 5: <input type="text" name="txt5WebBoxes" size="50" value="<?php echo $webboxes_text5_field_value ?>"><br>
+Headlines Text Field 1: <input type="text" name="txt1Headlines" value="<?php echo $headlines_text1_field_value ?>"><br>
+Headlines Text Field 2: <input type="text" name="txt2Headlines" value="<?php echo htmlspecialchars($headlines_text2_field_value) ?>"><br>
+Headlines Text Field 3: <input type="text" name="txt3Headlines" value="<?php echo $headlines_text3_field_value ?>">
 
 <?php break; } ?>
 			</table>
@@ -812,6 +1047,21 @@ Web Boxes Text Field 5: <input type="text" name="txt5WebBoxes" size="50" value="
 
 function wpgs_wpgraphicstudio_register_logo() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_logo_url' );
+}
+function wpgs_wpgraphicstudio_register_belcher_box_graphic() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_belcher_box_url' );
+}
+function wpgs_wpgraphicstudio_register_buttons_graphic() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_buttons_url' );
+}
+function wpgs_wpgraphicstudio_register_cta_boxes_graphic() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_cta_boxes_url' );
+}
+function wpgs_wpgraphicstudio_register_web_boxes_graphic() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_web_boxes_url' );
+}
+function wpgs_wpgraphicstudio_register_headlines_graphic() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_headlines_url' );
 }
 function wpgs_wpgraphicstudio_register_nav() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_nav_hex' );
@@ -830,6 +1080,11 @@ function wpgs_wpgraphicstudio_register_email_graphics() {
 }
 
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_logo');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_cta_boxes_graphic');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_web_boxes_graphic');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_headlines_graphic');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_buttons_graphic');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_belcher_box_graphic');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_nav');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_gallery');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_members');
@@ -840,6 +1095,46 @@ function wpgs_sanitize_register_logo( $new ) {
 	$old = get_option( 'wpgs_wpgraphicstudio_logo_url' );
 	if( $old && $old != $new ) {
 		update_option( 'wpgs_wpgraphicstudio_logo_url' );
+	}
+	return $new;
+}
+
+function wpgs_sanitize_register_belcher_box_graphic( $new ) {
+	$old = get_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
+	if( $old && $old != $new ) {
+		update_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
+	}
+	return $new;
+}
+
+function wpgs_sanitize_register_cta_boxes_graphic( $new ) {
+	$old = get_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
+	if( $old && $old != $new ) {
+		update_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
+	}
+	return $new;
+}
+
+function wpgs_sanitize_register_buttons_graphic( $new ) {
+	$old = get_option( 'wpgs_wpgraphicstudio_buttons_url' );
+	if( $old && $old != $new ) {
+		update_option( 'wpgs_wpgraphicstudio_buttons_url' );
+	}
+	return $new;
+}
+
+function wpgs_sanitize_register_headlines_graphic( $new ) {
+	$old = get_option( 'wpgs_wpgraphicstudio_headlines_url' );
+	if( $old && $old != $new ) {
+		update_option( 'wpgs_wpgraphicstudio_headlines_url' );
+	}
+	return $new;
+}
+
+function wpgs_sanitize_register_web_boxes_graphic( $new ) {
+	$old = get_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
+	if( $old && $old != $new ) {
+		update_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
 	}
 	return $new;
 }
@@ -876,7 +1171,6 @@ $to = $wp_upload_dir['basedir'] . '/wpgs/';
 
 hpt_copyr($from, $to);
 }
-add_action('admin_init', 'images_wpgraphicstudio_move');
 
 function hpt_copyr($source, $dest)
 {

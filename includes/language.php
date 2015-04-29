@@ -8,7 +8,7 @@ $xmlstr = <<<XML
 <navIcon>Icons</navIcon>
 <navColor>Colors</navColor>
 <navGraphics>Graphics</navGraphics>
-<font1>Arial Black</font1>
+<font1>Arial Black12</font1>
 <font2>Helvetica Neu</font2>
 <font3>Capture It</font3>
 <font4>Georgia</font4>
@@ -22,13 +22,13 @@ $xmlstr = <<<XML
 <font12>Myriad Pro</font12>
 <font13>Myriad Pro</font13>
 <textSaveOptions>Save Options</textSaveOptions>
-<textColorOptions>Color Options</textColorOptions>
+<textColorOptions></textColorOptions>
 <textImageDimensions>Image Dimension</textImageDimensions>
-<textSaveAs>Save As</textSaveAs>
+<textSaveAs>12</textSaveAs>
 <textIcon>Icon</textIcon>
 <textBackground>Background</textBackground>
 <textBackgroundColor></textBackgroundColor>
-<textSaveTo>Save To</textSaveTo>
+<textSaveTo>Save 12</textSaveTo>
 <txtAlign>Align</txtAlign>
 <txtField>Text Field</txtField>
 <txtColor>Color</txtColor>
@@ -45,6 +45,9 @@ $xmlstr = <<<XML
 <txt3WebBoxes>Learn More</txt3WebBoxes>
 <txt4WebBoxes>a smaller sub-headline</txt4WebBoxes>
 <txt5WebBoxes>Lorem Ipsum and Blah and Much More Text Would Go Here</txt5WebBoxes>
+<txt1Headlines>Attention All Struggling Internet Marketers</txt1Headlines>
+<txt2Headlines>&quot;Finally, You Can Start Selling A Product That Everyone Needs &amp; Wants. The Newbie Checklist Allows Anyone To Get Started Online Easily, It's Never Been So Easy!&quot;</txt2Headlines>
+<txt3Headlines>Grab Private Label Rights Today For Only $12 &amp; Keep 100% Of The Profits!</txt3Headlines>
 <btnReset>Reset design area.</btnReset>
 <btnDownload>Save graphic to computer.</btnDownload>
 <btnCapture>Save graphic to gallery.</btnCapture>
@@ -56,7 +59,6 @@ $xmlstr = <<<XML
 <btnAlignCenter>Align text to the center.</btnAlignCenter>
 <btnAlignRight>Align text to the right.</btnAlignRight>
 <textBorderStroke>Border Stroke</textBorderStroke>
-<textButtonBorderColor>Border Button Color</textButtonBorderColor>
 <textTexture>Texture</textTexture>
 <textTextureBackground>Texture Background</textTextureBackground>
 <textPaymentBoxBackground>Payment Box Background</textPaymentBoxBackground>
@@ -67,9 +69,10 @@ $xmlstr = <<<XML
 <textmWidth>Width</textmWidth>
 <textXHeight>X-Height</textXHeight>
 <textNotice>Max width 800px, Max height 400pxMin width 400px, Min height 100px</textNotice>
-<btnAddText>Add additional text fields.</btnAddText>
+<btnAddText></btnAddText>
 <textButtonColor>Button Color</textButtonColor>
 <textBottomColor>Bottom Color</textBottomColor>
+<textButtonBorderColor>Border Button Color</textButtonBorderColor>
 <textBorderColor>Border Color</textBorderColor>
 </langu>
 </langs>
