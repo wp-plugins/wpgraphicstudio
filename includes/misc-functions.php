@@ -1172,6 +1172,8 @@ $to = $wp_upload_dir['basedir'] . '/wpgs/';
 hpt_copyr($from, $to);
 }
 
+add_action('admin_init', 'images_wpgraphicstudio_move');
+
 function hpt_copyr($source, $dest)
 {
 // Check for symlinks
