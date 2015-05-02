@@ -671,7 +671,7 @@ $sanbtnFront = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnFront']));
 $sanbtnAlignLeft = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignLeft']));
 $sanbtnAlignCenter = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignCenter']));
 $sanbtnAlignRight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignRight']));
-$btnAddText = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAddText']));
+$sanbtnAddText = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAddText']));
 $santextBorderStroke = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderStroke']));
 $santextTexture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTexture']));
 $santextTextureBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTextureBackground']));
@@ -712,7 +712,7 @@ $xmlstr = <<<XML
 <font12>'.$sanfont12Value.'</font12>
 <font13>'.$sanfont13Value.'</font13>
 <textSaveOptions>'.$sansaveOptions.'</textSaveOptions>
-<textColorOptions>'.$sancolorOptions.'</textColorOptions>
+<textColorOptions>'.$sanColorOptions.'</textColorOptions>
 <textImageDimensions>'.$santextImageDimensions.'</textImageDimensions>
 <textSaveAs>'.$sansaveAs.'</textSaveAs>
 <textIcon>'.$santextIcon.'</textIcon>
@@ -748,6 +748,7 @@ $xmlstr = <<<XML
 <btnAlignLeft>'.$sanbtnAlignLeft.'</btnAlignLeft>
 <btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
+<btnAddText>'.$sanbtnAddText.'</btnAddText>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -759,7 +760,6 @@ $xmlstr = <<<XML
 <textmWidth>'.$santextmWidth.'</textmWidth>
 <textXHeight>'.$santextXHeight.'</textXHeight>
 <textNotice>'.$santextNotice.'</textNotice>
-<btnAddText>'.$sanbtnAddText.'</btnAddText>
 <textButtonColor>'.$santextButtonColor.'</textButtonColor>
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
@@ -794,7 +794,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <font12>'.$sanfont12Value.'</font12>
 <font13>'.$sanfont13Value.'</font13>
 <textSaveOptions>'.$sansaveOptions.'</textSaveOptions>
-<textColorOptions>'.$sancolorOptions.'</textColorOptions>
+<textColorOptions>'.$sanColorOptions.'</textColorOptions>
 <textImageDimensions>'.$santextImageDimensions.'</textImageDimensions>
 <textSaveAs>'.$sansaveAs.'</textSaveAs>
 <textIcon>'.$santextIcon.'</textIcon>
@@ -830,6 +830,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <btnAlignLeft>'.$sanbtnAlignLeft.'</btnAlignLeft>
 <btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
+<btnAddText>'.$sanbtnAddText.'</btnAddText>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -841,7 +842,6 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <textmWidth>'.$santextmWidth.'</textmWidth>
 <textXHeight>'.$santextXHeight.'</textXHeight>
 <textNotice>'.$santextNotice.'</textNotice>
-<btnAddText>'.$sanbtnAddText.'</btnAddText>
 <textButtonColor>'.$santextButtonColor.'</textButtonColor>
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
@@ -917,7 +917,7 @@ $save_computer_value = $langs->langu[0]->btnDownload;
 $align_left_value = $langs->langu[0]->btnAlignLeft;
 $align_center_value = $langs->langu[0]->btnAlignCenter;
 $align_right_value = $langs->langu[0]->btnAlignRight;
-$new_text_field_value = $langs->langu[0]->btnAddText;
+$add_text_field_value = $langs->langu[0]->btnAddText;
 
 $button_text_field_value = $langs->langu[0]->txtButton;
 $cta_boxes_text_field_value = $langs->langu[0]->txtCTAboxes;
@@ -986,7 +986,7 @@ Align: <input type="text" name="txtAlign" value="<?php echo $text_align_value ?>
 Text Field: <input type="text" name="txtField" value="<?php echo $text_field_value ?>">
 
 <h2><?php _e('Colors Menu'); ?><?php _e(' - Text displayed in the colors menu'); ?></h2>
-Color Options: <input type="text" name="colorOptions" value="<?php echo $color_options_value ?>"><br>
+Color Options: <input type="text" name="ColorOptions" value="<?php echo $color_options_value ?>"><br>
 Background: <input type="text" name="textBackground" value="<?php echo $text_background_value ?>"><br>
 Icon: <input type="text" name="textIcon" value="<?php echo $text_icon_value ?>"><br>
 Border Stroke: <input type="text" name="textBorderStroke" value="<?php echo $text_border_stroke_value ?>"><br>
@@ -1016,7 +1016,7 @@ Save To Computer: <input type="text" name="btnDownload" value="<?php echo $save_
 Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left_value ?>"><br>
 Align Center: <input type="text" name="btnAlignCenter" value="<?php echo $align_center_value ?>"><br>
 Align Right: <input type="text" name="btnAlignRight" value="<?php echo $align_right_value ?>"><br>
-Text Field: <input type="text" name="btnAddText" value="<?php echo $new_text_field_value ?>">
+Text Field: <input type="text" name="btnAddText" value="<?php echo $add_text_field_value ?>">
 
 <h2><?php _e('Height/Width Notice - Headlines'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
 Height/Width Notice: <input type="text" name="textNotice" value="<?php echo $text_notice_value ?>">
