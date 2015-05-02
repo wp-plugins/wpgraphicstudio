@@ -326,7 +326,7 @@ if ($_GET['settings-updated'] == 'true') { ?>
     <div class="updated">
         <p><?php _e( 'Customize Options Updated!', 'wpgs' ); ?></p>
     </div>";
-<?php }
+<?php
 	$logo_url 	= get_option( 'wpgs_wpgraphicstudio_logo_url' );
 	$nav_hex 	= get_option( 'wpgs_wpgraphicstudio_nav_hex' );
 	$belcher_box_url 	= get_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
@@ -338,6 +338,7 @@ $upload_dir = wp_upload_dir();
 $upload_path = $upload_dir['basedir'];
 $tomydir = "$upload_path/wpgs/images/create/";
 
+if ($BelcherBoxurl != '') {
 $BelcherBoxurl = $belcher_box_url;
 $BelcherBoxurlparts = parse_url("$BelcherBoxurl");
 $BelcherBoxextracted = $BelcherBoxurlparts['path'];
@@ -347,9 +348,13 @@ $frommydir = ABSPATH . '';
 
 $BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
 
+if ((isset($BelcherBoxurl)) && ($BelcherBoxurl != '')) {
 rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
 copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
+}
+}
 
+if ($Buttonsurl != '') {
 $Buttonsurl = $buttons_url;
 $Buttonsurlparts = parse_url("$Buttonsurl");
 $Buttonsextracted = $Buttonsurlparts['path'];
@@ -358,9 +363,13 @@ $Buttonsfrommydir_trim = ABSPATH . ''.$Buttonsextracted_trim.'';
 
 $Buttonspath = pathinfo(''.$Buttonsfrommydir_trim.'');
 
+if ((isset($Buttonsurl)) && ($Buttonsurl != '')) {
 rename(''.$Buttonsfrommydir_trim.'', ''.$Buttonspath['dirname'].'/buttons.png');
 copy(''.$Buttonspath['dirname'].'/buttons.png', ''.$tomydir.'buttons.png');
+}
+}
 
+if ($ctaBoxesurl != '') {
 $ctaBoxesurl = $cta_boxes_url;
 $ctaBoxesurlparts = parse_url("$ctaBoxesurl");
 $ctaBoxesextracted = $ctaBoxesurlparts['path'];
@@ -369,9 +378,13 @@ $ctaBoxesfrommydir_trim = ABSPATH . ''.$ctaBoxesextracted_trim.'';
 
 $ctaBoxespath = pathinfo(''.$ctaBoxesfrommydir_trim.'');
 
+if ((isset($ctaBoxesurl)) && ($ctaBoxesurl != '')) {
 rename(''.$ctaBoxesfrommydir_trim.'', ''.$ctaBoxespath['dirname'].'/cta-boxes.png');
 copy(''.$ctaBoxespath['dirname'].'/cta-boxes.png', ''.$tomydir.'cta-boxes.png');
+}
+}
 
+if ($Headlinesurl != '') {
 $Headlinesurl = $headlines_url;
 $Headlinesurlparts = parse_url("$Headlinesurl");
 $Headlinesextracted = $Headlinesurlparts['path'];
@@ -380,9 +393,13 @@ $Headlinesfrommydir_trim = ABSPATH . ''.$Headlinesextracted_trim.'';
 
 $Headlinespath = pathinfo(''.$Headlinesfrommydir_trim.'');
 
+if ((isset($Headlinesurl)) && ($Headlinesurl != '')) {
 rename(''.$Headlinesfrommydir_trim.'', ''.$Headlinespath['dirname'].'/headlines.png');
 copy(''.$Headlinespath['dirname'].'/headlines.png', ''.$tomydir.'headlines.png');
+}
+}
 
+if ($WebBoxesurl != '') {
 $WebBoxesurl = $web_boxes_url;
 $WebBoxesurlparts = parse_url("$WebBoxesurl");
 $WebBoxesextracted = $WebBoxesurlparts['path'];
@@ -391,11 +408,14 @@ $WebBoxesfrommydir_trim = ABSPATH . ''.$WebBoxesextracted_trim.'';
 
 $WebBoxespath = pathinfo(''.$WebBoxesfrommydir_trim.'');
 
+if ((isset($WebBoxesurl)) && ($WebBoxesurl != '')) {
 rename(''.$WebBoxesfrommydir_trim.'', ''.$WebBoxespath['dirname'].'/web-boxes.png');
 copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
+}
+}
 
 //unlink(''.$path['dirname'].'/belcher-boxes.png');
-?>
+} ?>
 <script language="JavaScript">
 (function( $ ) {
 
