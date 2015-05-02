@@ -135,8 +135,6 @@ if ( isset( $wpgs_options['gallery_page'] ) )
 		update_option( 'wpgs_version', WPGS_VERSION );
 
 
-add_action('admin_init', 'images_wpgraphicstudio_move');
-
 add_action( 'admin_init', 'wpgs_change_graphic_dir', 999 );
 add_action( 'admin_menu', 'wpgs_add_options_link', 10 );
 
