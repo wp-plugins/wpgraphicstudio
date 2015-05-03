@@ -335,23 +335,6 @@ if ($_GET['settings-updated'] == 'true') { ?>
 	$cta_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
 	$web_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
 	$headlines_url 	= get_option( 'wpgs_wpgraphicstudio_headlines_url' );
-$upload_dir = wp_upload_dir();
-$upload_path = $upload_dir['basedir'];
-$tomydir = "$upload_path/wpgs/images/create/";
-
-if ($_POST['wpgs_wpgraphicstudio_belcher_box_url'] != '') {
-$BelcherBoxurl = $belcher_box_url;
-$BelcherBoxurlparts = parse_url("$BelcherBoxurl");
-$BelcherBoxextracted = $BelcherBoxurlparts['path'];
-$BelcherBoxextracted_trim = trim( $BelcherBoxextracted, "/" );
-$BelcherBoxfrommydir_trim = ABSPATH . ''.$BelcherBoxextracted_trim.'';
-$frommydir = ABSPATH . '';
-
-$BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
-
-rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
-copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
-}
 
 if ($_POST['wpgs_wpgraphicstudio_buttons_url'] != '') {
 $Buttonsurl = $buttons_url;
@@ -1066,7 +1049,25 @@ function wpgs_wpgraphicstudio_register_logo() {
 }
 function wpgs_wpgraphicstudio_register_belcher_box_graphic() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_belcher_box_url' );
+$upload_dir = wp_upload_dir();
+$upload_path = $upload_dir['basedir'];
+$tomydir = "$upload_path/wpgs/images/create/";
+
+if (wpgs_wpgraphicstudio_belcher_box_url != '') {
+$BelcherBoxurl = $belcher_box_url;
+$BelcherBoxurlparts = parse_url("$BelcherBoxurl");
+$BelcherBoxextracted = $BelcherBoxurlparts['path'];
+$BelcherBoxextracted_trim = trim( $BelcherBoxextracted, "/" );
+$BelcherBoxfrommydir_trim = ABSPATH . ''.$BelcherBoxextracted_trim.'';
+$frommydir = ABSPATH . '';
+
+$BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
+
+rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
+copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
 }
+}
+
 function wpgs_wpgraphicstudio_register_buttons_graphic() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_buttons_url' );
 }
@@ -1106,6 +1107,7 @@ add_action('admin_init', 'wpgs_wpgraphicstudio_register_gallery');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_members');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_delete_files');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_email_graphics');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_member_graphics');
 
 function wpgs_sanitize_register_logo( $new ) {
 	$old = get_option( 'wpgs_wpgraphicstudio_logo_url' );
