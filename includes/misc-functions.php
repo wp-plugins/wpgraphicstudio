@@ -1107,7 +1107,6 @@ add_action('admin_init', 'wpgs_wpgraphicstudio_register_gallery');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_members');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_delete_files');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_email_graphics');
-add_action('admin_init', 'wpgs_wpgraphicstudio_register_member_graphics');
 
 function wpgs_sanitize_register_logo( $new ) {
 	$old = get_option( 'wpgs_wpgraphicstudio_logo_url' );
