@@ -353,7 +353,7 @@ rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-
 copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
 }
 
-//if ($Buttonsurl != '') {
+if ($_POST['$wpgs_wpgraphicstudio_buttons_url'] != '') {
 $Buttonsurl = $buttons_url;
 $Buttonsurlparts = parse_url("$Buttonsurl");
 $Buttonsextracted = $Buttonsurlparts['path'];
@@ -362,13 +362,11 @@ $Buttonsfrommydir_trim = ABSPATH . ''.$Buttonsextracted_trim.'';
 
 $Buttonspath = pathinfo(''.$Buttonsfrommydir_trim.'');
 
-//if ((isset($Buttonsurl)) && ($Buttonsurl != '')) {
 rename(''.$Buttonsfrommydir_trim.'', ''.$Buttonspath['dirname'].'/buttons.png');
 copy(''.$Buttonspath['dirname'].'/buttons.png', ''.$tomydir.'buttons.png');
-//}
-//}
+}
 
-//if ($ctaBoxesurl != '') {
+if ($_POST['$wpgs_wpgraphicstudio_cta_Boxes_url'] != '') {
 $ctaBoxesurl = $cta_boxes_url;
 $ctaBoxesurlparts = parse_url("$ctaBoxesurl");
 $ctaBoxesextracted = $ctaBoxesurlparts['path'];
@@ -377,13 +375,11 @@ $ctaBoxesfrommydir_trim = ABSPATH . ''.$ctaBoxesextracted_trim.'';
 
 $ctaBoxespath = pathinfo(''.$ctaBoxesfrommydir_trim.'');
 
-//if ((isset($ctaBoxesurl)) && ($ctaBoxesurl != '')) {
 rename(''.$ctaBoxesfrommydir_trim.'', ''.$ctaBoxespath['dirname'].'/cta-boxes.png');
 copy(''.$ctaBoxespath['dirname'].'/cta-boxes.png', ''.$tomydir.'cta-boxes.png');
-//}
-//}
+}
 
-//if ($Headlinesurl != '') {
+if ($_POST['$wpgs_wpgraphicstudio_headlines_url'] != '') {
 $Headlinesurl = $headlines_url;
 $Headlinesurlparts = parse_url("$Headlinesurl");
 $Headlinesextracted = $Headlinesurlparts['path'];
@@ -392,13 +388,11 @@ $Headlinesfrommydir_trim = ABSPATH . ''.$Headlinesextracted_trim.'';
 
 $Headlinespath = pathinfo(''.$Headlinesfrommydir_trim.'');
 
-//if ((isset($Headlinesurl)) && ($Headlinesurl != '')) {
 rename(''.$Headlinesfrommydir_trim.'', ''.$Headlinespath['dirname'].'/headlines.png');
 copy(''.$Headlinespath['dirname'].'/headlines.png', ''.$tomydir.'headlines.png');
-//}
-//}
+}
 
-//if ($WebBoxesurl != '') {
+if ($_POST['$wpgs_wpgraphicstudio_web_Boxes_url'] != '') {
 $WebBoxesurl = $web_boxes_url;
 $WebBoxesurlparts = parse_url("$WebBoxesurl");
 $WebBoxesextracted = $WebBoxesurlparts['path'];
@@ -407,11 +401,9 @@ $WebBoxesfrommydir_trim = ABSPATH . ''.$WebBoxesextracted_trim.'';
 
 $WebBoxespath = pathinfo(''.$WebBoxesfrommydir_trim.'');
 
-//if ((isset($WebBoxesurl)) && ($WebBoxesurl != '')) {
 rename(''.$WebBoxesfrommydir_trim.'', ''.$WebBoxespath['dirname'].'/web-boxes.png');
 copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
-//}
-//}
+}
 }
 //unlink(''.$path['dirname'].'/belcher-boxes.png');
  ?>
