@@ -335,8 +335,24 @@ if ($_GET['settings-updated'] == 'true') { ?>
 	$cta_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
 	$web_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
 	$headlines_url 	= get_option( 'wpgs_wpgraphicstudio_headlines_url' );
+$upload_dir = wp_upload_dir();
+$upload_path = $upload_dir['basedir'];
+$tomydir = "$upload_path/wpgs/images/create/";
 
-if ($_POST['wpgs_wpgraphicstudio_buttons_url'] != '') {
+$BelcherBoxurl = $belcher_box_url;
+$BelcherBoxurlparts = parse_url("$BelcherBoxurl");
+$BelcherBoxextracted = $BelcherBoxurlparts['path'];
+$BelcherBoxextracted_trim = trim( $BelcherBoxextracted, "/" );
+$BelcherBoxfrommydir_trim = ABSPATH . ''.$BelcherBoxextracted_trim.'';
+$frommydir = ABSPATH . '';
+
+$BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
+
+if ($BelcherBoxurl != '') {
+rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
+copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
+}
+
 $Buttonsurl = $buttons_url;
 $Buttonsurlparts = parse_url("$Buttonsurl");
 $Buttonsextracted = $Buttonsurlparts['path'];
@@ -345,11 +361,11 @@ $Buttonsfrommydir_trim = ABSPATH . ''.$Buttonsextracted_trim.'';
 
 $Buttonspath = pathinfo(''.$Buttonsfrommydir_trim.'');
 
+if ($Buttonsurl != '') {
 rename(''.$Buttonsfrommydir_trim.'', ''.$Buttonspath['dirname'].'/buttons.png');
 copy(''.$Buttonspath['dirname'].'/buttons.png', ''.$tomydir.'buttons.png');
 }
 
-if ($_POST['wpgs_wpgraphicstudio_cta_Boxes_url'] != '') {
 $ctaBoxesurl = $cta_boxes_url;
 $ctaBoxesurlparts = parse_url("$ctaBoxesurl");
 $ctaBoxesextracted = $ctaBoxesurlparts['path'];
@@ -358,11 +374,11 @@ $ctaBoxesfrommydir_trim = ABSPATH . ''.$ctaBoxesextracted_trim.'';
 
 $ctaBoxespath = pathinfo(''.$ctaBoxesfrommydir_trim.'');
 
+if ($ctaBoxesurl != '') {
 rename(''.$ctaBoxesfrommydir_trim.'', ''.$ctaBoxespath['dirname'].'/cta-boxes.png');
 copy(''.$ctaBoxespath['dirname'].'/cta-boxes.png', ''.$tomydir.'cta-boxes.png');
 }
 
-if ($_POST['wpgs_wpgraphicstudio_headlines_url'] != '') {
 $Headlinesurl = $headlines_url;
 $Headlinesurlparts = parse_url("$Headlinesurl");
 $Headlinesextracted = $Headlinesurlparts['path'];
@@ -371,11 +387,11 @@ $Headlinesfrommydir_trim = ABSPATH . ''.$Headlinesextracted_trim.'';
 
 $Headlinespath = pathinfo(''.$Headlinesfrommydir_trim.'');
 
+if ($Headlinesurl != '') {
 rename(''.$Headlinesfrommydir_trim.'', ''.$Headlinespath['dirname'].'/headlines.png');
 copy(''.$Headlinespath['dirname'].'/headlines.png', ''.$tomydir.'headlines.png');
 }
 
-if ($_POST['wpgs_wpgraphicstudio_web_Boxes_url'] != '') {
 $WebBoxesurl = $web_boxes_url;
 $WebBoxesurlparts = parse_url("$WebBoxesurl");
 $WebBoxesextracted = $WebBoxesurlparts['path'];
@@ -384,10 +400,10 @@ $WebBoxesfrommydir_trim = ABSPATH . ''.$WebBoxesextracted_trim.'';
 
 $WebBoxespath = pathinfo(''.$WebBoxesfrommydir_trim.'');
 
+if ($WebBoxesurl != '') {
 rename(''.$WebBoxesfrommydir_trim.'', ''.$WebBoxespath['dirname'].'/web-boxes.png');
 copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
-}
-}
+}}
 //unlink(''.$path['dirname'].'/belcher-boxes.png');
  ?>
 <script language="JavaScript">
@@ -1049,25 +1065,7 @@ function wpgs_wpgraphicstudio_register_logo() {
 }
 function wpgs_wpgraphicstudio_register_belcher_box_graphic() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_belcher_box_url' );
-$upload_dir = wp_upload_dir();
-$upload_path = $upload_dir['basedir'];
-$tomydir = "$upload_path/wpgs/images/create/";
-
-if (wpgs_wpgraphicstudio_belcher_box_url != '') {
-$BelcherBoxurl = $belcher_box_url;
-$BelcherBoxurlparts = parse_url("$BelcherBoxurl");
-$BelcherBoxextracted = $BelcherBoxurlparts['path'];
-$BelcherBoxextracted_trim = trim( $BelcherBoxextracted, "/" );
-$BelcherBoxfrommydir_trim = ABSPATH . ''.$BelcherBoxextracted_trim.'';
-$frommydir = ABSPATH . '';
-
-$BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
-
-rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
-copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
 }
-}
-
 function wpgs_wpgraphicstudio_register_buttons_graphic() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_buttons_url' );
 }
@@ -1188,8 +1186,6 @@ $to = $wp_upload_dir['basedir'] . '/wpgs/';
 
 hpt_copyr($from, $to);
 }
-
-add_action('admin_init', 'images_wpgraphicstudio_move');
 
 function hpt_copyr($source, $dest)
 {

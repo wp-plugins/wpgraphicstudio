@@ -140,6 +140,7 @@ add_action( 'admin_menu', 'wpgs_add_options_link', 10 );
 
 
 add_action( 'init', 'wpgs_setup_wpgs_post_types', 1 );
+add_action('admin_init', 'images_wpgraphicstudio_move');
 
 
 	// Bail if activating from network, or bulk
