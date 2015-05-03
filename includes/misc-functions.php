@@ -339,7 +339,7 @@ $upload_dir = wp_upload_dir();
 $upload_path = $upload_dir['basedir'];
 $tomydir = "$upload_path/wpgs/images/create/";
 
-//if ($_POST['$wpgs_wpgraphicstudio_belcher_box_url'] != '') {
+if ($_POST['$wpgs_wpgraphicstudio_belcher_box_url'] != '') {
 $BelcherBoxurl = $belcher_box_url;
 $BelcherBoxurlparts = parse_url("$BelcherBoxurl");
 $BelcherBoxextracted = $BelcherBoxurlparts['path'];
@@ -351,7 +351,7 @@ $BelcherBoxpath = pathinfo(''.$BelcherBoxfrommydir_trim.'');
 
 rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-boxes.png');
 copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
-//}
+}
 
 //if ($Buttonsurl != '') {
 $Buttonsurl = $buttons_url;
