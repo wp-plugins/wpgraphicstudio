@@ -339,7 +339,7 @@ $upload_dir = wp_upload_dir();
 $upload_path = $upload_dir['basedir'];
 $tomydir = "$upload_path/wpgs/images/create/";
 
-if ($_POST['$wpgs_wpgraphicstudio_belcher_box_url'] != '') {
+if ($_POST['wpgs_wpgraphicstudio_belcher_box_url'] != '') {
 $BelcherBoxurl = $belcher_box_url;
 $BelcherBoxurlparts = parse_url("$BelcherBoxurl");
 $BelcherBoxextracted = $BelcherBoxurlparts['path'];
@@ -353,7 +353,7 @@ rename(''.$BelcherBoxfrommydir_trim.'', ''.$BelcherBoxpath['dirname'].'/belcher-
 copy(''.$BelcherBoxpath['dirname'].'/belcher-boxes.png', ''.$tomydir.'belcher-boxes.png');
 }
 
-if ($_POST['$wpgs_wpgraphicstudio_buttons_url'] != '') {
+if ($_POST['wpgs_wpgraphicstudio_buttons_url'] != '') {
 $Buttonsurl = $buttons_url;
 $Buttonsurlparts = parse_url("$Buttonsurl");
 $Buttonsextracted = $Buttonsurlparts['path'];
@@ -366,7 +366,7 @@ rename(''.$Buttonsfrommydir_trim.'', ''.$Buttonspath['dirname'].'/buttons.png');
 copy(''.$Buttonspath['dirname'].'/buttons.png', ''.$tomydir.'buttons.png');
 }
 
-if ($_POST['$wpgs_wpgraphicstudio_cta_Boxes_url'] != '') {
+if ($_POST['wpgs_wpgraphicstudio_cta_Boxes_url'] != '') {
 $ctaBoxesurl = $cta_boxes_url;
 $ctaBoxesurlparts = parse_url("$ctaBoxesurl");
 $ctaBoxesextracted = $ctaBoxesurlparts['path'];
@@ -379,7 +379,7 @@ rename(''.$ctaBoxesfrommydir_trim.'', ''.$ctaBoxespath['dirname'].'/cta-boxes.pn
 copy(''.$ctaBoxespath['dirname'].'/cta-boxes.png', ''.$tomydir.'cta-boxes.png');
 }
 
-if ($_POST['$wpgs_wpgraphicstudio_headlines_url'] != '') {
+if ($_POST['wpgs_wpgraphicstudio_headlines_url'] != '') {
 $Headlinesurl = $headlines_url;
 $Headlinesurlparts = parse_url("$Headlinesurl");
 $Headlinesextracted = $Headlinesurlparts['path'];
@@ -392,7 +392,7 @@ rename(''.$Headlinesfrommydir_trim.'', ''.$Headlinespath['dirname'].'/headlines.
 copy(''.$Headlinespath['dirname'].'/headlines.png', ''.$tomydir.'headlines.png');
 }
 
-if ($_POST['$wpgs_wpgraphicstudio_web_Boxes_url'] != '') {
+if ($_POST['wpgs_wpgraphicstudio_web_Boxes_url'] != '') {
 $WebBoxesurl = $web_boxes_url;
 $WebBoxesurlparts = parse_url("$WebBoxesurl");
 $WebBoxesextracted = $WebBoxesurlparts['path'];
