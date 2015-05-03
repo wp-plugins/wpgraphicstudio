@@ -27,48 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @global $wp_version
  * @return void
  */
-function images_wpgraphicstudio_move()
-{
-$from = ''.plugin_dir_path( __FILE__ ).'wpgs/';
-$wp_upload_dir = wp_upload_dir();
-$to = $wp_upload_dir['basedir'] . '/wpgs/';
-
-hpt_copyr($from, $to);
-}
-
-function hpt_copyr($source, $dest)
-{
-// Check for symlinks
-if (is_link($source)) {
-return symlink(readlink($source), $dest);
-}
-
-// Simple copy for a file
-if (is_file($source)) {
-return copy($source, $dest);
-}
-
-// Make destination directory
-if (!is_dir($dest)) {
-mkdir($dest);
-}
-
-// Loop through the folder
-$dir = dir($source);
-while (false !== $entry = $dir->read()) {
-// Skip pointers
-if ($entry == '.' || $entry == '..') {
-continue;
-}
-
-// Deep copy directories
-hpt_copyr("$source/$entry", "$dest/$entry");
-}
-
-// Clean up
-$dir->close();
-return true;
-}
 
 function wpgs_install() {
 	global $wpdb, $wpgs_options, $wp_version;
@@ -176,9 +134,7 @@ if ( isset( $wpgs_options['gallery_page'] ) )
 	    update_option( 'create_page', create_page );
 		update_option( 'wpgs_version', WPGS_VERSION );
 
-
 add_action( 'admin_init', 'wpgs_change_graphic_dir', 999 );
-add_action( 'admin_init', 'images_wpgraphicstudio_move');
 add_action( 'admin_menu', 'wpgs_add_options_link', 10 );
 
 
