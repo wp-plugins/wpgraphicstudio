@@ -967,7 +967,7 @@ if (isset($_POST['navTextValue'])) { ?>
 
 <form method="post" action="">
 <h4><?php _e('Below are all the text variations used within the wpGraphicStudio Core graphic modules
- (Buttons, Belcher Boxes, CTA Boxes, Headlines, WordPress Headers) to change the language simply enter
+ (Buttons, Belcher Boxes, CTA Boxes, Headlines, Web Boxes) to change the language simply enter
   in the translated text for each text variation and save your changes at the bottom.<br><br>You can use <a href="https://translate.google.com/" target="_blank">
   <b><u>Google Translate</b></u></a> to translate these word combinations to just about any language and paste the translated versions below.<br><br>The text
    variations below are used on all modules and/or the five included modules in this plugin.<br>All add on modules also have a language section where additional
