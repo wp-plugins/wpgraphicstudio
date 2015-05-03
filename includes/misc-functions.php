@@ -449,7 +449,15 @@ copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
 		<h2><?php _e('wpGraphicStudio Customize Options'); ?></h2>
 		<form method="post" action="options.php">
 
-			<?php settings_fields('wpgs_wpgraphicstudio_settings'); ?>
+			<?php settings_fields('wpgs_wpgraphicstudio_settings');
+	$logo_url 	= get_option( 'wpgs_wpgraphicstudio_logo_url' );
+	$nav_hex 	= get_option( 'wpgs_wpgraphicstudio_nav_hex' );
+	$belcher_box_url 	= get_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
+	$buttons_url 	= get_option( 'wpgs_wpgraphicstudio_buttons_url' );
+	$cta_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
+	$web_boxes_url 	= get_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
+	$headlines_url 	= get_option( 'wpgs_wpgraphicstudio_headlines_url' );
+			?>
 
 			<table class="form-table">
 				<tbody>
