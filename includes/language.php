@@ -48,6 +48,7 @@ $xmlstr = <<<XML
 <txt1Headlines>Attention All Struggling Internet Marketers</txt1Headlines>
 <txt2Headlines>&quot;Finally, You Can Start Selling A Product That Everyone Needs &amp; Wants. The Newbie Checklist Allows Anyone To Get Started Online Easily, It's Never Been So Easy!&quot;</txt2Headlines>
 <txt3Headlines>Grab Private Label Rights Today For Only $12 &amp; Keep 100% Of The Profits!</txt3Headlines>
+<txtAdditional>Additional Text Field</txtAdditional>
 <btnReset>Reset design area.</btnReset>
 <btnDownload>Save graphic to computer.</btnDownload>
 <btnCapture>Save graphic to gallery.</btnCapture>
@@ -55,10 +56,10 @@ $xmlstr = <<<XML
 <btnDelete>Delete object from design area.</btnDelete>
 <btnBack>Move object to the back.</btnBack>
 <btnFront>Move object to the front.</btnFront>
-<btnAlignLeft>Align text to the left.</btnAlignLeft>
-<btnAlignCenter>Align text to the center.</btnAlignCenter>
-<btnAlignRight>Align text to the right.</btnAlignRight>
-<btnAddText>Add additional text field.</btnAddText>
+<btnAlignLeft>Align text to the left</btnAlignLeft>
+<btnAlignCenter>Align text to the center</btnAlignCenter>
+<btnAlignRight>Align text to the right</btnAlignRight>
+<btnAddText>Add additional text field</btnAddText>
 <textBorderStroke>Border Stroke</textBorderStroke>
 <textTexture>Texture</textTexture>
 <textTextureBackground>Texture Background</textTextureBackground>

@@ -680,6 +680,7 @@ $santxt5WebBoxes = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt5WebBo
 $santxt1Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt1Headlines']));
 $santxt2Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt2Headlines']));
 $santxt3Headlines = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txt3Headlines']));
+$santxtAdditional = preg_replace('/\\\\/', '', htmlspecialchars($_POST['txtAdditional']));
 $sanbtnReset = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnReset']));
 $sanbtnDownload = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnDownload']));
 $sanbtnCapture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnCapture']));
@@ -757,6 +758,7 @@ $xmlstr = <<<XML
 <txt1Headlines>'.$santxt1Headlines.'</txt1Headlines>
 <txt2Headlines>'.$santxt2Headlines.'</txt2Headlines>
 <txt3Headlines>'.$santxt3Headlines.'</txt3Headlines>
+<txtAdditional>'.$santxtAdditional.'</txtAdditional>
 <btnReset>'.$sanbtnReset.'</btnReset>
 <btnDownload>'.$sanbtnDownload.'</btnDownload>
 <btnCapture>'.$sanbtnCapture.'</btnCapture>
@@ -839,6 +841,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <txt1Headlines>'.$santxt1Headlines.'</txt1Headlines>
 <txt2Headlines>'.$santxt2Headlines.'</txt2Headlines>
 <txt3Headlines>'.$santxt3Headlines.'</txt3Headlines>
+<txtAdditional>'.$santxtAdditional.'</txtAdditional>
 <btnReset>'.$sanbtnReset.'</btnReset>
 <btnDownload>'.$sanbtnDownload.'</btnDownload>
 <btnCapture>'.$sanbtnCapture.'</btnCapture>
@@ -953,6 +956,7 @@ $webboxes_text5_field_value = $langs->langu[0]->txt5WebBoxes;
 $headlines_text1_field_value = $langs->langu[0]->txt1Headlines;
 $headlines_text2_field_value = $langs->langu[0]->txt2Headlines;
 $headlines_text3_field_value = $langs->langu[0]->txt3Headlines;
+$additional_text_field_value = $langs->langu[0]->txtAdditional;
 
 if (isset($_POST['navTextValue'])) { ?>
     <div class="updated">
@@ -1054,7 +1058,8 @@ Web Boxes Text Field 4: <input type="text" name="txt4WebBoxes" size="50" value="
 Web Boxes Text Field 5: <input type="text" name="txt5WebBoxes" size="50" value="<?php echo $webboxes_text5_field_value ?>"><br>
 Headlines Text Field 1: <input type="text" name="txt1Headlines" value="<?php echo $headlines_text1_field_value ?>"><br>
 Headlines Text Field 2: <input type="text" name="txt2Headlines" value="<?php echo htmlspecialchars($headlines_text2_field_value) ?>"><br>
-Headlines Text Field 3: <input type="text" name="txt3Headlines" value="<?php echo $headlines_text3_field_value ?>">
+Headlines Text Field 3: <input type="text" name="txt3Headlines" value="<?php echo $headlines_text3_field_value ?>"><br>
+Additional Text Field: <input type="text" name="txtAdditional" value="<?php echo $additional_text_field_value ?>">
 
 <?php break; } ?>
 			</table>
