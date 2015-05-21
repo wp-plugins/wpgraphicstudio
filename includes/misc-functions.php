@@ -291,7 +291,7 @@ function wpgs_get_timezone_id() {
 }
 
 function ilc_admin_tabs( $current = 'main' ) {
-    $tabs = array( 'main' => 'Main Settings', 'customize' => 'Customize', 'language' => 'Language' );
+    $tabs = array( 'main' => 'Main Settings', 'customize' => 'Customize', 'language' => 'Language', 'help' => 'Help' );
     echo '<div id="icon-themes" class="icon32"><br></div>';
     echo '<h2 class="nav-tab-wrapper">';
     foreach( $tabs as $tab => $name ){
@@ -691,6 +691,7 @@ $sanbtnAlignLeft = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignL
 $sanbtnAlignCenter = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignCenter']));
 $sanbtnAlignRight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignRight']));
 $sanbtnAddText = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAddText']));
+$sanbtnHelp = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnHelp']));
 $santextBorderStroke = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderStroke']));
 $santextTexture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTexture']));
 $santextTextureBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTextureBackground']));
@@ -706,6 +707,13 @@ $santextButtonColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBu
 $santextBottomColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBottomColor']));
 $santextButtonBorderColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textButtonBorderColor']));
 $santextBorderColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderColor']));
+$sanBelcherBoxHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxHelpTitle']));
+$sanButtonsHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsHelpTitle']));
+$sanctaBoxesHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesHelpTitle']));
+$sanHeadlinesHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesHelpTitle']));
+$sanWebBoxHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxHelpTitle']));
+$sanSelectHelpVideo = preg_replace('/\\\\/', '', htmlspecialchars($_POST['SelectHelpVideo']));
+$sanVideoLoading = preg_replace('/\\\\/', '', htmlspecialchars($_POST['videoLoading']));
 
 $phpcontent = '<?php
 $xmlstr = <<<XML
@@ -769,6 +777,7 @@ $xmlstr = <<<XML
 <btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
 <btnAddText>'.$sanbtnAddText.'</btnAddText>
+<btnHelp>'.$sanbtnHelp.'</btnHelp>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -784,6 +793,13 @@ $xmlstr = <<<XML
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
 <textBorderColor>'.$santextBorderColor.'</textBorderColor>
+<BelcherBoxHelpTitle>'.$sanBelcherBoxHelpTitle.'</BelcherBoxHelpTitle>
+<ButtonsHelpTitle>'.$sanButtonsHelpTitle.'</ButtonsHelpTitle>
+<ctaBoxesHelpTitle>'.$sanctaBoxesHelpTitle.'</ctaBoxesHelpTitle>
+<HeadlinesHelpTitle>'.$sanHeadlinesHelpTitle.'</HeadlinesHelpTitle>
+<WebBoxHelpTitle>'.$sanWebBoxHelpTitle.'</WebBoxHelpTitle>
+<SelectHelpVideo>'.$sanSelectHelpVideo.'</SelectHelpVideo>
+<videoLoading>'.$sanVideoLoading.'</videoLoading>
 </langu>
 </langs>
 XML;
@@ -852,6 +868,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <btnAlignCenter>'.$sanbtnAlignCenter.'</btnAlignCenter>
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
 <btnAddText>'.$sanbtnAddText.'</btnAddText>
+<btnHelp>'.$sanbtnHelp.'</btnHelp>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -867,6 +884,13 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
 <textBorderColor>'.$santextBorderColor.'</textBorderColor>
+<BelcherBoxHelpTitle>'.$sanBelcherBoxHelpTitle.'</BelcherBoxHelpTitle>
+<ButtonsHelpTitle>'.$sanButtonsHelpTitle.'</ButtonsHelpTitle>
+<ctaBoxesHelpTitle>'.$sanctaBoxesHelpTitle.'</ctaBoxesHelpTitle>
+<HeadlinesHelpTitle>'.$sanHeadlinesHelpTitle.'</HeadlinesHelpTitle>
+<WebBoxHelpTitle>'.$sanWebBoxHelpTitle.'</WebBoxHelpTitle>
+<SelectHelpVideo>'.$sanSelectHelpVideo.'</SelectHelpVideo>
+<videoLoading>'.$sanVideoLoading.'</videoLoading>
 </langu>
 </langs>';
 $fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.xml","wb");
@@ -939,6 +963,7 @@ $align_left_value = $langs->langu[0]->btnAlignLeft;
 $align_center_value = $langs->langu[0]->btnAlignCenter;
 $align_right_value = $langs->langu[0]->btnAlignRight;
 $add_text_field_value = $langs->langu[0]->btnAddText;
+$help_field_value = $langs->langu[0]->btnHelp;
 
 $button_text_field_value = $langs->langu[0]->txtButton;
 $cta_boxes_text_field_value = $langs->langu[0]->txtCTAboxes;
@@ -956,6 +981,14 @@ $headlines_text1_field_value = $langs->langu[0]->txt1Headlines;
 $headlines_text2_field_value = $langs->langu[0]->txt2Headlines;
 $headlines_text3_field_value = $langs->langu[0]->txt3Headlines;
 $additional_text_field_value = $langs->langu[0]->txtAdditional;
+
+$text_belcher_box_help_title_value = $langs->langu[0]->BelcherBoxHelpTitle;
+$text_buttons_help_title_value = $langs->langu[0]->ButtonsHelpTitle;
+$text_cta_boxes_help_title_value = $langs->langu[0]->ctaBoxesHelpTitle;
+$text_headlines_help_title_value = $langs->langu[0]->HeadlinesHelpTitle;
+$text_web_box_help_title_value = $langs->langu[0]->WebBoxHelpTitle;
+$text_select_help_video_value = $langs->langu[0]->SelectHelpVideo;
+$text_video_loading_value = $langs->langu[0]->videoLoading;
 
 if (isset($_POST['navTextValue'])) { ?>
     <div class="updated">
@@ -1038,10 +1071,20 @@ Save To Computer: <input type="text" name="btnDownload" value="<?php echo $save_
 Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left_value ?>"><br>
 Align Center: <input type="text" name="btnAlignCenter" value="<?php echo $align_center_value ?>"><br>
 Align Right: <input type="text" name="btnAlignRight" value="<?php echo $align_right_value ?>"><br>
-Text Field: <input type="text" name="btnAddText" value="<?php echo $add_text_field_value ?>">
+Text Field: <input type="text" name="btnAddText" value="<?php echo $add_text_field_value ?>"><br>
+Help: <input type="text" name="btnHelp" value="<?php echo $help_field_value ?>">
 
-<h2><?php _e('Height/Width Notice - Headlines'); ?><?php _e(' - Tooltip text displayed when hovering over action icons'); ?></h2>
+<h2><?php _e('Height/Width Notice - Headlines Module'); ?></h2>
 Height/Width Notice: <input type="text" name="textNotice" value="<?php echo $text_notice_value ?>">
+
+<h2><?php _e('Help Area Text - All Core Modules'); ?></h2>
+Belcher Box Help Section Title: <input type="text" name="BelcherBoxHelpTitle" value="<?php echo $text_belcher_box_help_title_value ?>"><br>
+Button Help Section Title: <input type="text" name="ButtonsHelpTitle" value="<?php echo $text_buttons_help_title_value ?>"><br>
+Call to Action Boxes Help Section Title: <input type="text" name="ctaBoxesHelpTitle" value="<?php echo $text_cta_boxes_help_title_value ?>"><br>
+Headlines Help Section Title: <input type="text" name="HeadlinesHelpTitle" value="<?php echo $text_headlines_help_title_value ?>"><br>
+Web Boxes Help Section Title: <input type="text" name="WebBoxHelpTitle" value="<?php echo $text_web_box_help_title_value ?>"><br>
+Select Video Text: <input type="text" name="SelectHelpVideo" value="<?php echo $text_select_help_video_value ?>"><br>
+Video Loading Text: <input type="text" name="VideoLoading" value="<?php echo $text_video_loading_value ?>">
 
 <h2><?php _e('Module Design Areas'); ?><?php _e(' - Text displayed in the design areas of the graphic modules'); ?></h2>
 Buttons Text Field: <input type="text" name="txtButton" value="<?php echo $button_text_field_value ?>"><br>
@@ -1060,13 +1103,299 @@ Headlines Text Field 2: <input type="text" name="txt2Headlines" value="<?php ech
 Headlines Text Field 3: <input type="text" name="txt3Headlines" value="<?php echo $headlines_text3_field_value ?>"><br>
 Additional Text Field: <input type="text" name="txtAdditional" value="<?php echo $additional_text_field_value ?>">
 
-<?php break; } ?>
+<?php break;
+      case 'help' :
+if (isset($_POST['BelcherBoxID1Value'])) {
+$sanBelcherBoxID1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxID1Value']));
+$sanBelcherBoxTitle1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxTitle1Value']));
+$sanBelcherBoxID2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxID2Value']));
+$sanBelcherBoxTitle2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxTitle2Value']));
+$sanBelcherBoxID3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxID3Value']));
+$sanBelcherBoxTitle3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxTitle3Value']));
+$sanBelcherBoxID4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxID4Value']));
+$sanBelcherBoxTitle4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['BelcherBoxTitle4Value']));
+
+$sanButtonsID1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsID1Value']));
+$sanButtonsTitle1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsTitle1Value']));
+$sanButtonsID2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsID2Value']));
+$sanButtonsTitle2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsTitle2Value']));
+$sanButtonsID3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsID3Value']));
+$sanButtonsTitle3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsTitle3Value']));
+$sanButtonsID4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsID4Value']));
+$sanButtonsTitle4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ButtonsTitle4Value']));
+
+$sanctaBoxesID1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesID1Value']));
+$sanctaBoxesTitle1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesTitle1Value']));
+$sanctaBoxesID2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesID2Value']));
+$sanctaBoxesTitle2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesTitle2Value']));
+$sanctaBoxesID3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesID3Value']));
+$sanctaBoxesTitle3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesTitle3Value']));
+$sanctaBoxesID4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesID4Value']));
+$sanctaBoxesTitle4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['ctaBoxesTitle4Value']));
+
+$sanHeadlinesID1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesID1Value']));
+$sanHeadlinesTitle1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesTitle1Value']));
+$sanHeadlinesID2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesID2Value']));
+$sanHeadlinesTitle2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesTitle2Value']));
+$sanHeadlinesID3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesID3Value']));
+$sanHeadlinesTitle3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesTitle3Value']));
+$sanHeadlinesID4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesID4Value']));
+$sanHeadlinesTitle4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['HeadlinesTitle4Value']));
+
+$sanWebBoxesID1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesID1Value']));
+$sanWebBoxesTitle1Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesTitle1Value']));
+$sanWebBoxesID2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesID2Value']));
+$sanWebBoxesTitle2Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesTitle2Value']));
+$sanWebBoxesID3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesID3Value']));
+$sanWebBoxesTitle3Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesTitle3Value']));
+$sanWebBoxesID4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesID4Value']));
+$sanWebBoxesTitle4Value = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxesTitle4Value']));
+
+$phpcontent = '<?php
+$xmlstr = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<langs>
+<langu>
+<BelcherBoxvID1>'.$sanBelcherBoxID1Value.'</BelcherBoxvID1>
+<BelcherBoxvTitle1>'.$sanBelcherBoxTitle1Value.'</BelcherBoxvTitle1>
+<BelcherBoxvID2>'.$sanBelcherBoxID2Value.'</BelcherBoxvID2>
+<BelcherBoxvTitle2>'.$sanBelcherBoxTitle2Value.'</BelcherBoxvTitle2>
+<BelcherBoxvID3>'.$sanBelcherBoxID3Value.'</BelcherBoxvID3>
+<BelcherBoxvTitle3>'.$sanBelcherBoxTitle3Value.'</BelcherBoxvTitle3>
+<BelcherBoxvID4>'.$sanBelcherBoxID4Value.'</BelcherBoxvID4>
+<BelcherBoxvTitle4>'.$sanBelcherBoxTitle4Value.'</BelcherBoxvTitle4>
+
+<ButtonsvID1>'.$sanButtonsID1Value.'</ButtonsvID1>
+<ButtonsvTitle1>'.$sanButtonsTitle1Value.'</ButtonsvTitle1>
+<ButtonsvID2>'.$sanButtonsID2Value.'</ButtonsvID2>
+<ButtonsvTitle2>'.$sanButtonsTitle2Value.'</ButtonsvTitle2>
+<ButtonsvID3>'.$sanButtonsID3Value.'</ButtonsvID3>
+<ButtonsvTitle3>'.$sanButtonsTitle3Value.'</ButtonsvTitle3>
+<ButtonsvID4>'.$sanButtonsID4Value.'</ButtonsvID4>
+<ButtonsvTitle4>'.$sanButtonsTitle4Value.'</ButtonsvTitle4>
+
+<ctaBoxesvID1>'.$sanctaBoxesID1Value.'</ctaBoxesvID1>
+<ctaBoxesvTitle1>'.$sanctaBoxesTitle1Value.'</ctaBoxesvTitle1>
+<ctaBoxesvID2>'.$sanctaBoxesID2Value.'</ctaBoxesvID2>
+<ctaBoxesvTitle2>'.$sanctaBoxesTitle2Value.'</ctaBoxesvTitle2>
+<ctaBoxesvID3>'.$sanctaBoxesID3Value.'</ctaBoxesvID3>
+<ctaBoxesvTitle3>'.$sanctaBoxesTitle3Value.'</ctaBoxesvTitle3>
+<ctaBoxesvID4>'.$sanctaBoxesID4Value.'</ctaBoxesvID4>
+<ctaBoxesvTitle4>'.$sanctaBoxesTitle4Value.'</ctaBoxesvTitle4>
+
+<HeadlinesvID1>'.$sanHeadlinesID1Value.'</HeadlinesvID1>
+<HeadlinesvTitle1>'.$sanHeadlinesTitle1Value.'</HeadlinesvTitle1>
+<HeadlinesvID2>'.$sanHeadlinesID2Value.'</HeadlinesvID2>
+<HeadlinesvTitle2>'.$sanHeadlinesTitle2Value.'</HeadlinesvTitle2>
+<HeadlinesvID3>'.$sanHeadlinesID3Value.'</HeadlinesvID3>
+<HeadlinesvTitle3>'.$sanHeadlinesTitle3Value.'</HeadlinesvTitle3>
+<HeadlinesvID4>'.$sanHeadlinesID4Value.'</HeadlinesvID4>
+<HeadlinesvTitle4>'.$sanHeadlinesTitle4Value.'</HeadlinesvTitle4>
+
+<WebBoxesvID1>'.$sanWebBoxesID1Value.'</WebBoxesvID1>
+<WebBoxesvTitle1>'.$sanWebBoxesTitle1Value.'</WebBoxesvTitle1>
+<WebBoxesvID2>'.$sanWebBoxesID2Value.'</WebBoxesvID2>
+<WebBoxesvTitle2>'.$sanWebBoxesTitle2Value.'</WebBoxesvTitle2>
+<WebBoxesvID3>'.$sanWebBoxesID3Value.'</WebBoxesvID3>
+<WebBoxesvTitle3>'.$sanWebBoxesTitle3Value.'</WebBoxesvTitle3>
+<WebBoxesvID4>'.$sanWebBoxesID4Value.'</WebBoxesvID4>
+<WebBoxesvTitle4>'.$sanWebBoxesTitle4Value.'</WebBoxesvTitle4>
+</langu>
+</langs>
+XML;
+?>';
+$phpfp = fopen("../wp-content/plugins/wpgraphicstudio/includes/help.php","wb");
+fwrite($phpfp,$phpcontent);
+fclose($phpfp);
+
+$content = '<langs>
+<langu>
+<BelcherBoxvID1>'.$sanBelcherBoxID1Value.'</BelcherBoxvID1>
+<BelcherBoxvTitle1>'.$sanBelcherBoxTitle1Value.'</BelcherBoxvTitle1>
+<BelcherBoxvID2>'.$sanBelcherBoxID2Value.'</BelcherBoxvID2>
+<BelcherBoxvTitle2>'.$sanBelcherBoxTitle2Value.'</BelcherBoxvTitle2>
+<BelcherBoxvID3>'.$sanBelcherBoxID3Value.'</BelcherBoxvID3>
+<BelcherBoxvTitle3>'.$sanBelcherBoxTitle3Value.'</BelcherBoxvTitle3>
+<BelcherBoxvID4>'.$sanBelcherBoxID4Value.'</BelcherBoxvID4>
+<BelcherBoxvTitle4>'.$sanBelcherBoxTitle4Value.'</BelcherBoxvTitle4>
+
+<ButtonsvID1>'.$sanButtonsID1Value.'</ButtonsvID1>
+<ButtonsvTitle1>'.$sanButtonsTitle1Value.'</ButtonsvTitle1>
+<ButtonsvID2>'.$sanButtonsID2Value.'</ButtonsvID2>
+<ButtonsvTitle2>'.$sanButtonsTitle2Value.'</ButtonsvTitle2>
+<ButtonsvID3>'.$sanButtonsID3Value.'</ButtonsvID3>
+<ButtonsvTitle3>'.$sanButtonsTitle3Value.'</ButtonsvTitle3>
+<ButtonsvID4>'.$sanButtonsID4Value.'</ButtonsvID4>
+<ButtonsvTitle4>'.$sanButtonsTitle4Value.'</ButtonsvTitle4>
+
+<ctaBoxesvID1>'.$sanctaBoxesID1Value.'</ctaBoxesvID1>
+<ctaBoxesvTitle1>'.$sanctaBoxesTitle1Value.'</ctaBoxesvTitle1>
+<ctaBoxesvID2>'.$sanctaBoxesID2Value.'</ctaBoxesvID2>
+<ctaBoxesvTitle2>'.$sanctaBoxesTitle2Value.'</ctaBoxesvTitle2>
+<ctaBoxesvID3>'.$sanctaBoxesID3Value.'</ctaBoxesvID3>
+<ctaBoxesvTitle3>'.$sanctaBoxesTitle3Value.'</ctaBoxesvTitle3>
+<ctaBoxesvID4>'.$sanctaBoxesID4Value.'</ctaBoxesvID4>
+<ctaBoxesvTitle4>'.$sanctaBoxesTitle4Value.'</ctaBoxesvTitle4>
+
+<HeadlinesvID1>'.$sanHeadlinesID1Value.'</HeadlinesvID1>
+<HeadlinesvTitle1>'.$sanHeadlinesTitle1Value.'</HeadlinesvTitle1>
+<HeadlinesvID2>'.$sanHeadlinesID2Value.'</HeadlinesvID2>
+<HeadlinesvTitle2>'.$sanHeadlinesTitle2Value.'</HeadlinesvTitle2>
+<HeadlinesvID3>'.$sanHeadlinesID3Value.'</HeadlinesvID3>
+<HeadlinesvTitle3>'.$sanHeadlinesTitle3Value.'</HeadlinesvTitle3>
+<HeadlinesvID4>'.$sanHeadlinesID4Value.'</HeadlinesvID4>
+<HeadlinesvTitle4>'.$sanHeadlinesTitle4Value.'</HeadlinesvTitle4>
+
+<WebBoxesvID1>'.$sanWebBoxesID1Value.'</WebBoxesvID1>
+<WebBoxesvTitle1>'.$sanWebBoxesTitle1Value.'</WebBoxesvTitle1>
+<WebBoxesvID2>'.$sanWebBoxesID2Value.'</WebBoxesvID2>
+<WebBoxesvTitle2>'.$sanWebBoxesTitle2Value.'</WebBoxesvTitle2>
+<WebBoxesvID3>'.$sanWebBoxesID3Value.'</WebBoxesvID3>
+<WebBoxesvTitle3>'.$sanWebBoxesTitle3Value.'</WebBoxesvTitle3>
+<WebBoxesvID4>'.$sanWebBoxesID4Value.'</WebBoxesvID4>
+<WebBoxesvTitle4>'.$sanWebBoxesTitle4Value.'</WebBoxesvTitle4>
+</langu>
+</langs>';
+$fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/xml/help.xml","wb");
+fwrite($fp,$content);
+fclose($fp);
+}
+
+include 'help.php';
+
+$langs = new SimpleXMLElement($xmlstr);
+$belcher_box_id_1_value = $langs->langu[0]->BelcherBoxvID1;
+$belcher_box_title_1_value = $langs->langu[0]->BelcherBoxvTitle1;
+$belcher_box_id_2_value = $langs->langu[0]->BelcherBoxvID2;
+$belcher_box_title_2_value = $langs->langu[0]->BelcherBoxvTitle2;
+$belcher_box_id_3_value = $langs->langu[0]->BelcherBoxvID3;
+$belcher_box_title_3_value = $langs->langu[0]->BelcherBoxvTitle3;
+$belcher_box_id_4_value = $langs->langu[0]->BelcherBoxvID4;
+$belcher_box_title_4_value = $langs->langu[0]->BelcherBoxvTitle4;
+
+$buttons_id_1_value = $langs->langu[0]->ButtonsvID1;
+$buttons_title_1_value = $langs->langu[0]->ButtonsvTitle1;
+$buttons_id_2_value = $langs->langu[0]->ButtonsvID2;
+$buttons_title_2_value = $langs->langu[0]->ButtonsvTitle2;
+$buttons_id_3_value = $langs->langu[0]->ButtonsvID3;
+$buttons_title_3_value = $langs->langu[0]->ButtonsvTitle3;
+$buttons_id_4_value = $langs->langu[0]->ButtonsvID4;
+$buttons_title_4_value = $langs->langu[0]->ButtonsvTitle4;
+
+$cta_boxes_id_1_value = $langs->langu[0]->ctaBoxesvID1;
+$cta_boxes_title_1_value = $langs->langu[0]->ctaBoxesvTitle1;
+$cta_boxes_id_2_value = $langs->langu[0]->ctaBoxesvID2;
+$cta_boxes_title_2_value = $langs->langu[0]->ctaBoxesvTitle2;
+$cta_boxes_id_3_value = $langs->langu[0]->ctaBoxesvID3;
+$cta_boxes_title_3_value = $langs->langu[0]->ctaBoxesvTitle3;
+$cta_boxes_id_4_value = $langs->langu[0]->ctaBoxesvID4;
+$cta_boxes_title_4_value = $langs->langu[0]->ctaBoxesvTitle4;
+
+$headlines_id_1_value = $langs->langu[0]->HeadlinesvID1;
+$headlines_title_1_value = $langs->langu[0]->HeadlinesvTitle1;
+$headlines_id_2_value = $langs->langu[0]->HeadlinesvID2;
+$headlines_title_2_value = $langs->langu[0]->HeadlinesvTitle2;
+$headlines_id_3_value = $langs->langu[0]->HeadlinesvID3;
+$headlines_title_3_value = $langs->langu[0]->HeadlinesvTitle3;
+$cta_boxes_id_4_value = $langs->langu[0]->HeadlinesvID4;
+$headlines_title_4_value = $langs->langu[0]->HeadlinesvTitle4;
+
+$web_boxes_id_1_value = $langs->langu[0]->WebBoxesvID1;
+$web_boxes_title_1_value = $langs->langu[0]->WebBoxesvTitle1;
+$web_boxes_id_2_value = $langs->langu[0]->WebBoxesvID2;
+$web_boxes_title_2_value = $langs->langu[0]->WebBoxesvTitle2;
+$web_boxes_id_3_value = $langs->langu[0]->WebBoxesvID3;
+$web_boxes_title_3_value = $langs->langu[0]->WebBoxesvTitle3;
+$web_boxes_id_4_value = $langs->langu[0]->WebBoxesvID4;
+$web_boxes_title_4_value = $langs->langu[0]->WebBoxesvTitle4;
+
+if (isset($_POST['BelcherBoxID1Value'])) { ?>
+    <div class="updated">
+        <p><?php _e( 'Video Help Settings Updated!', 'wpgs' ); ?></p>
+    </div>
+<?php } ?>
+<div class="wrap">
+		<h2><?php _e('wpGraphicStudio Core Modules - Help Video Settings'); ?></h2>
+
+		<form method="post" action="admin.php?page=funnels-module-settings&tab=help">
+<h4><?php _e('Users can view general overview and usage videos for this module anytime by clicking on the help icon located near the top right corner of the application labeled with a "?".<br>
+Below are all the video and help options used within this modules help section.<br>
+The videos currently setup for this module are the official wpGraphicStudio help videos specific to this module.'); ?></h4>
+<h3><?php _e('Help Video IDs'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+<h4><?php _e('The YouTube video id is the 11 character id at the end of the YouTube url (after the "v=" variable) for the page where your help video can be viewed at.<br>
+For example, in the following video url: (www.youtube.com/watch?v=<b><u>3kwom8OpnMg</u></b>) the video id is "3kwom8OpnMg".'); ?></h4>
+
+<h3><?php _e('Belcher Box Module - Help Video Settings'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+Belcher Box Video ID 1: <input type="text" name="BelcherBoxID1Value" value="<?php echo $belcher_box_id_1_value ?>"><br>
+Belcher Box Video 1 Title: <input type="text" name="BelcherBoxTitle1Value" value="<?php echo $belcher_box_title_1_value ?>" size="20"><br>
+<br>
+Belcher Box Video ID 2: <input type="text" name="BelcherBoxID2Value" value="<?php echo $belcher_box_id_2_value ?>"><br>
+Belcher Box Video 2 Title: <input type="text" name="BelcherBoxTitle2Value" value="<?php echo $belcher_box_title_2_value ?>" size="20"><br>
+<br>
+Belcher Box Video ID 3: <input type="text" name="BelcherBoxID3Value" value="<?php echo $belcher_box_id_3_value ?>"><br>
+Belcher Box Video 3 Title: <input type="text" name="BelcherBoxTitle3Value" value="<?php echo $belcher_box_title_3_value ?>" size="20"><br>
+<br>
+Belcher Box Video ID 4: <input type="text" name="BelcherBoxID4Value" value="<?php echo $belcher_box_id_4_value ?>"><br>
+Belcher Box Video 4 Title: <input type="text" name="BelcherBoxTitle4Value" value="<?php echo $belcher_box_title_4_value ?>" size="20"><br>
+
+<h3><?php _e('Buttons Module - Help Video Settings'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+Buttons Video ID 1: <input type="text" name="ButtonsID1Value" value="<?php echo $buttons_id_1_value ?>"><br>
+Buttons Video 1 Title: <input type="text" name="ButtonsTitle1Value" value="<?php echo $buttons_title_1_value ?>" size="20"><br>
+<br>
+Buttons Video ID 2: <input type="text" name="ButtonsID2Value" value="<?php echo $buttons_id_2_value ?>"><br>
+Buttons Video 2 Title: <input type="text" name="ButtonsTitle2Value" value="<?php echo $buttons_title_2_value ?>" size="20"><br>
+<br>
+Buttons Video ID 3: <input type="text" name="ButtonsID3Value" value="<?php echo $buttons_id_3_value ?>"><br>
+Buttons Video 3 Title: <input type="text" name="ButtonsTitle3Value" value="<?php echo $buttons_title_3_value ?>" size="20"><br>
+<br>
+Buttons Video ID 4: <input type="text" name="ButtonsID4Value" value="<?php echo $buttons_id_4_value ?>"><br>
+Buttons Video 4 Title: <input type="text" name="ButtonsTitle4Value" value="<?php echo $buttons_title_4_value ?>" size="20"><br>
+
+<h3><?php _e('Call to Action Boxes Module - Help Video Settings'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+CTA Boxes Video ID 1: <input type="text" name="ctaBoxesID1Value" value="<?php echo $cta_boxes_id_1_value ?>"><br>
+CTA Boxes Video 1 Title: <input type="text" name="ctaBoxesTitle1Value" value="<?php echo $cta_boxes_title_1_value ?>" size="20"><br>
+<br>
+CTA Boxes Video ID 2: <input type="text" name="ctaBoxesID2Value" value="<?php echo $cta_boxes_id_2_value ?>"><br>
+CTA Boxes Video 2 Title: <input type="text" name="ctaBoxesTitle2Value" value="<?php echo $cta_boxes_title_2_value ?>" size="20"><br>
+<br>
+CTA Boxes Video ID 3: <input type="text" name="ctaBoxesID3Value" value="<?php echo $cta_boxes_id_3_value ?>"><br>
+CTA Boxes Video 3 Title: <input type="text" name="ctaBoxesTitle3Value" value="<?php echo $cta_boxes_title_3_value ?>" size="20"><br>
+<br>
+CTA Boxes Video ID 4: <input type="text" name="ctaBoxesID4Value" value="<?php echo $cta_boxes_id_4_value ?>"><br>
+CTA Boxes Video 4 Title: <input type="text" name="ctaBoxesTitle4Value" value="<?php echo $cta_boxes_title_4_value ?>" size="20"><br>
+
+<h3><?php _e('Headlines Module - Help Video Settings'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+Headlines Video ID 1: <input type="text" name="HeadlinesID1Value" value="<?php echo $headlines_id_1_value ?>"><br>
+Headlines Video 1 Title: <input type="text" name="HeadlinesTitle1Value" value="<?php echo $headlines_title_1_value ?>" size="20"><br>
+<br>
+Headlines Video ID 2: <input type="text" name="HeadlinesID2Value" value="<?php echo $headlines_id_2_value ?>"><br>
+Headlines Video 2 Title: <input type="text" name="HeadlinesTitle2Value" value="<?php echo $headlines_title_2_value ?>" size="20"><br>
+<br>
+Headlines Video ID 3: <input type="text" name="HeadlinesID3Value" value="<?php echo $headlines_id_3_value ?>"><br>
+Headlines Video 3 Title: <input type="text" name="HeadlinesTitle3Value" value="<?php echo $headlines_title_3_value ?>" size="20"><br>
+<br>
+Headlines Video ID 4: <input type="text" name="HeadlinesID4Value" value="<?php echo $headlines_id_4_value ?>"><br>
+Headlines Video 4 Title: <input type="text" name="HeadlinesTitle4Value" value="<?php echo $headlines_title_4_value ?>" size="20"><br>
+
+<h3><?php _e('Web Boxes Module - Help Video Settings'); ?><?php _e(' - You can add up to 4 YouTube videos which are specific to this Module'); ?></h3>
+Web Boxes Video ID 1: <input type="text" name="WebBoxesID1Value" value="<?php echo $web_boxes_id_1_value ?>"><br>
+Web Boxes Video 1 Title: <input type="text" name="WebBoxesTitle1Value" value="<?php echo $web_boxes_title_1_value ?>" size="20"><br>
+<br>
+Web Boxes Video ID 2: <input type="text" name="WebBoxesID2Value" value="<?php echo $web_boxes_id_2_value ?>"><br>
+Web Boxes Video 2 Title: <input type="text" name="WebBoxesTitle2Value" value="<?php echo $web_boxes_title_2_value ?>" size="20"><br>
+<br>
+Web Boxes Video ID 3: <input type="text" name="WebBoxesID3Value" value="<?php echo $web_boxes_id_3_value ?>"><br>
+Web Boxes Video 3 Title: <input type="text" name="WebBoxesTitle3Value" value="<?php echo $web_boxes_title_3_value ?>" size="20"><br>
+<br>
+Web Boxes Video ID 4: <input type="text" name="WebBoxesID4Value" value="<?php echo $web_boxes_id_4_value ?>"><br>
+Web Boxes Video 4 Title: <input type="text" name="WebBoxesTitle4Value" value="<?php echo $web_boxes_title_4_value ?>" size="20"><br>
+
 			</table>
       <?php submit_button(); ?>
-
-		</form>
-	<?php
-}}
+</form>
+<?php
+break;
+}}}
 
 function wpgs_wpgraphicstudio_register_logo() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_logo_url' );
@@ -1248,20 +1577,20 @@ return true;
    }
  }
 
-function remove_admin_bar() {
+function wpgs_remove_admin_bar() {
 if (!current_user_can('administrator') && !is_admin()) {
 show_admin_bar(false);
 }
 }
-add_action('after_setup_theme', 'remove_admin_bar');
+add_action('after_setup_theme', 'wpgs_remove_admin_bar');
 
-function restrict_admin_with_redirect() {
+function wpgs_restrict_admin_with_redirect() {
 	if ( ! current_user_can( 'manage_options' ) && $_SERVER['PHP_SELF'] != '/wp-admin/' ) {
 		wp_redirect( site_url() ); exit;
 	}
 }
 
-add_action( 'admin_init', 'restrict_admin_with_redirect' );
+add_action( 'admin_init', 'wpgs_restrict_admin_with_redirect' );
 
 function app_output_buffer() {
 ob_start();
