@@ -3,8 +3,8 @@ $xmlstr = <<<XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <langs>
 <langu>
-<BelcherBoxvID1>cufoXitmPvQ</BelcherBoxvID1>
-<BelcherBoxvTitle1>Funnels Module Brief Overview</BelcherBoxvTitle1>
+<BelcherBoxvID1></BelcherBoxvID1>
+<BelcherBoxvTitle1></BelcherBoxvTitle1>
 <BelcherBoxvID2></BelcherBoxvID2>
 <BelcherBoxvTitle2></BelcherBoxvTitle2>
 <BelcherBoxvID3></BelcherBoxvID3>
@@ -13,8 +13,8 @@ $xmlstr = <<<XML
 <BelcherBoxvTitle4></BelcherBoxvTitle4>
 
 
-<ButtonsvID1>cufoXitmPvQ</ButtonsvID1>
-<ButtonsvTitle1>Funnels Module Brief Overview</ButtonsvTitle1>
+<ButtonsvID1></ButtonsvID1>
+<ButtonsvTitle1></ButtonsvTitle1>
 <ButtonsvID2></ButtonsvID2>
 <ButtonsvTitle2></ButtonsvTitle2>
 <ButtonsvID3></ButtonsvID3>
@@ -22,8 +22,8 @@ $xmlstr = <<<XML
 <ButtonsvID4></ButtonsvID4>
 <ButtonsvTitle4></ButtonsvTitle4>
 
-<ctaBoxesvID1>cufoXitmPvQ</ctaBoxesvID1>
-<ctaBoxesvTitle1>Funnels Module Brief Overview</ctaBoxesvTitle1>
+<ctaBoxesvID1></ctaBoxesvID1>
+<ctaBoxesvTitle1></ctaBoxesvTitle1>
 <ctaBoxesvID2></ctaBoxesvID2>
 <ctaBoxesvTitle2></ctaBoxesvTitle2>
 <ctaBoxesvID3></ctaBoxesvID3>
@@ -31,8 +31,8 @@ $xmlstr = <<<XML
 <ctaBoxesvID4></ctaBoxesvID4>
 <ctaBoxesvTitle4></ctaBoxesvTitle4>
 
-<HeadlinesvID1>cufoXitmPvQ</HeadlinesvID1>
-<HeadlinesvTitle1>Funnels Module Brief Overview</HeadlinesvTitle1>
+<HeadlinesvID1></HeadlinesvID1>
+<HeadlinesvTitle1></HeadlinesvTitle1>
 <HeadlinesvID2></HeadlinesvID2>
 <HeadlinesvTitle2></HeadlinesvTitle2>
 <HeadlinesvID3></HeadlinesvID3>
@@ -40,8 +40,8 @@ $xmlstr = <<<XML
 <HeadlinesvID4></HeadlinesvID4>
 <HeadlinesvTitle4></HeadlinesvTitle4>
 
-<WebBoxesvID1>cufoXitmPvQ</WebBoxesvID1>
-<WebBoxesvTitle1>Funnels Module Brief Overview</WebBoxesvTitle1>
+<WebBoxesvID1></WebBoxesvID1>
+<WebBoxesvTitle1></WebBoxesvTitle1>
 <WebBoxesvID2></WebBoxesvID2>
 <WebBoxesvTitle2></WebBoxesvTitle2>
 <WebBoxesvID3></WebBoxesvID3>
