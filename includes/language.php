@@ -60,6 +60,7 @@ $xmlstr = <<<XML
 <btnAlignCenter>Align text to the center</btnAlignCenter>
 <btnAlignRight>Align text to the right</btnAlignRight>
 <btnAddText>Add additional text field</btnAddText>
+<btnHelp>View Help Videos</btnHelp>
 <textBorderStroke>Border Stroke</textBorderStroke>
 <textTexture>Texture</textTexture>
 <textTextureBackground>Texture Background</textTextureBackground>
@@ -75,6 +76,13 @@ $xmlstr = <<<XML
 <textBottomColor>Bottom Color</textBottomColor>
 <textButtonBorderColor>Border Button Color</textButtonBorderColor>
 <textBorderColor>Border Color</textBorderColor>
+<BelcherBoxHelpTitle>Belcher Box Module - Help Videos</BelcherBoxHelpTitle>
+<ButtonsHelpTitle>Buttons Module - Help Videos</ButtonsHelpTitle>
+<ctaBoxesHelpTitle>Call to Action Module - Help Videos</ctaBoxesHelpTitle>
+<HeadlinesHelpTitle>Headlines Module - Help Videos</HeadlinesHelpTitle>
+<WebBoxHelpTitle>Web Boxes Module- Help Videos</WebBoxHelpTitle>
+<SelectHelpVideo>Select Help Video</SelectHelpVideo>
+<videoLoading>Video Loading: Please Standby</videoLoading>
 </langu>
 </langs>
 XML;
