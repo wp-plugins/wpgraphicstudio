@@ -18,6 +18,8 @@ Rather than attempting to provide every feature under the sun, wpGraphicStudio m
 **Features of the plugin include**
 
   * Compatible integration with s2Member
+  * Compatible with both WordPress Standard and Multi Site installs
+  * Integrated video help section
   * Module text customizing for translating graphic modules to different languages
   * Upload custom images for each module in the members area and graphic gallery sections
   * Members area
@@ -65,6 +67,11 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.4.3 May 21 2015 =
+* Updated routines to allow use on a WordPress Multi-Site install on the main network site.
+* Added support video help feature to allow site owners to add their own created YouTube videos in the help section.
+* Updated text customizing/language feature.
+
 = 6.3.3 April 29 2015 =
 * Updated headlines module.
 * Added ability to upload members area and graphic gallery images for each module.
