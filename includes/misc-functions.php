@@ -804,7 +804,7 @@ $xmlstr = <<<XML
 </langs>
 XML;
 ?>';
-$phpfp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.php","wb");
+$phpfp = fopen("../wp-content/uploads/xml/core-language.php","wb");
 fwrite($phpfp,$phpcontent);
 fclose($phpfp);
 
@@ -893,7 +893,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <videoLoading>'.$sanVideoLoading.'</videoLoading>
 </langu>
 </langs>';
-$fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/language.xml","wb");
+$fp = fopen("../wp-content/uploads/xml/core-language.xml","wb");
 fwrite($fp,$content);
 fclose($fp);
 }
@@ -1204,7 +1204,7 @@ $xmlstr = <<<XML
 </langs>
 XML;
 ?>';
-$phpfp = fopen("../wp-content/plugins/wpgraphicstudio/includes/help.php","wb");
+$phpfp = fopen("../wp-content/uploads/xml/core-help.php","wb");
 fwrite($phpfp,$phpcontent);
 fclose($phpfp);
 
@@ -1256,7 +1256,7 @@ $content = '<langs>
 <WebBoxesvTitle4>'.$sanWebBoxesTitle4Value.'</WebBoxesvTitle4>
 </langu>
 </langs>';
-$fp = fopen("../wp-content/plugins/wpgraphicstudio/includes/xml/help.xml","wb");
+$fp = fopen("../wp-content/uploads/xml/core-help.xml","wb");
 fwrite($fp,$content);
 fclose($fp);
 }
@@ -1583,6 +1583,8 @@ show_admin_bar(false);
 }
 }
 add_action('after_setup_theme', 'wpgs_remove_admin_bar');
+
+	$upgraded_from = get_option( 'wpgs_version_upgraded_from' );
 
 function wpgs_restrict_admin_with_redirect() {
 	if ( ! current_user_can( 'manage_options' ) && $_SERVER['PHP_SELF'] != '/wp-admin/' ) {
