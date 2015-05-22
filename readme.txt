@@ -67,6 +67,9 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.4.4 May 22 2015 =
+* Updated language/text customizing routines to keep changes on plugin updates.
+
 = 6.4.3 May 21 2015 =
 * Updated routines to allow use on a WordPress Multi-Site install on the main network site.
 * Added support video help feature to allow site owners to add their own created YouTube videos in the help section.
