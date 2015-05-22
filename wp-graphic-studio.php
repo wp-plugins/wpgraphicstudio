@@ -5,7 +5,7 @@
  * Description: The internets only premier, premium graphics development and distribution system for wordpress...
  * Author: wpGraphicStudio
  * Author URI: http://wpgraphicstudio.com
- * Version: 6.4.3
+ * Version: 6.4.4
  * Text Domain: wpgs
  * Domain Path: languages
  *
@@ -14,7 +14,7 @@
  * @package WPGS
  * @category Core
  * @author wpGraphicStudio
- * @version 6.4.3
+ * @version 6.4.4
  */
  // Exit if accessed directly
  if ( ! defined( 'ABSPATH' ) ) exit;
@@ -129,7 +129,7 @@ final class wp_Graphic_Studio {
 	private function setup_constants() {
 		// Plugin version
 		if ( ! defined( 'WPGS_VERSION' ) )
-			define( 'WPGS_VERSION', '6.4.3' );
+			define( 'WPGS_VERSION', '6.4.4' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'WPGS_PLUGIN_DIR' ) )
@@ -164,11 +164,12 @@ final class wp_Graphic_Studio {
 		require_once WPGS_PLUGIN_DIR . 'includes/scripts.php';
 		require_once WPGS_PLUGIN_DIR . 'includes/graphic-directory-functions.php';
 		require_once WPGS_PLUGIN_DIR . 'includes/post-types.php';
-		//require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
-		//require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php';
+		require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
+		require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php';
 
 		if( is_admin() ) {
 			require_once WPGS_PLUGIN_DIR . 'includes/admin/welcome.php';
+			require_once WPGS_PLUGIN_DIR . 'includes/admin/Upgrade-Language.php';
 		} else {
 			require_once WPGS_PLUGIN_DIR . 'includes/shortcodes.php';
 		}
