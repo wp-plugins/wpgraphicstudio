@@ -18,7 +18,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @since 3.0
  * @return void
 */
-function edd_upgrades_screen() {
+function wpgs_upgrades_screen() {
 	$action = isset( $_GET['wpgs-upgrade'] ) ? sanitize_text_field( $_GET['wpgs-upgrade'] ) : '';
 	$step   = isset( $_GET['step'] )        ? absint( $_GET['step'] )                     : 1;
 	$total  = isset( $_GET['total'] )       ? absint( $_GET['total'] )                    : false;

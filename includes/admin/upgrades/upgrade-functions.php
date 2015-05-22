@@ -34,7 +34,23 @@ function wpgs_show_upgrade_notices() {
 	if ( version_compare( $wpgs_version, '6.0.1', '<' ) && ! get_option( 'wpgs_remove_gallery_page' ) ) {
 		printf(
 			'<div class="updated"><p>' . esc_html__( 'The gallery page needs to be removed as it is no longer needed in 6.0.1 or above, click %shere%s to start the upgrade.', 'wpgs' ) . '</p></div>',
-			'<a href="' . esc_url( admin_url( 'options.php?page=wpgs-upgrades' ) ) . '">',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wpgs-core-settings&tab=upgrades' ) ) . '">',
+			'</a>'
+		);
+	}
+
+	if ( version_compare( $wpgs_version, '6.4.4', '<' ) && ! get_option( 'wpgs_update_language_options' ) ) {
+		printf(
+			'<div class="updated"><p>' . esc_html__( 'The wpGraphicStudio Core module language file needs to be updated with new language variations, click %shere%s to start the upgrade.', 'wpgs' ) . '</p></div>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wpgs-language-upgrade' ) ) . '">',
+			'</a>'
+		);
+	}
+
+	if ( version_compare( $wpgs_version, '6.4.4', '<' ) && ! get_option( 'wpgs_update_help_options' ) ) {
+		printf(
+			'<div class="updated"><p>' . esc_html__( 'The wpGraphicStudio Core module help file needs to be updated with new language variations, click %shere%s to start the upgrade.', 'wpgs' ) . '</p></div>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wpgs-help-upgrade' ) ) . '">',
 			'</a>'
 		);
 	}
@@ -76,7 +92,7 @@ function wpgs_trigger_upgrades() {
 	}
 
 	if ( version_compare( WPGS_VERSION, $wpgs_version, '>' ) ) {
-		wpgs_v60_upgrades();
+		wpgs_v644_upgrades();
 	}
 
 	update_option( 'wpgs_version', WPGS_VERSION );
