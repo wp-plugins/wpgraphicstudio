@@ -893,12 +893,12 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <videoLoading>'.$sanVideoLoading.'</videoLoading>
 </langu>
 </langs>';
-$fp = fopen("../wp-content/uploads/xml/core-language.xml","wb");
+$fp = fopen("../wp-content/uploads/wpgs/xml/core-language.xml","wb");
 fwrite($fp,$content);
 fclose($fp);
 }
 
-include 'language.php';
+include '../wp-content/uploads/wpgs/xml/core-language.php';
 
 $langs = new SimpleXMLElement($xmlstr);
 $nav_text_value = $langs->langu[0]->navText;
@@ -1204,7 +1204,7 @@ $xmlstr = <<<XML
 </langs>
 XML;
 ?>';
-$phpfp = fopen("../wp-content/uploads/xml/core-help.php","wb");
+$phpfp = fopen("../wp-content/uploads/wpgs/xml/core-help.php","wb");
 fwrite($phpfp,$phpcontent);
 fclose($phpfp);
 
@@ -1256,12 +1256,12 @@ $content = '<langs>
 <WebBoxesvTitle4>'.$sanWebBoxesTitle4Value.'</WebBoxesvTitle4>
 </langu>
 </langs>';
-$fp = fopen("../wp-content/uploads/xml/core-help.xml","wb");
+$fp = fopen("../wp-content/uploads/wpgs/xml/core-help.xml","wb");
 fwrite($fp,$content);
 fclose($fp);
 }
 
-include 'help.php';
+include '../wp-content/uploads/wpgs/xml/core-help.php';
 
 $langs = new SimpleXMLElement($xmlstr);
 $belcher_box_id_1_value = $langs->langu[0]->BelcherBoxvID1;
