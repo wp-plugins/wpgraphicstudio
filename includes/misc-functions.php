@@ -309,7 +309,6 @@ add_action('admin_menu', 'wpgs_wpgraphicstudio_settings_menu');
 
 function wpgs_wpgraphicstudio_settings_page() {
    global $pagenow;
-   $settings = get_option( "ilc_theme_settings" );
 
 //generic HTML and code goes here
 
@@ -1613,7 +1612,7 @@ function wpgs_get_pages( $force = false ) {
 
 	$pages_options = array( '' => '' ); // Blank option
 
-	if( ( ! isset( $_GET['page'] ) || 'edd-settings' != $_GET['page'] ) && ! $force ) {
+	if( ( ! isset( $_GET['page'] ) || 'wpgs-settings' != $_GET['page'] ) && ! $force ) {
 		return $pages_options;
 	}
 
