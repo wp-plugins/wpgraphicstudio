@@ -32,6 +32,22 @@ if ( isset( $wpgs_options['headlines_page'] ) )
 	wp_delete_post( $wpgs_options['headlines_page'], true );
 
 /** Delete all the Plugin Options */
-delete_option( 'wpgs_settings_general' );
-delete_option( 'wpgs_settings_emails' );
-delete_option( 'wpgs_settings_misc' );
+delete_option( 'wpgs_wpgraphicstudio_logo_url' );
+delete_option( 'wpgs_wpgraphicstudio_nav_hex' );
+delete_option( 'wpgs_wpgraphicstudio_belcher_box_url' );
+
+delete_option( 'wpgs_wpgraphicstudio_buttons_url' );
+delete_option( 'wpgs_wpgraphicstudio_cta_boxes_url' );
+delete_option( 'wpgs_wpgraphicstudio_web_boxes_url' );
+
+delete_option( 'wpgs_wpgraphicstudio_headlines_url' );
+delete_option( 'wpgs_wpgraphicstudio_per_gallery' );
+delete_option( 'wpgs_wpgraphicstudio_per_members' );
+
+delete_option( 'wpgs_wpgraphicstudio_delete_files' );
+delete_option( 'wpgs_wpgraphicstudio_email_graphics' );
+delete_option( 'wpgs_wpgraphicstudio_install' );
+delete_option( 'wpgs_wpgraphicstudio_install' );
+delete_option( 'wpgs_version_upgraded_from' );
+
+
