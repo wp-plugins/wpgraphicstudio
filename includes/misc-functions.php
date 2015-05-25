@@ -626,7 +626,27 @@ if ($_GET['settings-updated'] == 'true') { ?>
 							<label class="description" for="wpgs_wpgraphicstudio_email_graphics"><?php _e('Allow users to email graphics to their email account'); ?></label>
 						</td>
 					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Remove Plugin Files/Settings'); ?>
+						</th>
+						<td>
+<?php
+	$delete_settings = array("Off", "On");
+	echo "<select id='wpgs_wpgraphicstudio_remove_settings' name='wpgs_wpgraphicstudio_remove_settings'>";
+	foreach($delete_settings as $delete_setting) {
+		$delete_selected = ($remove_settings==$delete_setting) ? 'selected="selected"' : '';
+		echo "<option value='$delete_setting' $delete_selected>$delete_setting</option>";
+	}
+	echo "</select>";
+?>
+							<label class="description" for="wpgs_wpgraphicstudio_remove_settings"><?php _e('Remove all plugin settings and files (including user created graphic files) on plugin delete'); ?></label>
+						</td>
+					</tr>
 				</tbody>
+			</table>
+      <?php submit_button(); ?>
+</form>
       <?php
 break;
       case 'language' :
@@ -691,6 +711,11 @@ $sanbtnAlignCenter = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlig
 $sanbtnAlignRight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAlignRight']));
 $sanbtnAddText = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnAddText']));
 $sanbtnHelp = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnHelp']));
+$sanbtnFontShow = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnFontShow']));
+$sanbtnFontHide = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnFontHide']));
+$sanbtnSizeUp = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnSizeUp']));
+$sanbtnSizeDown = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnSizeDown']));
+$sanbtnTextColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['btnTextColor']));
 $santextBorderStroke = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBorderStroke']));
 $santextTexture = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTexture']));
 $santextTextureBackground = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textTextureBackground']));
@@ -777,6 +802,11 @@ $xmlstr = <<<XML
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
 <btnAddText>'.$sanbtnAddText.'</btnAddText>
 <btnHelp>'.$sanbtnHelp.'</btnHelp>
+<btnFontShow>'.$sanbtnFontShow.'</btnFontShow>
+<btnFontHide>'.$sanbtnFontHide.'</btnFontHide>
+<btnSizeUp>'.$sanbtnSizeUp.'</btnSizeUp>
+<btnSizeDown>'.$sanbtnSizeDown.'</btnSizeDown>
+<btnTextColor>'.$sanbtnTextColor.'</btnTextColor>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -868,6 +898,11 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <btnAlignRight>'.$sanbtnAlignRight.'</btnAlignRight>
 <btnAddText>'.$sanbtnAddText.'</btnAddText>
 <btnHelp>'.$sanbtnHelp.'</btnHelp>
+<btnFontShow>'.$sanbtnFontShow.'</btnFontShow>
+<btnFontHide>'.$sanbtnFontHide.'</btnFontHide>
+<btnSizeUp>'.$sanbtnSizeUp.'</btnSizeUp>
+<btnSizeDown>'.$sanbtnSizeDown.'</btnSizeDown>
+<btnTextColor>'.$sanbtnTextColor.'</btnTextColor>
 <textBorderStroke>'.$santextBorderStroke.'</textBorderStroke>
 <textTexture>'.$santextTexture.'</textTexture>
 <textTextureBackground>'.$santextTextureBackground.'</textTextureBackground>
@@ -963,6 +998,11 @@ $align_center_value = $langs->langu[0]->btnAlignCenter;
 $align_right_value = $langs->langu[0]->btnAlignRight;
 $add_text_field_value = $langs->langu[0]->btnAddText;
 $help_field_value = $langs->langu[0]->btnHelp;
+$font_show_field_value = $langs->langu[0]->btnFontShow;
+$font_hide_field_value = $langs->langu[0]->btnFontHide;
+$size_up_field_value = $langs->langu[0]->btnSizeUp;
+$size_down_field_value = $langs->langu[0]->btnSizeDown;
+$text_color_field_value = $langs->langu[0]->btnTextColor;
 
 $button_text_field_value = $langs->langu[0]->txtButton;
 $cta_boxes_text_field_value = $langs->langu[0]->txtCTAboxes;
@@ -1071,7 +1111,12 @@ Align Left: <input type="text" name="btnAlignLeft" value="<?php echo $align_left
 Align Center: <input type="text" name="btnAlignCenter" value="<?php echo $align_center_value ?>"><br>
 Align Right: <input type="text" name="btnAlignRight" value="<?php echo $align_right_value ?>"><br>
 Text Field: <input type="text" name="btnAddText" value="<?php echo $add_text_field_value ?>"><br>
-Help: <input type="text" name="btnHelp" value="<?php echo $help_field_value ?>">
+Help: <input type="text" name="btnHelp" value="<?php echo $help_field_value ?>"><br>
+Font Selector Open: <input type="text" name="btnFontShow" value="<?php echo $font_show_field_value ?>"><br>
+Font Selector Close: <input type="text" name="btnFontHide" value="<?php echo $font_hide_field_value ?>"><br>
+Font Size Up: <input type="text" name="btnSizeUp" value="<?php echo $size_up_field_value ?>"><br>
+Font Size Down: <input type="text" name="btnSizeDown" value="<?php echo $size_down_field_value ?>"><br>
+Font Color: <input type="text" name="btnTextColor" value="<?php echo $text_color_field_value ?>">
 
 <h2><?php _e('Height/Width Notice - Headlines Module'); ?></h2>
 Height/Width Notice: <input type="text" name="textNotice" value="<?php echo $text_notice_value ?>">
@@ -1101,6 +1146,9 @@ Headlines Text Field 1: <input type="text" name="txt1Headlines" value="<?php ech
 Headlines Text Field 2: <input type="text" name="txt2Headlines" value="<?php echo htmlspecialchars($headlines_text2_field_value) ?>"><br>
 Headlines Text Field 3: <input type="text" name="txt3Headlines" value="<?php echo $headlines_text3_field_value ?>"><br>
 Additional Text Field: <input type="text" name="txtAdditional" value="<?php echo $additional_text_field_value ?>">
+			</table>
+      <?php submit_button(); ?>
+</form>
 
 <?php break;
       case 'help' :
@@ -1429,6 +1477,9 @@ function wpgs_wpgraphicstudio_register_delete_files() {
 function wpgs_wpgraphicstudio_register_email_graphics() {
 	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_email_graphics' );
 }
+function wpgs_wpgraphicstudio_register_remove_settings() {
+	register_setting('wpgs_wpgraphicstudio_settings', 'wpgs_wpgraphicstudio_remove_settings' );
+}
 
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_logo');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_cta_boxes_graphic');
@@ -1441,6 +1492,7 @@ add_action('admin_init', 'wpgs_wpgraphicstudio_register_gallery');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_members');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_delete_files');
 add_action('admin_init', 'wpgs_wpgraphicstudio_register_email_graphics');
+add_action('admin_init', 'wpgs_wpgraphicstudio_register_remove_settings');
 
 function wpgs_sanitize_register_logo( $new ) {
 	$old = get_option( 'wpgs_wpgraphicstudio_logo_url' );
@@ -1519,14 +1571,43 @@ function images_wpgraphicstudio_move()
 $from = ''.plugin_dir_path( __FILE__ ).'wpgs/';
 $wp_upload_dir = wp_upload_dir();
 $to = $wp_upload_dir['basedir'] . '/wpgs/';
-
 hpt_copyr($from, $to);
-update_option( 'wpgs_wpgraphicstudio_install', 1 );
 }
 
-$install = get_option( 'wpgs_wpgraphicstudio_install' );
-if ($install != '1') {
-add_action('admin_init', 'images_wpgraphicstudio_move');
+function deactivate_wpgraphicstudio() {
+$wp_upload_dir = wp_upload_dir();
+
+$headlines_delete = get_page_by_title( 'Headlines' );
+wp_delete_post($headlines_delete->ID, true);
+$myHeadlines = $wp_upload_dir['basedir'] . '/wpgs/images/create/headlines.png';
+unlink($myHeadlines);
+
+$web_boxes_delete = get_page_by_title( 'Web Boxes' );
+wp_delete_post($web_boxes_delete->ID, true);
+$myWebBoxes = $wp_upload_dir['basedir'] . '/wpgs/images/create/web-boxes.png';
+unlink($myWebBoxes);
+
+$cta_boxes_delete = get_page_by_title( 'CTA Boxes' );
+wp_delete_post($cta_boxes_delete->ID, true);
+$myctaBoxes = $wp_upload_dir['basedir'] . '/wpgs/images/create/cta-boxes.png';
+unlink($myctaBoxes);
+
+$buttons_delete = get_page_by_title( 'Buttons' );
+wp_delete_post($buttons_delete->ID, true);
+$myButtons = $wp_upload_dir['basedir'] . '/wpgs/images/create/buttons.png';
+unlink($myButtons);
+
+$belcher_boxes_delete = get_page_by_title( 'Belcher Boxes' );
+wp_delete_post($belcher_boxes_delete->ID, true);
+$myBelcherBoxes = $wp_upload_dir['basedir'] . '/wpgs/images/create/belcher-boxes.png';
+unlink($myBelcherBoxes);
+
+$members_area_delete = get_page_by_title( 'Members Area' );
+wp_delete_post($members_area_delete->ID, true);
+
+update_option( 'wpgs_wpgraphicstudio_install', 0 );
+delete_option( 'create_page', create_page );
+
 }
 
 function hpt_copyr($source, $dest)
@@ -1645,3 +1726,7 @@ recursiveRemove("$mydir");
 if ((get_option( 'wpgs_wpgraphicstudio_delete_files' ) == '') || (get_option( 'wpgs_wpgraphicstudio_delete_files' ) == 'On')) {
 add_action( 'delete_user', 'fileRemove' );
 }
+
+register_deactivation_hook( WPGS_PLUGIN_FILE, 'deactivate_wpgraphicstudio' );
+register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
+register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );

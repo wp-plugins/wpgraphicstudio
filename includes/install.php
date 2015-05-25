@@ -136,7 +136,7 @@ if ( isset( $wpgs_options['gallery_page'] ) )
 
 add_action( 'admin_init', 'wpgs_change_graphic_dir', 999 );
 add_action( 'admin_menu', 'wpgs_add_options_link', 10 );
-
+update_option( 'wpgs_wpgraphicstudio_install', 1 );
 
 add_action( 'init', 'wpgs_setup_wpgs_post_types', 1 );
 
@@ -161,5 +161,3 @@ add_action( 'init', 'wpgs_setup_wpgs_post_types', 1 );
 	// Add the transient to redirect
 	set_transient( '_wpgs_activation_redirect', true, 30 );
 }
-
-register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
