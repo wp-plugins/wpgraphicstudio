@@ -1729,4 +1729,6 @@ add_action( 'delete_user', 'fileRemove' );
 
 register_deactivation_hook( WPGS_PLUGIN_FILE, 'deactivate_wpgraphicstudio' );
 register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
+if (get_option( 'wpgs_wpgraphicstudio_install' ) == '') {
 register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );
+}
