@@ -47,7 +47,14 @@ delete_option( 'wpgs_wpgraphicstudio_per_members' );
 delete_option( 'wpgs_wpgraphicstudio_delete_files' );
 delete_option( 'wpgs_wpgraphicstudio_email_graphics' );
 delete_option( 'wpgs_wpgraphicstudio_install' );
-delete_option( 'wpgs_wpgraphicstudio_install' );
 delete_option( 'wpgs_version_upgraded_from' );
+
+if ((get_option( 'wpgs_wpgraphicstudio_email_graphics' ) == '') || (get_option( 'wpgs_wpgraphicstudio_remove_settings' ) == 'On')) {
+$upload_dir = wp_upload_dir();
+$removeDir = ABSPATH . ''.$upload_dir.'/wpgs/';
+recursiveRemove("$removeDir");
+}
+
+
 
 
