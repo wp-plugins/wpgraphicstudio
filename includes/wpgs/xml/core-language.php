@@ -56,11 +56,16 @@ $xmlstr = <<<XML
 <btnDelete>Delete object from design area.</btnDelete>
 <btnBack>Move object to the back.</btnBack>
 <btnFront>Move object to the front.</btnFront>
-<btnAlignLeft>Align text to the left</btnAlignLeft>
-<btnAlignCenter>Align text to the center</btnAlignCenter>
-<btnAlignRight>Align text to the right</btnAlignRight>
+<btnAlignLeft>Select a text field to activate, Then click to align text to the left</btnAlignLeft>
+<btnAlignCenter>Select a text field to activate, Then click to align text to the center</btnAlignCenter>
+<btnAlignRight>Select a text field to activate, Then click to align text to the right</btnAlignRight>
 <btnAddText>Add additional text field</btnAddText>
 <btnHelp>View Help Videos</btnHelp>
+<btnSizeDown>Select a text field to activate, Then use to decrease the size of the selected text.</btnSizeDown>
+<btnSizeUp>Select a text field to activate, Then use to increase the size of the selected text.</btnSizeUp>
+<btnFontShow>Select a text field to activate, Then click to open the font selector.</btnFontShow>
+<btnFontHide>After selecting and changing the text color for a text field, Then click to close the font selector.</btnFontHide>
+<btnTextColor>Select a text field to activate, Then use to change the color of the selected text.</btnTextColor>
 <textBorderStroke>Border Stroke</textBorderStroke>
 <textTexture>Texture</textTexture>
 <textTextureBackground>Texture Background</textTextureBackground>
