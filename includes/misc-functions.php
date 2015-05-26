@@ -559,9 +559,17 @@ if ($_GET['settings-updated'] == 'true') { ?>
         <p><?php _e( 'Main Settings/Options Updated!', 'wpgs' ); ?></p>
     </div>
 <?php }
+if ((get_option( 'wpgs_wpgraphicstudio_per_gallery' ) == '') || (get_option( 'wpgs_wpgraphicstudio_per_gallery' ) == '0')) {
+$per_gallery = 10;
+} else {
+$per_gallery = get_option( 'wpgs_wpgraphicstudio_per_gallery' );
+}
+if ((get_option( 'wpgs_wpgraphicstudio_per_members' ) == '') || (get_option( 'wpgs_wpgraphicstudio_per_members' ) == '0')) {
+$per_members = 10;
+} else {
+$per_members = get_option( 'wpgs_wpgraphicstudio_per_members' );
+}
 
-	$per_gallery 	= get_option( 'wpgs_wpgraphicstudio_per_gallery' );
-	$per_members 	= get_option( 'wpgs_wpgraphicstudio_per_members' );
 	$delete_files 	= get_option( 'wpgs_wpgraphicstudio_delete_files' );
 	$email_graphics 	= get_option( 'wpgs_wpgraphicstudio_email_graphics' );
 
@@ -727,6 +735,16 @@ $santextHighlight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textHigh
 $santextmWidth = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textmWidth']));
 $santextXHeight = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textXHeight']));
 $santextNotice = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textNotice']));
+$sanemailGraphicNotice = preg_replace('/\\\\/', '', htmlspecialchars($_POST['emailGraphicNotice']));
+$sandeleteGraphicNotice = preg_replace('/\\\\/', '', htmlspecialchars($_POST['deleteGraphicNotice']));
+$santextGraphicSavedNotice = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textGraphicSavedNotice']));
+$sanemailGraphicSubject = preg_replace('/\\\\/', '', htmlspecialchars($_POST['emailGraphicSubject']));
+$sanemailGraphicBody = preg_replace('/\\\\/', '', htmlspecialchars($_POST['emailGraphicBody']));
+$sanaltDeleteGraphic = preg_replace('/\\\\/', '', htmlspecialchars($_POST['altDeleteGraphic']));
+$sanaltEmailGraphic = preg_replace('/\\\\/', '', htmlspecialchars($_POST['altEmailGraphic']));
+$sanaltDownloadGraphic = preg_replace('/\\\\/', '', htmlspecialchars($_POST['altDownloadGraphic']));
+$sanaltCreateGraphic = preg_replace('/\\\\/', '', htmlspecialchars($_POST['altCreateGraphic']));
+$sanaltViewGallery = preg_replace('/\\\\/', '', htmlspecialchars($_POST['altViewGallery']));
 $santextButtonColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textButtonColor']));
 $santextBottomColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textBottomColor']));
 $santextButtonBorderColor = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textButtonBorderColor']));
@@ -738,6 +756,7 @@ $sanHeadlinesHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['Hea
 $sanWebBoxHelpTitle = preg_replace('/\\\\/', '', htmlspecialchars($_POST['WebBoxHelpTitle']));
 $sanSelectHelpVideo = preg_replace('/\\\\/', '', htmlspecialchars($_POST['SelectHelpVideo']));
 $sanVideoLoading = preg_replace('/\\\\/', '', htmlspecialchars($_POST['videoLoading']));
+$santextEmptyGallery = preg_replace('/\\\\/', '', htmlspecialchars($_POST['textEmptyGallery']));
 
 $phpcontent = '<?php
 $xmlstr = <<<XML
@@ -818,6 +837,16 @@ $xmlstr = <<<XML
 <textmWidth>'.$santextmWidth.'</textmWidth>
 <textXHeight>'.$santextXHeight.'</textXHeight>
 <textNotice>'.$santextNotice.'</textNotice>
+<emailGraphicSubject>'.$sanemailGraphicSubject.'</emailGraphicSubject>
+<emailGraphicBody>'.$sanemailGraphicBody.'</emailGraphicBody>
+<emailGraphicNotice>'.$sanemailGraphicNotice.'</emailGraphicNotice>
+<deleteGraphicNotice>'.$sandeleteGraphicNotice.'</deleteGraphicNotice>
+<textGraphicSavedNotice>'.$santextGraphicSavedNotice.'</textGraphicSavedNotice>
+<altDeleteGraphic>'.$sanaltDeleteGraphic.'</altDeleteGraphic>
+<altEmailGraphic>'.$sanaltEmailGraphic.'</altEmailGraphic>
+<altDownloadGraphic>'.$sanaltDownloadGraphic.'</altDownloadGraphic>
+<altCreateGraphic>'.$sanaltCreateGraphic.'</altCreateGraphic>
+<altViewGallery>'.$sanaltViewGallery.'</altViewGallery>
 <textButtonColor>'.$santextButtonColor.'</textButtonColor>
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
@@ -829,6 +858,7 @@ $xmlstr = <<<XML
 <WebBoxHelpTitle>'.$sanWebBoxHelpTitle.'</WebBoxHelpTitle>
 <SelectHelpVideo>'.$sanSelectHelpVideo.'</SelectHelpVideo>
 <videoLoading>'.$sanVideoLoading.'</videoLoading>
+<textEmptyGallery>'.$santextEmptyGallery.'</textEmptyGallery>
 </langu>
 </langs>
 XML;
@@ -914,6 +944,16 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <textmWidth>'.$santextmWidth.'</textmWidth>
 <textXHeight>'.$santextXHeight.'</textXHeight>
 <textNotice>'.$santextNotice.'</textNotice>
+<emailGraphicSubject>'.$sanemailGraphicSubject.'</emailGraphicSubject>
+<emailGraphicBody>'.$sanemailGraphicBody.'</emailGraphicBody>
+<emailGraphicNotice>'.$sanemailGraphicNotice.'</emailGraphicNotice>
+<deleteGraphicNotice>'.$sandeleteGraphicNotice.'</deleteGraphicNotice>
+<textGraphicSavedNotice>'.$santextGraphicSavedNotice.'</textGraphicSavedNotice>
+<altDeleteGraphic>'.$sanaltDeleteGraphic.'</altDeleteGraphic>
+<altEmailGraphic>'.$sanaltEmailGraphic.'</altEmailGraphic>
+<altDownloadGraphic>'.$sanaltDownloadGraphic.'</altDownloadGraphic>
+<altCreateGraphic>'.$sanaltCreateGraphic.'</altCreateGraphic>
+<altViewGallery>'.$sanaltViewGallery.'</altViewGallery>
 <textButtonColor>'.$santextButtonColor.'</textButtonColor>
 <textBottomColor>'.$santextBottomColor.'</textBottomColor>
 <textButtonBorderColor>'.$santextButtonBorderColor.'</textButtonBorderColor>
@@ -925,6 +965,7 @@ $content = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <WebBoxHelpTitle>'.$sanWebBoxHelpTitle.'</WebBoxHelpTitle>
 <SelectHelpVideo>'.$sanSelectHelpVideo.'</SelectHelpVideo>
 <videoLoading>'.$sanVideoLoading.'</videoLoading>
+<textEmptyGallery>'.$santextEmptyGallery.'</textEmptyGallery>
 </langu>
 </langs>';
 $fp = fopen("../wp-content/uploads/wpgs/xml/core-language.xml","wb");
@@ -1028,6 +1069,17 @@ $text_headlines_help_title_value = $langs->langu[0]->HeadlinesHelpTitle;
 $text_web_box_help_title_value = $langs->langu[0]->WebBoxHelpTitle;
 $text_select_help_video_value = $langs->langu[0]->SelectHelpVideo;
 $text_video_loading_value = $langs->langu[0]->videoLoading;
+$text_email_graphic_notice_value = $langs->langu[0]->emailGraphicNotice;
+$text_email_graphic_subject_value = $langs->langu[0]->emailGraphicSubject;
+$text_email_graphic_body_value = $langs->langu[0]->emailGraphicBody;
+$text_delete_graphic_notice_value = $langs->langu[0]->deleteGraphicNotice;
+$text_graphic_saved_notice_value = $langs->langu[0]->textGraphicSavedNotice;
+$alt_delete_graphic_value = $langs->langu[0]->altDeleteGraphic;
+$alt_email_graphic_value = $langs->langu[0]->altEmailGraphic;
+$alt_download_graphic_value = $langs->langu[0]->altDownloadGraphic;
+$alt_create_graphic_value = $langs->langu[0]->altCreateGraphic;
+$alt_view_gallery_value = $langs->langu[0]->altViewGallery;
+$text_empty_gallery_value = $langs->langu[0]->textEmptyGallery;
 
 if (isset($_POST['navTextValue'])) { ?>
     <div class="updated">
@@ -1120,6 +1172,19 @@ Font Color: <input type="text" name="btnTextColor" value="<?php echo $text_color
 
 <h2><?php _e('Height/Width Notice - Headlines Module'); ?></h2>
 Height/Width Notice: <input type="text" name="textNotice" value="<?php echo $text_notice_value ?>">
+
+<h2><?php _e('wpGraphicStudio Notices - All Core Modules and Add On Modules'); ?></h2>
+Email Graphic Notice: <input type="text" name="emailGraphicNotice" value="<?php echo $text_email_graphic_notice_value ?>"><br>
+Delete Graphic Notice: <input type="text" name="deleteGraphicNotice" value="<?php echo $text_delete_graphic_notice_value ?>"><br>
+Email Graphic Subject: <input type="text" name="emailGraphicSubject" value="<?php echo $text_email_graphic_subject_value ?>"><br>
+Email Graphic Body: <input type="text" name="emailGraphicBody" value="<?php echo $text_email_graphic_body_value ?>"><br>
+Save Graphic Notice: <input type="text" name="textGraphicSavedNotice" value="<?php echo $text_graphic_saved_notice_value ?>"><br>
+Download Graphic Alt Text: <input type="text" name="altDownloadGraphic" value="<?php echo $alt_download_graphic_value ?>"><br>
+Delete Graphic Alt Text: <input type="text" name="altDeleteGraphic" value="<?php echo $alt_delete_graphic_value ?>"><br>
+Email Graphic Alt Text: <input type="text" name="altEmailGraphic" value="<?php echo $alt_email_graphic_value ?>"><br>
+Create Graphic Alt Text: <input type="text" name="altCreateGraphic" value="<?php echo $alt_create_graphic_value ?>"><br>
+View Gallery Alt Text: <input type="text" name="altViewGallery" value="<?php echo $alt_view_gallery_value ?>"><br>
+Empty Graphic Gallery: <input type="text" name="textEmptyGallery" value="<?php echo $text_empty_gallery_value ?>">
 
 <h2><?php _e('Help Area Text - All Core Modules'); ?></h2>
 Belcher Box Help Section Title: <input type="text" name="BelcherBoxHelpTitle" value="<?php echo $text_belcher_box_help_title_value ?>"><br>
