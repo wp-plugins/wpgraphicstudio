@@ -1,4 +1,5 @@
 <?php
+include '/wp-content/uploads/wpgs/xml/core-language.php';
 global $current_user;
 get_currentuserinfo();
 $cuser = $current_user->ID;
@@ -25,6 +26,9 @@ function set_html_content_type () {
 	}
 
 function emailGraphic($user_id) {
+$langs = new SimpleXMLElement($xmlstr);
+$text_email_graphic_subject_value = $langs->langu[0]->emailGraphicSubject;
+$text_email_graphic_body_value = $langs->langu[0]->emailGraphicBody;
 
 	global $wpdb;
 	$emailFile = sanitize_file_name( $_POST['file'] );
@@ -37,7 +41,7 @@ function emailGraphic($user_id) {
 	   $attachments = array( $upload_path.'/wpgs/'.$user_id.'/belcher-boxes/'.$emailFile.'' );
 	   $headers = 'From: ' . get_bloginfo( "name" ) . ' <' . get_bloginfo( "admin_email" ) . '>' . "\r\n";
 add_filter( 'wp_mail_content_type', 'set_html_content_type' );
-$eGraphic = @wp_mail($downemail, 'Your custom graphic from ' . get_bloginfo( "name" ) . '', 'Thank you for using ' . get_bloginfo("name") . ' for your graphic creation needs.<br>Your custom generated graphic is attached.', $headers, $attachments, 0);
+$eGraphic = @wp_mail($downemail, '' . $text_email_graphic_subject_value . '', '' . $text_email_graphic_body_value . '', $headers, $attachments, 0);
 
 if($eGraphic){
 update_post_meta($user_id, 'EmailSent', $emailFile);
@@ -47,6 +51,10 @@ remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
 }
 
 function ResendGraphic($user_id) {
+$langs = new SimpleXMLElement($xmlstr);
+$text_email_graphic_subject_value = $langs->langu[0]->emailGraphicSubject;
+$text_email_graphic_body_value = $langs->langu[0]->emailGraphicBody;
+
 	$emailFile = sanitize_file_name( $_POST['file'] );
 
 	global $wpdb;
@@ -59,7 +67,7 @@ function ResendGraphic($user_id) {
 	   $attachments = array( $upload_path . '/wpgs/'.$user_id.'/belcher-boxes/'. $emailFile .'' );
 	   $headers = 'From: ' . get_bloginfo( "name" ) . ' <' . get_bloginfo( "admin_email" ) . '>' . "\r\n";
 add_filter( 'wp_mail_content_type', 'set_html_content_type' );
-$eGraphic = @wp_mail($downemail, 'Your custom graphic from ' . get_bloginfo( "name" ) . '', 'Thank you for using ' . get_bloginfo("name") . ' for your graphic creation needs.<br>Your custom generated graphic is attached.', $headers, $attachments, 0);
+$eGraphic = @wp_mail($downemail, '' . $text_email_graphic_subject_value . '', '' . $text_email_graphic_body_value . '', $headers, $attachments, 0);
 
 if($eGraphic){
 update_post_meta($user_id, 'ReSent', $emailFile);
@@ -68,6 +76,8 @@ delete_post_meta($user_id, 'EmailSent', $emailFile);
 }
 remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
 $fileurl = plugins_url( 'includes/wpgs/images', dirname(__FILE__) );
+$langs = new SimpleXMLElement($xmlstr);
+$text_email_graphic_notice_value = $langs->langu[0]->emailGraphicNotice;
 ?>
 <style type="text/css">
 .isa_info, .isa_success, .isa_warning, .isa_error {
@@ -86,7 +96,7 @@ border-radius:.5em;
     background-image:url('<?php echo $fileurl ?>/success.png');
 }
 </style>
-<div class="isa_success">Your Belcher Box Graphic Has Been eMailed to the eMail address on file.</div>
+<div class="isa_success"><?php echo $text_email_graphic_notice_value ?></div>
 <?php
 }
 }
@@ -103,7 +113,8 @@ unlink($myFile);
 unlink($myThumb);
 $upload_path = $wp_upload_dir['basedir'] . '/wpgs';
 $fileurl = plugins_url( 'includes/wpgs/images', dirname(__FILE__) );
-
+$langs = new SimpleXMLElement($xmlstr);
+$text_delete_graphic_notice_value = $langs->langu[0]->deleteGraphicNotice;
 ?>
 <style type="text/css">
 .isa_info, .isa_success, .isa_warning, .isa_error {
@@ -122,7 +133,7 @@ border-radius:.5em;
     background-image:url('<?php echo $fileurl ?>/success.png');
 }
 </style>
-<div class="isa_success">Your Belcher Box Graphic Has Been Deleted From Your Gallery Below</div>
+<div class="isa_success"><?php echo $text_delete_graphic_notice_value ?></div>
 <?php }
 
 if((isset($_POST['email'])) && ($_POST['email'] != '') && ($user_id != '')) {
@@ -196,6 +207,9 @@ if ($format == 'png') {
     imagepng($thumb, ''.$upload_path.'/'. $user_id .'/belcher-boxes/thumbs/THUMB_'. $newName .'.'. $format .'');
     }
 imagedestroy($im);
+$langs = new SimpleXMLElement($xmlstr);
+$text_graphic_saved_notice_value = $langs->langu[0]->textGraphicSavedNotice;
+
 ?>
 <style type="text/css">
 .isa_info, .isa_success, .isa_warning, .isa_error {
@@ -215,9 +229,7 @@ border-radius:.5em;
 }
 </style>
 <div class="isa_success">
-Your created Belcher Box Has Been Saved To Your Belcher Boxes Graphic Gallery For Future Use.
-<br>Click on your created Belcher Box below to save to your computer....<br>
-<b>Close This Window When Download Has Completed To Return To The Belcher Boxes Module.</b>
+<?php echo $text_graphic_saved_notice_value ?>
 </div>
 <div width="100%" align="center">
 <div align="center"><a href="<?php echo $filePath ?>" download="<?php echo $newName ?>"><img src="<?php echo $filePath ?>" width="300px"></a></div>
@@ -245,7 +257,11 @@ $thumbpath = $full_url . "thumbs/";
 
 # Set number of thumbs_per_page.
 
+if ((get_option( 'wpgs_wpgraphicstudio_per_gallery' ) == '') || (get_option( 'wpgs_wpgraphicstudio_per_gallery' ) == '0')) {
+$thumbs_per_page = 10;
+} else {
 $thumbs_per_page = $thumbs_per_page = get_option( 'wpgs_wpgraphicstudio_per_gallery' );
+}
 
 # Set the thumb_max height/width in pixels.
 
@@ -272,6 +288,11 @@ $use_better_quality = 0;
 $query = (strlen($_SERVER['QUERY_STRING']) > 0) ? $_SERVER['QUERY_STRING'] : 1;
 
 $pictureArray = array();
+$langs = new SimpleXMLElement($xmlstr);
+$alt_delete_graphic_value = $langs->langu[0]->altDeleteGraphic;
+$alt_email_graphic_value = $langs->langu[0]->altEmailGraphic;
+$alt_download_graphic_value = $langs->langu[0]->altDownloadGraphic;
+$text_empty_gallery_value = $langs->langu[0]->textEmptyGallery;
 ?>
 <head>
 <link rel="stylesheet" href="<?php echo $cssurl ?>" type="text/css" media="all" />
@@ -342,16 +363,16 @@ print "<ul class=\"thumbs\">\n";
 <input type=\"hidden\" name=\"file\" value=\"$file_name\">
 <input type=\"hidden\" name=\"view\" value=\"gallery\">
 <input type=\"hidden\" name=\"delete\" value=\"1\">
-<input class=\"galleryDelete\" type=\"submit\" value=\"\" alt=\"Delete Graphic\" title=\"Delete Graphic\" /></form>
+<input class=\"galleryDelete\" type=\"submit\" value=\"\" alt=\"$alt_delete_graphic_value\" title=\"$alt_delete_graphic_value\" /></form>
 
 <a href=\"".$full_url.$pA."\" download=\"$pA\">
-<input class=\"galleryDownload\" type=\"submit\" value=\"\" alt=\"Download Graphic\" title=\"Download Graphic\" /></a>";
+<input class=\"galleryDownload\" type=\"submit\" value=\"\" alt=\"$alt_download_graphic_value\" title=\"$alt_download_graphic_value\" /></a>";
 if ((get_option( 'wpgs_wpgraphicstudio_email_graphics' ) == '') || (get_option( 'wpgs_wpgraphicstudio_email_graphics' ) == 'On')) {
 print "<form action=\"/belcher-boxes\" id=\"eMail\" method=\"post\">
 <input type=\"hidden\" name=\"file\" value=\"$file_name\">
 <input type=\"hidden\" name=\"view\" value=\"gallery\">
 <input type=\"hidden\" name=\"email\" value=\"1\">
-<input class=\"galleryEmail\" type=\"submit\" value=\"\" alt=\"Email Graphic\" title=\"Email Graphic\"/></form>";
+<input class=\"galleryEmail\" type=\"submit\" value=\"\" alt=\"$alt_email_graphic_value\" title=\"$alt_email_graphic_value\"/></form>";
 }
 print "</div></li>\n";
 			}
@@ -365,9 +386,8 @@ print "</div></li>\n";
 
 print "</ul>\n<div class=\"clear\">&nbsp;</div>\n";
 }
-else
-{
-print "<p>You currently have no graphics in this gallery </p>";
+else { ?>
+<?php echo ''.$text_empty_gallery_value.'';
 } ?>
 </div>
 <?php } if ($_POST['create'] != '') {
@@ -381,10 +401,6 @@ $decHex = ereg_replace("[^A-Za-z0-9]", "", $nav_hex );
   <?php echo '<object type="application/x-shockwave-flash" data="'.plugins_url( 'belcher-boxes.swf', dirname(__FILE__) ).'?logoURL='.$logo.'&NavColor='.$decHex.'" width="950px" height="650px">'; ?>
   <!--<![endif]-->
   </div>
-    <p>
-      No graphic creation selection has been made or that module is not available.<br>
-      Pleae contact site support to request that module be added.</p>
-
   <!--[if !IE]>-->
   </object>
   <!--<![endif]-->
