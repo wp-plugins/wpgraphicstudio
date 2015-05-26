@@ -35,7 +35,6 @@ class WPGS_Language {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'language_menus') );
 		add_action( 'admin_head', array( $this, 'language_head' ) );
-		add_action( 'admin_init', array( $this, 'languageup'    ) );
 	}
 
 	/**
