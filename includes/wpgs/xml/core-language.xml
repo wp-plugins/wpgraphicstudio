@@ -75,6 +75,18 @@
 <textmWidth>Width</textmWidth>
 <textXHeight>X-Height</textXHeight>
 <textNotice>Max width 800px, Max height 400pxMin width 400px, Min height 100px</textNotice>
+<textGraphicSavedNotice>Your created graphic has been saved to your graphic gallery for future use.
+Click on your created graphic below to save to your computer....
+Close This Window When Download Has Completed To Return To The graphic Module.</textGraphicSavedNotice>
+<emailGraphicNotice>Your created graphic has been eMailed to the eMail address on file.</emailGraphicNotice>
+<deleteGraphicNotice>Your graphic has been deleted from your graphic gallery below.</deleteGraphicNotice>
+<emailGraphicSubject>Your custom graphic.</emailGraphicSubject>
+<emailGraphicBody>Your custom graphic is attached. Thank You for using wpGraphicStudio.</emailGraphicBody>
+<altDeleteGraphic>Delete Graphic</altDeleteGraphic>
+<altEmailGraphic>eMail Graphic</altEmailGraphic>
+<altDownloadGraphic>Download Graphic</altDownloadGraphic>
+<altCreateGraphic>Create Graphic</altCreateGraphic>
+<altViewGallery>View Gallery</altViewGallery>
 <textButtonColor>Button Color</textButtonColor>
 <textBottomColor>Bottom Color</textBottomColor>
 <textButtonBorderColor>Border Button Color</textButtonBorderColor>
@@ -86,5 +98,6 @@
 <WebBoxHelpTitle>Web Boxes Module- Help Videos</WebBoxHelpTitle>
 <SelectHelpVideo>Select Help Video</SelectHelpVideo>
 <videoLoading>Video Loading: Please Standby</videoLoading>
+<textEmptyGallery>You have no graphics in this gallery</textEmptyGallery>
 </langu>
 </langs>
