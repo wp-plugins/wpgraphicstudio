@@ -1901,7 +1901,4 @@ register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
 register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );
 } elseif (get_option( 'wpgs_wpgraphicstudio_install' ) == '0') {
 register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
-} else {
-register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
-register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );
 }
