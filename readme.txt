@@ -67,6 +67,9 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.4.5 June 7 2015 =
+* Updated install routine for upgrading from older versions of wpGraphicStudio.
+
 = 6.4.4 May 22 2015 =
 * Updated language/text customizing routines to keep changes on plugin updates.
 * Added remove all files (user generated/created) and settings on plugin delete.
