@@ -290,7 +290,7 @@ function wpgs_get_timezone_id() {
     return 'UTC';
 }
 
-function ilc_admin_tabs( $current = 'main' ) {
+function wpgs_admin_tabs( $current = 'main' ) {
     $tabs = array( 'main' => 'Main Settings', 'customize' => 'Customize', 'language' => 'Language', 'help' => 'Help' );
     echo '<div id="icon-themes" class="icon32"><br></div>';
     echo '<h2 class="nav-tab-wrapper">';
@@ -312,7 +312,7 @@ function wpgs_wpgraphicstudio_settings_page() {
 
 //generic HTML and code goes here
 
-if ( isset ( $_GET['tab'] ) ) ilc_admin_tabs($_GET['tab']); else ilc_admin_tabs('main');
+if ( isset ( $_GET['tab'] ) ) wpgs_admin_tabs($_GET['tab']); else wpgs_admin_tabs('main');
 
 if ( $pagenow == 'admin.php' && $_GET['page'] == 'wpgs-core-settings' ){
 
@@ -551,6 +551,9 @@ copy(''.$WebBoxespath['dirname'].'/web-boxes.png', ''.$tomydir.'web-boxes.png');
 						</td>
 					</tr>
 				</tbody>
+			</table>
+      <?php submit_button(); ?>
+</form>
 <?php
    break;
       case 'main' :
@@ -649,6 +652,106 @@ $per_members = get_option( 'wpgs_wpgraphicstudio_per_members' );
 	echo "</select>";
 ?>
 							<label class="description" for="wpgs_wpgraphicstudio_remove_settings"><?php _e('Remove all plugin settings and files (including user created graphic files) on plugin delete'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Belcher Boxes Module Page'); ?>
+						</th>
+						<td>
+<select id="wpgs_wpgraphicstudio_belcher_boxes_page" name="wpgs_wpgraphicstudio_belcher_boxes_page">
+ <option value="">Belcher Boxes</option>
+ <?php
+  $bbpages = get_pages();
+  foreach ( $bbpages as $bbpage ) {
+  	$bboption = '<option value="' . get_page_link( $bbpage->ID ) . '">';
+	$bboption .= $bbpage->post_title;
+	$bboption .= '</option>';
+	echo $bboption;
+  }
+ ?>
+</select>
+							<label class="description" for="wpgs_wpgraphicstudio_belcher_boxes_page"><?php _e('If you have changed the Belcher Boxes Module page title or perma link, select the new page here to update wpGraphicStudio to this change.'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Buttons Module Page'); ?>
+						</th>
+						<td>
+<select id="wpgs_wpgraphicstudio_buttons_page" name="wpgs_wpgraphicstudio_buttons_page">
+ <option value="">Buttons</option>
+ <?php
+  $bpages = get_pages();
+  foreach ( $bpages as $bpage ) {
+  	$boption = '<option value="' . get_page_link( $bpage->ID ) . '">';
+	$boption .= $bpage->post_title;
+	$boption .= '</option>';
+	echo $boption;
+  }
+ ?>
+</select>
+							<label class="description" for="wpgs_wpgraphicstudio_buttons_page"><?php _e('If you have changed the Buttons Module page title or perma link, select the new page here to update wpGraphicStudio to this change.'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('CTA Boxes Module Page'); ?>
+						</th>
+						<td>
+<select id="wpgs_wpgraphicstudio_cta_boxes_page" name="wpgs_wpgraphicstudio_cta_boxes_page">
+ <option value="">CTA Boxes</option>
+ <?php
+  $ctapages = get_pages();
+  foreach ( $ctapages as $ctapage ) {
+  	$ctaoption = '<option value="' . get_page_link( $ctapage->ID ) . '">';
+	$ctaoption .= $ctapage->post_title;
+	$ctaoption .= '</option>';
+	echo $ctaoption;
+  }
+ ?>
+</select>
+							<label class="description" for="wpgs_wpgraphicstudio_cta_boxes_page"><?php _e('If you have changed the CTA Boxes Module page title or perma link, select the new page here to update wpGraphicStudio to this change.'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Headlines Module Page'); ?>
+						</th>
+						<td>
+<select id="wpgs_wpgraphicstudio_headlines_page" name="wpgs_wpgraphicstudio_headlines_page">
+ <option value="">Headlines</option>
+ <?php
+  $hpages = get_pages();
+  foreach ( $hpages as $hpage ) {
+  	$hoption = '<option value="' . get_page_link( $hpage->ID ) . '">';
+	$hoption .= $hpage->post_title;
+	$hoption .= '</option>';
+	echo $hoption;
+  }
+ ?>
+</select>
+							<label class="description" for="wpgs_wpgraphicstudio_headlines_page"><?php _e('If you have changed the Headlines Module page title or perma link, select the new page here to update wpGraphicStudio to this change.'); ?></label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" valign="top">
+							<?php _e('Web Boxes Module Page'); ?>
+						</th>
+						<td>
+<select id="wpgs_wpgraphicstudio_web_boxes_page" name="wpgs_wpgraphicstudio_web_boxes_page">
+ <option value="">Web Boxes</option>
+ <?php
+  $wbpages = get_pages();
+  foreach ( $wbpages as $wbpage ) {
+  	$wboption = '<option value="' . get_page_link( $wbpage->ID ) . '">';
+	$wboption .= $wbpage->post_title;
+	$wboption .= '</option>';
+	echo $wboption;
+  }
+ ?>
+</select>
+							<label class="description" for="wpgs_wpgraphicstudio_web_boxes_page"><?php _e('If you have changed the Web Boxes page title or perma link, select the new page here to update wpGraphicStudio to this change.'); ?></label>
 						</td>
 					</tr>
 				</tbody>
@@ -863,7 +966,7 @@ $xmlstr = <<<XML
 </langs>
 XML;
 ?>';
-$phpfp = fopen("../wp-content/uploads/xml/core-language.php","wb");
+$phpfp = fopen("../wp-content/uploads/wpgs/xml/core-language.php","wb");
 fwrite($phpfp,$phpcontent);
 fclose($phpfp);
 
@@ -1788,12 +1891,17 @@ recursiveRemove("$mydir");
 	$headers = 'From: ' . get_bloginfo( "name" ) . ' <' . get_bloginfo( "admin_email" ) . '>' . "\r\n";
  	 wp_mail( $email, 'Your account has been removed', 'Your account at ' . get_bloginfo("name") . ' has been removed due to dormancy or non usage for an extended period of time.', $headers );
 }
-if ((get_option( 'wpgs_wpgraphicstudio_delete_files' ) == '') || (get_option( 'wpgs_wpgraphicstudio_delete_files' ) == 'On')) {
+if (get_option( 'wpgs_wpgraphicstudio_delete_files' ) == 'On') {
 add_action( 'delete_user', 'fileRemove' );
 }
 
 register_deactivation_hook( WPGS_PLUGIN_FILE, 'deactivate_wpgraphicstudio' );
-register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
 if (get_option( 'wpgs_wpgraphicstudio_install' ) == '') {
+register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
+register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );
+} elseif (get_option( 'wpgs_wpgraphicstudio_install' ) == '0') {
+register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
+} else {
+register_activation_hook( WPGS_PLUGIN_FILE, 'wpgs_install' );
 register_activation_hook( WPGS_PLUGIN_FILE, 'images_wpgraphicstudio_move' );
 }
