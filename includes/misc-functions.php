@@ -1532,7 +1532,7 @@ if (isset($_POST['BelcherBoxID1Value'])) { ?>
 <div class="wrap">
 		<h2><?php _e('wpGraphicStudio Core Modules - Help Video Settings'); ?></h2>
 
-		<form method="post" action="admin.php?page=funnels-module-settings&tab=help">
+		<form method="post" action="admin.php?page=wpgs-core-settings&tab=help">
 <h4><?php _e('Users can view general overview and usage videos for this module anytime by clicking on the help icon located near the top right corner of the application labeled with a "?".<br>
 Below are all the video and help options used within this modules help section.<br>
 The videos currently setup for this module are the official wpGraphicStudio help videos specific to this module.'); ?></h4>
