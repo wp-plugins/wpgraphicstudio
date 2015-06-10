@@ -1,5 +1,5 @@
 <?php
-include '/wp-content/uploads/wpgs/xml/core-language.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/uploads/wpgs/xml/core-language.php');
 # Create folder named thumbs inside your gallery,
 # Be sure to set the thumbs folder permissions to 777.
 # You do not need to edit the thumbpath variable.
