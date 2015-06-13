@@ -67,6 +67,9 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.4.6 June 13 2015 =
+* Updated module templates for new features and future feature support.
+
 = 6.4.5 June 7 2015 =
 * Updated install routine for upgrading from older versions of wpGraphicStudio.
 
