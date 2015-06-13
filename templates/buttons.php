@@ -1,5 +1,5 @@
 <?php
-include '/wp-content/uploads/wpgs/xml/core-language.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/uploads/wpgs/xml/core-language.php');
 global $current_user;
 get_currentuserinfo();
 $cuser = $current_user->ID;
