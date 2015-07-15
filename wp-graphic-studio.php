@@ -164,12 +164,12 @@ final class wp_Graphic_Studio {
 		require_once WPGS_PLUGIN_DIR . 'includes/scripts.php';
 		require_once WPGS_PLUGIN_DIR . 'includes/graphic-directory-functions.php';
 		require_once WPGS_PLUGIN_DIR . 'includes/post-types.php';
-		require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
-		require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php';
+		//require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
+		//require_once WPGS_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php';
 
 		if( is_admin() ) {
 			require_once WPGS_PLUGIN_DIR . 'includes/admin/welcome.php';
-			require_once WPGS_PLUGIN_DIR . 'includes/admin/Upgrade-Language.php';
+			//require_once WPGS_PLUGIN_DIR . 'includes/admin/Upgrade-Language.php';
 		} else {
 			require_once WPGS_PLUGIN_DIR . 'includes/shortcodes.php';
 		}
