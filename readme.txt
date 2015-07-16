@@ -69,6 +69,7 @@ With over 40 modules total we are sure to have something for everyone.
 = 6.4.7 July 15 2015 =
 * Rolled back the language customizing options to the developer version.
 * Language customizing can be done with the developer version of the wpGraphicStudio Core and it's modules developer versions.
+* Resolved some minor issues with a couple modules.
 
 = 6.4.6 June 13 2015 =
 * Updated module templates for new features and future feature support.
