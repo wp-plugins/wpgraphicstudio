@@ -5,7 +5,7 @@
  * Description: The internets only premier, premium graphics development and distribution system for wordpress...
  * Author: wpGraphicStudio
  * Author URI: http://wpgraphicstudio.com
- * Version: 6.4.6
+ * Version: 6.4.7
  * Text Domain: wpgs
  * Domain Path: languages
  *
@@ -129,7 +129,7 @@ final class wp_Graphic_Studio {
 	private function setup_constants() {
 		// Plugin version
 		if ( ! defined( 'WPGS_VERSION' ) )
-			define( 'WPGS_VERSION', '6.4.6' );
+			define( 'WPGS_VERSION', '6.4.7' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'WPGS_PLUGIN_DIR' ) )
