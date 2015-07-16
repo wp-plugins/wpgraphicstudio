@@ -20,7 +20,6 @@ Rather than attempting to provide every feature under the sun, wpGraphicStudio m
   * Compatible integration with s2Member
   * Compatible with both WordPress Standard and Multi Site installs
   * Integrated video help section
-  * Module text customizing for translating graphic modules to different languages
   * Upload custom images for each module in the members area and graphic gallery sections
   * Members area
   * Members graphic galleries
@@ -67,6 +66,10 @@ You can visit [wpGraphicStudio.com](http://wpgraphicstudio.com) to view all the 
 With over 40 modules total we are sure to have something for everyone.
 
 == Changelog ==
+= 6.4.7 July 15 2015 =
+* Rolled back the language customizing options to the developer version.
+* Language customizing can be done with the developer version of the wpGraphicStudio Core and it's modules developer versions.
+
 = 6.4.6 June 13 2015 =
 * Updated module templates for new features and future feature support.
 
