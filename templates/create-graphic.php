@@ -1,5 +1,4 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-content/uploads/wpgs/xml/core-language.php');
 # Create folder named thumbs inside your gallery,
 # Be sure to set the thumbs folder permissions to 777.
 # You do not need to edit the thumbpath variable.
@@ -46,9 +45,6 @@ $use_better_quality = 0;
 $query = (strlen($_SERVER['QUERY_STRING']) > 0) ? $_SERVER['QUERY_STRING'] : 1;
 
 $pictureArray = array();
-$langs = new SimpleXMLElement($xmlstr);
-$alt_create_graphic_value = $langs->langu[0]->altCreateGraphic;
-$alt_view_gallery_value = $langs->langu[0]->altViewGallery;
 ?>
 <head>
 <link rel="stylesheet" href="<?php echo $cssurl ?>" type="text/css" media="all" />
@@ -123,10 +119,10 @@ print "<ul class=\"thumbs\">\n";
 			print "<li><div class=\"show-image\"><img src=\"".$full_url.$pA."\" alt=\"$pA\" />
     <form action=\"/$file_name\" method=\"post\">
 <input type=\"hidden\" name=\"create\" value=\"yes\">
-<input class=\"create\" type=\"submit\" value=\"\"  title=\"$alt_create_graphic_value\" alt=\"$alt_create_graphic_value\" /></form>
+<input class=\"create\" type=\"submit\" value=\"\"  title=\"Launch Designer\" alt=\"Launch Designer\" /></form>
     <form action=\"/$file_name\" method=\"post\">
 <input type=\"hidden\" name=\"gallery\" value=\"yes\">
-<input class=\"gallery\" type=\"submit\" value=\"\" title=\"$alt_view_gallery_value\" alt=\"$alt_view_gallery_value\" /></form>
+<input class=\"gallery\" type=\"submit\" value=\"\" title=\"Open Graphic Gallery\" alt=\"Open Graphic Gallery\" /></form>
 			</div>\n";
 }
 			else
