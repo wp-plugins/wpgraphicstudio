@@ -21,7 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return string
  */
 function wpgs_get_templates_dir() {
-	return WPGS_PLUGIN_DIR . 'templates';
+$wp_upload_dir = wp_upload_dir();
+	return $wp_upload_dir['basedir'] . '/wpgs/templates';
 }
 
 /**
@@ -31,7 +32,9 @@ function wpgs_get_templates_dir() {
  * @return string
  */
 function wpgs_get_templates_url() {
-	return WPGS_PLUGIN_URL . 'templates';
+$wp_upload_dir = wp_upload_dir();
+
+	return $wp_upload_dir['baseurl'] . '/wpgs/templates';
 }
 
 /**
